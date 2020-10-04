@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Сервис для поиска новостей с возможностью сохранения их в своем личном кабинете">
+  <meta name="author" content="Мария Скосырская">
+  <title>Обозреватель новостей</title>
+  <link rel="icon" href="<%= require('../images/favicon.png').default %>">
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css %>">
+</head>
+
+<body class=body>
+  <div class="root">
+    <div class="header-block">
+      <header class="header container">
+        <a href="../index.html" class="link logo logo_color_white">NewsExplorer</a>
+        <button class="header__button-icon button-icon button-icon_type_open-menu" id="openMenu"></button>
+        <!-- класс header__nav-wrapper_invisible для скрытия мобильного меню -->
+        <div class="header__nav-wrapper container header__nav-wrapper_invisible">
+          <button class="header__button-icon button-icon button-icon_type_close-menu" id="closeMenu"></button>
+          <nav class="header__menu header__menu_type_mobile">
+            <ul class="list menu-mobail__list">
+              <li class="list__item">
+                <a href="./" class="link link_theme_dark list__link">Главная</a>
+              </li>
+              <!-- класс list__item_invisible для скрытия пункта меню -->
+              <li class="list__item  list__item_auth list__item_invisible">
+                <a href="#" class="link link_theme_dark list__link">Сохраненные статьи</a>
+              </li>
+              <li class="list__item  list__item_unauth">
+                <button
+                  class="button header__button header__button_type_reg header__button_color_white">Регистрация</button>
+              </li>
+              <li class="list__item  list__item_auth list__item_invisible">
+                <button
+                  class="button header__button header__button_type_logout header__button_color_white">Гретта</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <section class="search container">
+        <h1 class="search__title">Что в мире творится?</h1>
+        <p class="subtitle search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своем личном
+          кабинете</p>
+        <form class="search__form">
+          <input class="search__input" type="text" name="search" placeholder="Введите тему новости">
+          <button class="button search__button" id="searchNews">Искать</button>
+        </form>
+      </section>
+    </div>
+
+    <main class="main">
+
+
+
+
+
+      <section class="content">
+
+      </section>
+      <section class="author">
+
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer__copyright"></div>
+      <div class="footer__links">
+        <ul class="list list_content_info">
+          <li class="list__item">
+            <a href="./" class="list__link">Главная</a>
+          </li>
+          <li class="list__item">
+            <a href="https://praktikum.yandex.ru" class="list__link" target="_blank">Яндекс.Практикум</a>
+        </ul>
+        <ul class="list list_content_social">
+          <li class="list__item">
+            <a href="https://github.com/MeryMegg" target="_blank" class="social__link">
+              <img src="<%=require('../images/github.svg').default%>" alt="Github" class="list__icon">
+            </a>
+          </li>
+          <li class="list__item">
+            <a href="https://facebook.com" target="_blank" class="social__link">
+              <img src="<%=require('../images/fb.svg').default%>" alt="Facebook" class="list__icon">
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+    </footer>
+  </div>
+  <script src="<%= htmlWebpackPlugin.files.js %>"></script>
+</body>
+
+</html>

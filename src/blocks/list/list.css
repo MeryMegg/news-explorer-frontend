@@ -1,0 +1,7 @@
+@import url('./__item/list__item.css');
+@import url('./__item/_invisible/list__item_invisible.css');
+
+.list {
+  list-style-type: none;
+  padding-left: 0;
+}

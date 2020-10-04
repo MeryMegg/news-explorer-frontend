@@ -4,7 +4,7 @@
   "description": "diplom project",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack --mode production",
+    "build": "cross-env NODE_ENV=production rimraf dist && webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --watch",
     "deploy": "cross-env NODE_ENV=production gh-pages -d dist"
   },
@@ -21,7 +21,7 @@
   "devDependencies": {
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-env": "^7.10.4",
     "autoprefixer": "^10.0.1",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
@@ -33,6 +33,7 @@
     "image-webpack-loader": "^7.0.1",
     "mini-css-extract-plugin": "^0.11.2",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "postcss": "^8.1.1",
     "postcss-loader": "^4.0.2",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.2",

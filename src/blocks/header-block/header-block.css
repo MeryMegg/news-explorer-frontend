@@ -1,0 +1,7 @@
+.header-block {
+  background-image: url(../../images/bg-mobaile.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  /* background-attachment: fixed; */
+}

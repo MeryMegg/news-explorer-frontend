@@ -1,0 +1,11 @@
+@import url('./_theme/link_theme_light.css');
+@import url('./_theme/link_theme_dark.css');
+
+.link {
+  text-decoration: none;
+  transition: opacity .5s ease;
+}
+
+.link:hover {
+  opacity: .6;
+}

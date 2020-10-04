@@ -1,0 +1,15 @@
+/* @import url('./_visible/header__nav-wrapper_visible.css'); */
+
+
+.header__nav-wrapper {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background-color: #1A1B22;
+  border-radius: 0  0 16px 16px;
+  box-sizing: border-box;
+  padding: 16px 0 7px;
+  right: 0;
+  left: 0;
+  top: 0;
+}

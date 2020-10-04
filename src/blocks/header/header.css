@@ -1,0 +1,19 @@
+@import url('./__menu/header__menu.css');
+@import url('./__nav-wrapper/header__nav-wrapper.css');
+@import url('./__nav-wrapper/_visible/header__nav-wrapper_visible.css');
+@import url('./__button-icon/header__button-icon.css');
+@import url('./__button/header__button.css');
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  align-items: center;
+  border-bottom: 1px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(196, 196, 196, 0.01);
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+}

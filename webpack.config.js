@@ -9,7 +9,7 @@ const isDev = process.env.NODE_ENV === "development";
 module.exports = {
   entry: {
     main: './src/scripts/index.js',
-    favourites: './src/scripts/favourites/index.js',
+    favourites: './src/scripts/favourites.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -24,14 +24,9 @@ module.exports = {
     {
       test: /\.css$/i, // применять это правило только к CSS-файлам
       use: [
-        isDev ? "style-loader" : {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            publicPath: '../'
-          }
-        },
-        "css-loader",
-        "postcss-loader",
+        { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
+        'css-loader',
+        'postcss-loader',
       ], // к этим файлам нужно применить пакеты, которые мы уже установили
     },
     {
@@ -41,7 +36,6 @@ module.exports = {
           loader: "file-loader",
           options: {
             name: "./images/[name].[ext]",
-            esModule: false,
           },
         },
         {
@@ -81,7 +75,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name]/[name].[contenthash].css'
+      filename: './styles/index.[contenthash].css'
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
@@ -93,15 +87,13 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({ // настроили плагин
       inject: false, // стили НЕ нужно прописывать внутри тегов
-      hash: true, // для страницы нужно считать хеш
-      template: './src/index.html', // откуда брать образец для сравнения с текущим видом проекта
+      template: './src/pages/index.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'index.html' // имя выходного файла, то есть того, что окажется в папке dist после сборки
     }),
     new HtmlWebpackPlugin({ // настроили плагин
       inject: false, // стили НЕ нужно прописывать внутри тегов
-      hash: true, // для страницы нужно считать хеш
-      template: './src/favourites.html', // откуда брать образец для сравнения с текущим видом проекта
-      filename: './favouretes/favourites.html' // имя выходного файла, то есть того, что окажется в папке dist после сборки
+      template: './src/pages/favourites.html', // откуда брать образец для сравнения с текущим видом проекта
+      filename: 'favourites.html' // имя выходного файла, то есть того, что окажется в папке dist после сборки
     }),
     new WebpackMd5Hash(),
     new webpack.DefinePlugin({

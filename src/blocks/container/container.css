@@ -1,0 +1,32 @@
+.container {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+@media (min-width: 576px){
+  .container {
+    padding-right: 0 calc(50% - 270px);
+    padding-left: 0 calc(50% - 270px);
+  }
+}
+
+@media (min-width: 768px){
+  .container {
+    padding-right: 0 calc(50% - 360px);
+    padding-left: 0 calc(50% - 360px);
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    padding-right: 0 calc(50% - 480px);
+    padding-left: 0 calc(50% - 480px);
+  }
+}
+
+@media (min-width: 1199.98px){
+  .container {
+    padding-right: calc(50% - 590px);
+    padding-left: calc(50% - 590px);
+  }
+}

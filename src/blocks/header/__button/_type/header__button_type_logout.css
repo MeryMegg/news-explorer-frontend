@@ -1,0 +1,11 @@
+.header__button_type_logout {
+  padding: 17px 10px;
+  width: 288px;
+}
+
+.header__button_type_logout::after {
+  content: url("../../../../images/icon-logout.svg");
+  position: relative;
+  margin-left: 5px;
+  top:2px;
+}
