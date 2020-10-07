@@ -1,0 +1,11 @@
+.button_color_white {
+  background-color: #fff;
+  color: #1a1b22;
+  border: none;
+  border-radius: 80px;
+  transition: opacity .5s ease;
+}
+
+.button_color_white:hover {
+  opacity: .9;
+}

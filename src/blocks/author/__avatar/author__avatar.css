@@ -1,0 +1,7 @@
+.author__avatar {
+  max-width: 272px;
+  height: auto;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}

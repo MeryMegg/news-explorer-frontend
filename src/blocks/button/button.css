@@ -1,4 +1,15 @@
+@import url('./_color/button_color_transparent.css');
+@import url('./_color/button_color_blue.css');
+@import url('./_color/button_color_white.css');
+
 .button {
-  border-radius: 100px;
   cursor: pointer;
+  outline: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  align-items: center;
+  text-align: center;
 }

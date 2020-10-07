@@ -1,8 +1,10 @@
 @import url('./_type/button-icon_type_open-menu.css');
 @import url('./_type/button-icon_type_close-menu.css');
+@import url('./_type/button-icon_type_save-article.css');
+@import url('./_invisible/button-icon_invisible.css');
 
 .button-icon {
   border: none;
-  background-color: transparent;
   cursor: pointer;
+  outline: none;
 }

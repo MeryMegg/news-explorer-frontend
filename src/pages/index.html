@@ -17,11 +17,11 @@
       <header class="header container">
         <a href="../index.html" class="link logo logo_color_white">NewsExplorer</a>
         <button class="header__button-icon button-icon button-icon_type_open-menu" id="openMenu"></button>
-        <!-- класс header__nav-wrapper_invisible для скрытия мобильного меню -->
-        <div class="header__nav-wrapper container header__nav-wrapper_invisible">
+        <!-- класс header__nav-wrapper_is-opened показывает мобильное меню (добавляется при помощи js нажатием соответсвующей кнопки) -->
+        <div class="header__nav-wrapper container">
           <button class="header__button-icon button-icon button-icon_type_close-menu" id="closeMenu"></button>
-          <nav class="header__menu header__menu_type_mobile">
-            <ul class="list menu-mobail__list">
+          <nav class="header__menu">
+            <ul class="list header__list">
               <li class="list__item">
                 <a href="./" class="link link_theme_dark list__link">Главная</a>
               </li>
@@ -30,12 +30,12 @@
                 <a href="#" class="link link_theme_dark list__link">Сохраненные статьи</a>
               </li>
               <li class="list__item  list__item_unauth">
-                <button
-                  class="button header__button header__button_type_reg header__button_color_white">Регистрация</button>
+                <button class="button header__button_color_transparent header__button header__button_type_auth"
+                  id="openLoginPopup">Авторизоваться</button>
               </li>
               <li class="list__item  list__item_auth list__item_invisible">
                 <button
-                  class="button header__button header__button_type_logout header__button_color_white">Гретта</button>
+                  class="button button_color_transparent header__button header__button_type_logout">Гретта</button>
               </li>
             </ul>
           </nav>
@@ -43,36 +43,121 @@
       </header>
 
       <section class="search container">
-        <h1 class="search__title">Что в мире творится?</h1>
+        <h1 class="search__title">Что творится в мире?</h1>
         <p class="subtitle search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своем личном
           кабинете</p>
         <form class="search__form">
           <input class="search__input" type="text" name="search" placeholder="Введите тему новости">
-          <button class="button search__button" id="searchNews">Искать</button>
+          <button class="button button_color_blue search__button" id="searchNews">Искать</button>
         </form>
       </section>
     </div>
 
     <main class="main">
+      <section class="result-search container">
+        <!-- класс result-search__preloader_invisible скрывает ненужные блоки -->
+        <div class="result-search__preloader result-search__preloader_invisible">
+          <i class="result-search__circle-preloader"></i>
+          <p class="subtitle result-search__subtitle">Идет поиск новостей...</p>
+        </div>
 
+        <!-- класс result-search__content_invisible скрывает ненужные блоки -->
+        <div class="result-search__content">
+          <h2 class="title result-search__title">Результаты поиска</h2>
+          <div class="result-search__article-list">
+            <article class="article">
+              <div class="article__image">
+                <button class="button-icon button-icon_type_save-article"><span class="article__tooltip">Войдите, чтобы
+                    сохранять статьи</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
 
+            <article class="article">
+              <div class="article__image">
+                <button class="button-icon button-icon_type_save-article"><span class="article__tooltip">Войдите, чтобы
+                    сохранять статьи</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
 
+            <article class="article">
+              <div class="article__image">
+                <button class="button-icon button-icon_type_save-article"><span class="article__tooltip">Войдите, чтобы
+                    сохранять статьи</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
+          </div>
+          <button class="button button_color_white result-search__button">Показать еще</button>
+        </div>
 
-
-      <section class="content">
-
+        <!-- класс result-search__not-found_invisible скрывает ненужные блоки -->
+        <div class="result-search__not-found result-search__not-found_invisible">
+          <span class="result-search__image"></span>
+          <h3 class="result-search__title">Ничего не найдено</h3>
+          <p class="subtitle result-search__subtitle">К сожалению, по вашему запросу<br>ничего не найдено.</p>
+        </div>
       </section>
-      <section class="not-found">
 
+      <section class="author container">
+        <picture>
+          <source srcset="<%=require('../images/avatar-desktop.png').default%>" media="(max-width: 1200px)">
+          <source srcset="<%=require('../images/avatar-tablet.png').default%>" media="(max-width: 768px)">
+          <img src="<%=require('../images/avatar-mobile.png').default%>" alt="Автор сайта" class="author__avatar">
+        </picture>
+        <div class="author__description">
+          <h2 class="title author__title">Об авторе</h2>
+          <p class="author__about">
+            Это блок с описанием автора проекта. Здесь следует указать, как вас зовут,
+            чем вы занимаетесь, какими технологиями разработки владеете.
+          </p>
+          <p class="author__about">
+            Также можно рассказать о процессе обучения в Практикуме, чему вы тут научились,
+            и чем можете помочь потенциальным заказчикам.
+          </p>
+        </div>
       </section>
-      <section class="placeholder">
-
-      </section>
-      <section class="author">
-
-      </section>
-
     </main>
+
+    <div id="popupLogin" class="popup">
+      <div class="popup__content">
+        <img src="<%=require('../images/icon-close-white.svg').default%>" alt="" class="popup__close">
+        <h3 class="popup__title">Вход</h3>
+        <form class="popup__form" name="formLogin">
+          <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название">
+          <span id="error-name" class="error-message"></span>
+          <input type="url" name="link" class="popup__input popup__input_type_link-url"
+            placeholder="Ссылка на картинку">
+          <span id="error-link" class="error-message"></span>
+          <button name="submit" id="buttonLogin" class="popup__button">+</button>
+        </form>
+      </div>
+    </div>
 
     <footer class="footer container">
       <div class="footer__copyright">&copy; 2020 Supersite, Powered by News API</div>

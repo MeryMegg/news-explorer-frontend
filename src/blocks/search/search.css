@@ -2,3 +2,8 @@
 @import url('./__subtitle/search__subtitle.css');
 @import url('./__input/search__input.css');
 @import url('./__button/search__button.css');
+
+.search {
+  max-width: 300px;
+  margin: 0 auto;
+}

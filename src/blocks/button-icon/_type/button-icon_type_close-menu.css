@@ -1,5 +1,6 @@
 .button-icon_type_close-menu {
   background-image: url('../../../images/icon-close-white.svg');
+  background-color: transparent;
   align-self: flex-end;
   margin-bottom: 16px;
   padding-right: 16px;

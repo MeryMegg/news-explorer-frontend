@@ -1,0 +1,9 @@
+.result-search__not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-search__not-found_invisible {
+  display: none;
+}

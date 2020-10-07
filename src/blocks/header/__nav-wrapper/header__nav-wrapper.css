@@ -1,5 +1,4 @@
-/* @import url('./_visible/header__nav-wrapper_visible.css'); */
-
+@import url('./_is-opened/header__nav-wrapper_is-opened.css');
 
 .header__nav-wrapper {
   display: none;

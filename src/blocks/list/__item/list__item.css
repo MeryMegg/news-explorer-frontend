@@ -1,3 +1,9 @@
+@import url('./_auth/list__item_auth.css');
+
 .list__item {
   margin: 0 0 24px;
+}
+
+.list__item_invisible {
+  display: none;
 }

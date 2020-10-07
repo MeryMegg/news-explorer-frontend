@@ -1,9 +1,7 @@
-@import url('./_type/header__button_type_reg.css');
 @import url('./_type/header__button_type_logout.css');
-@import url('./_color/header__button_color_white.css');
-@import url('./_color/header__button_color_black.css');
 
 .header__button {
-  background-color: transparent;
-  margin-top: 22px;
+  border-radius: 100px;
+  margin-top: 13px;
+  padding: 18px 79px;
 }

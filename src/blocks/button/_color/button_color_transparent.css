@@ -1,0 +1,5 @@
+.header__button_color_transparent {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+}

@@ -1,0 +1,9 @@
+.result-search__image {
+  display: block;
+  margin: 0 auto;
+  width: 96px;
+  height: 96px;
+  background-image: url('../../../images/icon-not-found.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

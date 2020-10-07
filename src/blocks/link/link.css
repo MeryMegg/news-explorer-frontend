@@ -9,6 +9,7 @@
   font-size: 18px;
   line-height: 24px;
   transition: opacity .5s ease;
+  cursor: pointer;
 }
 
 .link:hover {
