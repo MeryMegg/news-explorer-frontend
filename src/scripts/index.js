@@ -5,7 +5,7 @@ import '../styles/index.css';
   const body = document.querySelector('.body');
   const buttonOpenMenu = document.querySelector('#openMenu');
   const buttonCloseMenu = document.querySelector('#closeMenu');
-  const menuMobile = document.querySelector('.header__nav-wrapper');
+  const menuMobile = document.querySelector('.header__popup');
   const popupLogin = document.querySelector('#popupLogin');
   const buttonOpenLogitPopup = document.querySelector('#openLoginPopup');
 
@@ -15,7 +15,7 @@ import '../styles/index.css';
 
   function toggleMenuMobile() {
     toggleOverflow();
-    menuMobile.classList.toggle('header__nav-wrapper_is-opened');
+    menuMobile.classList.toggle('popup_is-opened');
   }
 
   function toggleOpenMenuButton() {
