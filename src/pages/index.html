@@ -18,27 +18,30 @@
         <a href="../index.html" class="link logo logo_color_white">NewsExplorer</a>
         <button class="header__button-icon button-icon button-icon_type_open-menu" id="openMenu"></button>
         <!-- класс header__nav-wrapper_is-opened показывает мобильное меню (добавляется при помощи js нажатием соответсвующей кнопки) -->
-        <div class="header__nav-wrapper container">
-          <button class="header__button-icon button-icon button-icon_type_close-menu" id="closeMenu"></button>
-          <nav class="header__menu">
-            <ul class="list header__list">
-              <li class="list__item">
-                <a href="./" class="link link_theme_dark list__link">Главная</a>
-              </li>
-              <!-- класс list__item_invisible для скрытия пункта меню -->
-              <li class="list__item  list__item_auth list__item_invisible">
-                <a href="#" class="link link_theme_dark list__link">Сохраненные статьи</a>
-              </li>
-              <li class="list__item  list__item_unauth">
-                <button class="button header__button_color_transparent header__button header__button_type_auth"
-                  id="openLoginPopup">Авторизоваться</button>
-              </li>
-              <li class="list__item  list__item_auth list__item_invisible">
-                <button
-                  class="button button_color_transparent header__button header__button_type_logout">Гретта</button>
-              </li>
-            </ul>
-          </nav>
+
+        <div class="popup header__popup">
+          <div class="header__nav-wrapper container">
+            <button class="header__button-icon button-icon button-icon_type_close-menu" id="closeMenu"></button>
+            <nav class="header__menu">
+              <ul class="list header__list">
+                <li class="list__item">
+                  <a href="./" class="link link_theme_dark list__link">Главная</a>
+                </li>
+                <!-- класс list__item_invisible для скрытия пункта меню -->
+                <li class="list__item  list__item_auth list__item_invisible">
+                  <a href="#" class="link link_theme_dark list__link">Сохраненные статьи</a>
+                </li>
+                <li class="list__item  list__item_unauth">
+                  <button class="button header__button_color_transparent header__button header__button_type_auth"
+                    id="openLoginPopup">Авторизоваться</button>
+                </li>
+                <li class="list__item  list__item_auth list__item_invisible">
+                  <button
+                    class="button button_color_transparent header__button header__button_type_logout">Гретта</button>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </header>
 
