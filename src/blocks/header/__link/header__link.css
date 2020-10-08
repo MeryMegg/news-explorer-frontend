@@ -1,0 +1,7 @@
+@import url('./_is-active/header__link_is-active.css');
+
+@media screen and (min-width: 655px) {
+  .header__link {
+    padding-bottom: 23px;
+  }
+}

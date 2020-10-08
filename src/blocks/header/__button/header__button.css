@@ -1,7 +1,15 @@
 @import url('./_type/header__button_type_logout.css');
 
 .header__button {
+  width: 100%;
   border-radius: 100px;
-  margin-top: 13px;
+  margin: 4px 0 14px;
   padding: 18px 79px;
+}
+
+@media screen and (min-width: 655px) {
+  .header__button {
+    margin: 0;
+    padding: 18px 79px;
+  }
 }

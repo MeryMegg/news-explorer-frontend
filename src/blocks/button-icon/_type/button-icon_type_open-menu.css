@@ -1,4 +1,11 @@
 .button-icon_type_open-menu {
   background-image: url('../../../images/icon-burger-white.svg');
   background-color: transparent;
+  z-index: 6;
+}
+
+@media screen and (min-width: 655px) {
+  .button-icon.button-icon_type_open-menu {
+    display: none;
+  }
 }

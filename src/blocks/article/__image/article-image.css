@@ -5,8 +5,13 @@
   background-image: url('../../../images/image-article-3.png');
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  min-height: 272px;
+  min-height: 196px;
   background-size: cover;
   background-position: center;
-  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 655px) {
+  .article__image {
+    min-height: 272px;
+  }
 }

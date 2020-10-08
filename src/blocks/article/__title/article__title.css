@@ -1,0 +1,9 @@
+.article__title {
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 26px;
+  color: #1a1b22;
+  margin: 10px 0 0;
+}

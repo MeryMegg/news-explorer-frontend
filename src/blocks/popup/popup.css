@@ -6,6 +6,7 @@
 @import url('./__error-message/popup__error-message.css');
 @import url('./__choice/popup__choice.css');
 @import url('./__link/popup__link.css');
+@import url('./_overlay/popup_overlay.css');
 
 .popup {
   position: fixed;

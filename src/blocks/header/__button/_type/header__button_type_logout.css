@@ -1,6 +1,5 @@
-.header__button_type_logout {
+.header__button.header__button_type_logout {
   padding: 17px 10px;
-  width: 288px;
 }
 
 .header__button_type_logout::after {
@@ -8,4 +7,10 @@
   position: relative;
   margin-left: 5px;
   top:2px;
+}
+
+@media screen and (min-width: 500px) {
+  .header__button.header__button_type_logout {
+    padding: 12px 16px;
+  }
 }
