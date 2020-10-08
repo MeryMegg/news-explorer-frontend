@@ -5,7 +5,7 @@ import '../styles/index.css';
   const body = document.querySelector('.body');
   const buttonOpenMenu = document.querySelector('#openMenu');
   const buttonCloseMenu = document.querySelector('#closeMenu');
-  const menuMobile = document.querySelector('.header__popup');
+  const menuMobile = document.querySelector('#overlay');
   const popupLogin = document.querySelector('#popupLogin');
   const popupReg = document.querySelector('#popupReg');
   const buttonOpenLogitPopup = document.querySelector('#openLoginPopup');

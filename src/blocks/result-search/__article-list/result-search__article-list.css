@@ -6,10 +6,6 @@
   margin-bottom: 15px;
 }
 
-.result-search__content_invisible {
-  display: none;
-}
-
 /* @media screen and (min-width: 576px) {
   .container {
     padding-right: calc(50% - 275px);

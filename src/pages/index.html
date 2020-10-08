@@ -17,21 +17,22 @@
     <div class="header-block">
       <header class="header container">
         <a href="../index.html" class="link logo logo_color_white">NewsExplorer</a>
-        <!-- класс button-icon_invisible для скрытия кнопки вызова мобильного меню -->
-        <button class="header__button-icon button-icon button-icon_type_open-menu button-icon_invisible"
-          id="openMenu"></button>
-        <!-- класс header__menu_is-invisible для скрытия desktop menu -->
+        <!-- класс button-icon_invisible для скрытия кнопок вызова и скрытия мобильного меню -->
+        <button class="header__button-icon button-icon button-icon_type_open-menu " id="openMenu"></button>
+        <button class="header__button-icon button-icon button-icon_type_close-menu button-icon_invisible"
+          id="closeMenu"></button>
+        <!-- класс header__menu_is-visible для открытия мобильного меню -->
         <nav class="header__menu">
           <ul class="list header__list">
             <li class="list__item">
-              <a href="./" class="link link_theme_dark list__link">Главная</a>
+              <a href="./" class="link link_theme_dark header__link header__link_is-active">Главная</a>
             </li>
-            <!-- класс list__item_invisible для скрытия пункта меню -->
+            <!-- класс list__item_is-invisible для скрытия пункта меню -->
             <li class="list__item  list__item_auth ">
-              <a href="#" class="link link_theme_dark list__link">Сохраненные статьи</a>
+              <a href="#" class="link link_theme_dark header__link">Сохраненные статьи</a>
             </li>
-            <li class="list__item  list__item_unauth list__item_invisible">
-              <button class="button header__button_color_transparent header__button header__button_type_auth"
+            <li class="list__item  list__item_unauth list__item_is-invisible">
+              <button class="button button_color_transparent header__button header__button_type_auth"
                 id="openLoginPopup">Авторизоваться</button>
             </li>
             <li class="list__item  list__item_auth ">
@@ -39,32 +40,6 @@
             </li>
           </ul>
         </nav>
-
-        <!-- класс popup_is-opened открывает мобильное меню (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
-        <div class="popup header__popup">
-          <div class="header__nav-wrapper container">
-            <button class="header__button-icon button-icon button-icon_type_close-menu" id="closeMenu"></button>
-            <nav class="header__menu header__menu_mobile">
-              <ul class="list header__list header__list_mobile">
-                <li class="list__item">
-                  <a href="./" class="link link_theme_dark list__link">Главная</a>
-                </li>
-                <!-- класс list__item_invisible для скрытия пункта меню -->
-                <li class="list__item  list__item_auth ">
-                  <a href="#" class="link link_theme_dark list__link">Сохраненные статьи</a>
-                </li>
-                <li class="list__item  list__item_unauth list__item_invisible">
-                  <button class="button header__button_color_transparent header__button header__button_type_auth"
-                    id="openLoginPopup">Авторизоваться</button>
-                </li>
-                <li class="list__item  list__item_auth ">
-                  <button
-                    class="button button_color_transparent header__button header__button_type_logout">Гретта</button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
       </header>
 
       <section class="search container">
@@ -81,14 +56,14 @@
 
     <main class="main">
       <section class="result-search container">
-        <!-- класс result-search__preloader_invisible при необходимости скрывает блок result-search__preloader -->
-        <div class="result-search__preloader result-search__preloader_invisible">
+        <!-- класс result-search__preloader_is-invisible при необходимости скрывает блок result-search__preloader -->
+        <div class="result-search__preloader result-search__preloader_is-invisible">
           <i class="result-search__circle-preloader"></i>
           <p class="subtitle result-search__subtitle">Идет поиск новостей...</p>
         </div>
 
-        <!-- класс result-search__content_invisible при необходимости скрывает блок result-search__content-->
-        <div class="result-search__content">
+        <!-- класс result-search__content_is-invisible при необходимости скрывает блок result-search__content-->
+        <div class="result-search__content result-search__content_is-invisible">
           <h2 class="title result-search__title">Результаты поиска</h2>
           <div class="result-search__article-list">
             <article class="article">
@@ -142,8 +117,8 @@
           <button class="button button_color_white result-search__button">Показать еще</button>
         </div>
 
-        <!-- класс result-search__not-found_invisible при необходимости скрывает блок result-search__not-found -->
-        <div class="result-search__not-found result-search__not-found_invisible">
+        <!-- класс result-search__not-found_is-invisible при необходимости скрывает блок result-search__not-found -->
+        <div class="result-search__not-found result-search__not-found_is-invisible">
           <span class="result-search__image"></span>
           <h3 class="result-search__title">Ничего не найдено</h3>
           <p class="subtitle result-search__subtitle">К сожалению, по вашему запросу<br>ничего не найдено.</p>
@@ -169,6 +144,10 @@
         </div>
       </section>
     </main>
+
+    <!-- popup overlay открывается в момент открытия мобильного меню-->
+    <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
+    <div id="overlay" class="popup popup_overlay"></div>
 
     <!-- popup login -->
     <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
