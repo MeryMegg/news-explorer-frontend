@@ -4,6 +4,7 @@
 @import url('./__button/search__button.css');
 
 .search {
-  max-width: 300px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(285px, 400px);
+  justify-content: center;
 }

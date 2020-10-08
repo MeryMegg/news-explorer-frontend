@@ -1,16 +1,18 @@
 .popup__content {
-  /* width: calc(100% - 60px); */
-  width: 430px;
-	height: calc(100% - 58px);
-	border-radius: 10px;
-	padding: 34px 36px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+	height: 100%;
+	border-radius: 16px;
+	padding: 16px;
   background-color: #fff;
   position: relative;
+  box-sizing: border-box;
 }
 
-@media screen and (min-width: 540px) {
+/* @media screen and (min-width: 576px) {
   .popup__content {
-
-    box-sizing: border-box;
+    height: 380px;
   }
-}
+} */
