@@ -1,0 +1,29 @@
+@import url('./__subtitle/title-block__subtitle.css');
+@import url('./__title/title-block__title.css');
+@import url('./__keywords/title-block__keywords.css');
+@import url('./__keyword/title-block__keyword.css');
+
+.title-block {
+  padding-top: 10px;
+  padding-bottom: 32px;
+}
+
+@media screen and (min-width: 655px) {
+  .title-block {
+    padding-top: 24px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .title-block {
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .title-block {
+    padding-top: 40px;
+    padding-bottom: 56px;
+  }
+}

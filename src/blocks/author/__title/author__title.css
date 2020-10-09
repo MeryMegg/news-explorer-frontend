@@ -1,3 +1,15 @@
 .author__title {
   margin: 25px 0 18px;
 }
+
+@media screen and (min-width: 655px) {
+  .author__title {
+    margin: 14px 0 11px;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .author__title {
+    margin: 14px 0 23px;
+  }
+}

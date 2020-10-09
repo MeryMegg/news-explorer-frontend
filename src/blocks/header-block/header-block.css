@@ -5,3 +5,15 @@
   position: relative;
   /* background-attachment: fixed; */
 }
+
+@media screen and (min-width: 655px) {
+  .header-block {
+    background-image: url(../../images/bg-tablet.jpg);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .header-block {
+    background-image: url(../../images/bg-desktop.jpg);
+  }
+}

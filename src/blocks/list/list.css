@@ -1,5 +1,6 @@
 @import url('./__item/list__item.css');
 @import url('./_content/list_content_social.css');
+@import url('./_content/list_content_info.css');
 @import url('./__icon/list__icon.css');
 
 .list {

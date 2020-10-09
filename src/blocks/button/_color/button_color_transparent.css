@@ -2,4 +2,9 @@
   background-color: transparent;
   border: 1px solid #fff;
   color: #fff;
+  transition: opacity .5s ease;
+}
+
+.button_color_transparent:hover {
+  opacity: .9;
 }

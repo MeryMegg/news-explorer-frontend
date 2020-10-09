@@ -1,3 +1,6 @@
+@import url('./_color/logo_color_white.css');
+@import url('./_color/logo_color_black.css');
+
 .logo {
   position: relative;
   font-family: Roboto Slab;
@@ -5,7 +8,6 @@
   font-weight: bold;
   font-size: 16px;
   line-height: 24px;
-  color: #fff;
   z-index: 11;
 }
 

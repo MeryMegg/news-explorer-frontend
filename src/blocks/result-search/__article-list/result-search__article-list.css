@@ -1,14 +1,21 @@
 .result-search__article-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 400px));
-  grid-gap: 9px 9px;
+  grid-gap: 8px;
   justify-content: center;
   margin-bottom: 15px;
 }
 
-/* @media screen and (min-width: 576px) {
-  .container {
-    padding-right: calc(50% - 275px);
-    padding-left: calc(50% - 275px);
+@media screen and (min-width:768px) {
+  .result-search__article-list {
+    grid-template-columns: repeat(3, minmax(224px, 400px));
+    margin-bottom: 22px;
   }
-} */
+}
+
+@media screen and (min-width:980px) {
+  .result-search__article-list {
+    grid-gap: 16px;
+    margin-bottom: 70px;
+  }
+}

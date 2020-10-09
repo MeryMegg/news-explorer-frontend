@@ -2,9 +2,28 @@
 @import url('./__subtitle/search__subtitle.css');
 @import url('./__input/search__input.css');
 @import url('./__button/search__button.css');
+@import url('./__form/search__form.css');
 
 .search {
   display: grid;
   grid-template-columns: minmax(285px, 400px);
   justify-content: center;
+}
+
+@media screen and (min-width: 655px) {
+  .search {
+    grid-template-columns: minmax(285px, 448px);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .search {
+    grid-template-columns: minmax(285px, 560px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search {
+    grid-template-columns: minmax(285px, 608px);
+  }
 }

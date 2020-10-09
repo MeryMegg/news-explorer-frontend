@@ -4,3 +4,19 @@
   width: 100%;
   margin-bottom: 30px;
 }
+
+@media screen and (min-width: 655px) {
+  .search__button {
+    width: 160px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .search__button {
+    padding: 20px 16px;
+    width: 168px;
+  }
+}

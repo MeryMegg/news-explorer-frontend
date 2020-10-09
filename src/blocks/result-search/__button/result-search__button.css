@@ -4,3 +4,9 @@
   padding: 18px 79px;
   margin: 0 auto;
 }
+
+@media screen and (min-width: 980px) {
+  .result-search__button {
+    width: 288px;
+  }
+}

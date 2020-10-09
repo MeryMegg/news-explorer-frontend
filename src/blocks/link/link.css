@@ -5,7 +5,7 @@
   text-decoration: none;
   font-family: Roboto;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 18px;
   line-height: 24px;
   transition: opacity .5s ease;
@@ -16,9 +16,16 @@
   opacity: .6;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 655px) {
+  .link {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 980px) {
   .link {
     margin: 0;
+    font-size: 18px;
   }
 }
 

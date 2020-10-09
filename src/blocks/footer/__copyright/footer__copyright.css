@@ -6,3 +6,9 @@
   line-height: 22px;
   color: #b6bcbf;
 }
+
+@media screen and (min-width: 768px) {
+  .footer__copyright {
+    margin-top: 3px;
+  }
+}

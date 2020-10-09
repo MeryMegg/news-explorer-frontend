@@ -11,8 +11,9 @@
   box-sizing: border-box;
 }
 
-/* @media screen and (min-width: 576px) {
+@media screen and (min-width: 655px) {
   .popup__content {
-    height: 380px;
+    height: auto;
+    padding: 36px;
   }
-} */
+}

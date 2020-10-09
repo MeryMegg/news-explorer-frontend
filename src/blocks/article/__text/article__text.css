@@ -7,3 +7,9 @@
   color: #1a1b22;
   margin: 9px 0 7px;
 }
+
+@media screen and (min-width: 980px) {
+  .article__text {
+    margin: 9px 0 68px;
+  }
+}

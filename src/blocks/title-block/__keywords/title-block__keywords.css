@@ -1,0 +1,21 @@
+.title-block__keywords {
+  margin: 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b22;
+}
+
+@media screen and (min-width: 655px) {
+  .title-block__keywords {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .title-block__keywords {
+    font-size: 18px;
+  }
+}

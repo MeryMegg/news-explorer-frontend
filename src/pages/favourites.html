@@ -4,14 +4,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="новости сохраненные в личном кабинете">
+  <meta name="description" content="Сервис для поиска новостей с возможностью сохранения их в своем личном кабинете">
   <meta name="author" content="Мария Скосырская">
   <title>Обозреватель новостей</title>
   <link rel="icon" href="<%= require('../images/favicon.png').default %>">
   <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css %>">
 </head>
 
-<body>
+<body class=body>
+  <!-- класс root_overflow_hidden блокирует скролл на странице при открытии попапов -->
+  <div class="root">
+    <header class="header header_theme_white container">
+      <a href="../index.html" class="link logo logo_color_black">NewsExplorer</a>
+      <!-- класс button-icon_is-invisible для скрытия кнопок вызова и скрытия мобильного меню -->
+      <button class="header__button-icon button-icon button-icon_type_open-black " id="openMenu"></button>
+      <button class="header__button-icon button-icon button-icon_type_close-menu button-icon_is-invisible"
+        id="closeMenu"></button>
+      <!-- класс header__menu_is-visible для открытия мобильного меню -->
+      <nav class="header__menu">
+        <ul class="list header__list">
+          <li class="list__item">
+            <a href="./" class="link link_theme_light header__link">Главная</a>
+          </li>
+          <li class="list__item  list__item_auth">
+            <a href="#" class="link link_theme_light header__link  header__link_is-active-black">Сохраненные статьи</a>
+          </li>
+          <li class="list__item  list__item_auth">
+            <button class="button button_color_white-border header__button header__button_type_logout">Гретта</button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="title-block container">
+      <p class="title-block__subtitle">Сохраненные статьи</p>
+      <h1 class="title title-block__title">
+        <span class="title__name">Грета</span>, у вас <span class="title__count"> 5 </span>сохранённых статей
+      </h1>
+      <p class="title-block__keywords">По ключевым словам: <span class="title-block__keyword">Природа</span>, <span
+          class="title-block__keyword">Тайга</span> и <span class="title-block__keyword"> 2-м другим</span></p>
+    </section>
+
+
+    <main class="main">
+      <section class="result-search container">
+        <div class="result-search__content">
+          <h2 class="title result-search__title">Результаты поиска</h2>
+          <div class="result-search__article-list">
+            <article class="article">
+              <div class="article__image article__image_loc_fav">
+                <span class="article__keyword">Природа</span>
+                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                    class="article__tooltip">Убрать из сохраненных</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
+
+            <article class="article">
+              <div class="article__image article__image_loc_fav">
+                <span class="article__keyword">Природа</span>
+                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                    class="article__tooltip">Убрать из сохраненных</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
+
+            <article class="article">
+              <div class="article__image article__image_loc_fav">
+                <span class="article__keyword">Природа</span>
+                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                    class="article__tooltip">Убрать из сохраненных</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
+
+            <article class="article">
+              <div class="article__image article__image_loc_fav">
+                <span class="article__keyword">Природа</span>
+                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                    class="article__tooltip">Убрать из сохраненных</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
+
+            <article class="article">
+              <div class="article__image article__image_loc_fav">
+                <span class="article__keyword">Природа</span>
+                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                    class="article__tooltip">Убрать из сохраненных</span></button>
+              </div>
+              <div class="article__description">
+                <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>
+                <h3 class="article__title">Национальное достояние – парки</h3>
+                <p class="article__text">
+                  В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система
+                  национальных парков...
+                </p>
+                <a href="https://meduza.io/" target="_blank" class="link article__link">Медуза</a>
+              </div>
+            </article>
+          </div>
+          <button class="button button_color_white result-search__button">Показать еще</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- popup overlay открывается в момент открытия мобильного меню-->
+    <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
+    <div id="overlay" class="popup popup_overlay"></div>
+
+    <footer class="footer container">
+      <div class="footer__copyright">&copy; 2020 Supersite, Powered by News API</div>
+      <div class="footer__links">
+        <ul class="list list_content_info">
+          <li class="list__item">
+            <a href="./" class="link link_theme_light list__link">Главная</a>
+          </li>
+          <li class="list__item">
+            <a href="https://praktikum.yandex.ru" class="link link_theme_light list__link"
+              target="_blank">Яндекс.Практикум</a>
+        </ul>
+        <ul class="list list_content_social">
+          <li class="list__item">
+            <a href="https://github.com/MeryMegg" target="_blank" class="link social__link">
+              <img src="<%=require('../images/github.svg').default%>" alt="Github" class="list__icon">
+            </a>
+          </li>
+          <li class="list__item">
+            <a href="https://facebook.com" target="_blank" class="link social__link">
+              <img src="<%=require('../images/fb.svg').default%>" alt="Facebook" class="list__icon">
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+    </footer>
+  </div>
   <script src="<%= htmlWebpackPlugin.files.js %>"></script>
 </body>
 

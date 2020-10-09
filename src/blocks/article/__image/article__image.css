@@ -1,0 +1,34 @@
+@import url('./_loc/article__image_loc_fav.css');
+
+.article__image {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  max-width: 400px;
+  background-image: url('../../../images/image-article-3.png');
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  min-height: 196px;
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (min-width: 768px) {
+  .article__image {
+    min-height: 272px;
+    min-height: 150px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .article__image {
+    min-height: 200px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .article__image {
+    min-height: 272px;
+    margin-bottom: 5px;
+  }
+}

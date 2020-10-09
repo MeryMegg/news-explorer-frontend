@@ -98,7 +98,7 @@ module.exports = {
     new HtmlWebpackPlugin({ // настроили плагин
       inject: false, // стили НЕ нужно прописывать внутри тегов
       template: './src/pages/favourites.html', // откуда брать образец для сравнения с текущим видом проекта
-      filename: 'favourites/index.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
+      filename: 'favourites.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
       chunks: ['favourites']
     }),
     new WebpackMd5Hash(),

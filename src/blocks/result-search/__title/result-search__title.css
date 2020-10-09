@@ -3,7 +3,15 @@ margin: 0 0 24px;
 font-family: Roboto Slab;
 font-style: normal;
 font-weight: normal;
-font-size: 22px;
-line-height: 28px;
-color: #1a1b22;
+font-size: 30px;
+line-height: 34px;
+color: hsl(233, 13%, 12%);
+}
+
+@media screen and (min-width: 980px) {
+  .result-search__title {
+    font-size: 40px;
+    line-height: 46px;
+    margin: 0 0 63px;
+  }
 }

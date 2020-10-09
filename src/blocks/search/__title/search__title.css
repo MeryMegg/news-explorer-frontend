@@ -7,3 +7,19 @@
   color: #fff;
   margin: 27px 0 3px;
 }
+
+@media screen and (min-width: 655px) {
+  .search__title {
+    width: 385px;
+    margin: 39px 0 0;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .search__title {
+    font-size: 60px;
+    line-height: 64px;
+    width: 608px;
+    margin: 79px 0 0;
+  }
+}

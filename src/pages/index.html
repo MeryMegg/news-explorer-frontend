@@ -15,11 +15,11 @@
   <!-- класс root_overflow_hidden блокирует скролл на странице при открытии попапов -->
   <div class="root">
     <div class="header-block">
-      <header class="header container">
+      <header class="header header_theme_dark container">
         <a href="../index.html" class="link logo logo_color_white">NewsExplorer</a>
-        <!-- класс button-icon_invisible для скрытия кнопок вызова и скрытия мобильного меню -->
-        <button class="header__button-icon button-icon button-icon_type_open-menu " id="openMenu"></button>
-        <button class="header__button-icon button-icon button-icon_type_close-menu button-icon_invisible"
+        <!-- класс button-icon_is-invisible для скрытия кнопок вызова и скрытия мобильного меню -->
+        <button class="header__button-icon button-icon button-icon_type_open-white " id="openMenu"></button>
+        <button class="header__button-icon button-icon button-icon_type_close-menu button-icon_is-invisible"
           id="closeMenu"></button>
         <!-- класс header__menu_is-visible для открытия мобильного меню -->
         <nav class="header__menu">
@@ -28,22 +28,25 @@
               <a href="./" class="link link_theme_dark header__link header__link_is-active">Главная</a>
             </li>
             <!-- класс list__item_is-invisible для скрытия пункта меню -->
-            <li class="list__item  list__item_auth ">
-              <a href="#" class="link link_theme_dark header__link">Сохраненные статьи</a>
+            <li class="list__item  list__item_auth">
+              <a href="./favourites.html" class="link link_theme_dark header__link">Сохраненные статьи</a>
             </li>
-            <li class="list__item  list__item_unauth list__item_is-invisible">
-              <button class="button button_color_transparent header__button header__button_type_auth"
+            <li class="list__item  list__item_unauth  list__item_is-invisible">
+              <button class="button button_color_transparent header__button header__button_type_auth "
                 id="openLoginPopup">Авторизоваться</button>
             </li>
-            <li class="list__item  list__item_auth ">
-              <button class="button button_color_transparent header__button header__button_type_logout">Гретта</button>
+            <li class="list__item  list__item_auth">
+              <button
+                class="button button_color_transparent header__button header__button_type_logout-white">Гретта</button>
             </li>
           </ul>
         </nav>
       </header>
 
       <section class="search container">
-        <h1 class="search__title">Что творится в мире?</h1>
+        <h1 class="search__title">Что
+          творится в
+          мире?</h1>
         <p class="subtitle search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своем личном
           кабинете</p>
         <form class="search__form">
@@ -63,12 +66,14 @@
         </div>
 
         <!-- класс result-search__content_is-invisible при необходимости скрывает блок result-search__content-->
-        <div class="result-search__content result-search__content_is-invisible">
+        <div class="result-search__content">
           <h2 class="title result-search__title">Результаты поиска</h2>
+
           <div class="result-search__article-list">
             <article class="article">
               <div class="article__image">
-                <button class="button-icon button-icon_type_save-article"><span class="article__tooltip">Войдите, чтобы
+                <button class="button-icon article__button-icon article__button-icon_type_save"><span
+                    class="article__tooltip">Войдите, чтобы
                     сохранять статьи</span></button>
               </div>
               <div class="article__description">
@@ -84,7 +89,8 @@
 
             <article class="article">
               <div class="article__image">
-                <button class="button-icon button-icon_type_save-article"><span class="article__tooltip">Войдите, чтобы
+                <button class="button-icon article__button-icon article__button-icon_type_save"><span
+                    class="article__tooltip">Войдите, чтобы
                     сохранять статьи</span></button>
               </div>
               <div class="article__description">
@@ -100,7 +106,8 @@
 
             <article class="article">
               <div class="article__image">
-                <button class="button-icon button-icon_type_save-article"><span class="article__tooltip">Войдите, чтобы
+                <button class="button-icon article__button-icon article__button-icon_type_save"><span
+                    class="article__tooltip">Войдите, чтобы
                     сохранять статьи</span></button>
               </div>
               <div class="article__description">
@@ -125,9 +132,9 @@
         </div>
       </section>
 
-      <section class="author container">
+      <section class="root__author author container">
         <picture>
-          <source srcset="<%=require('../images/avatar-desktop.png').default%>" media="(max-width: 1200px)">
+          <source srcset="<%=require('../images/avatar-desktop.png').default%>" media="(max-width: 1000px)">
           <source srcset="<%=require('../images/avatar-tablet.png').default%>" media="(max-width: 768px)">
           <img src="<%=require('../images/avatar-mobile.png').default%>" alt="Автор сайта" class="author__avatar">
         </picture>
@@ -232,10 +239,10 @@
       <div class="footer__links">
         <ul class="list list_content_info">
           <li class="list__item">
-            <a href="./" class="link link_heme_light list__link">Главная</a>
+            <a href="./" class="link link_theme_light list__link">Главная</a>
           </li>
           <li class="list__item">
-            <a href="https://praktikum.yandex.ru" class="link link_heme_light list__link"
+            <a href="https://praktikum.yandex.ru" class="link link_theme_light list__link"
               target="_blank">Яндекс.Практикум</a>
         </ul>
         <ul class="list list_content_social">

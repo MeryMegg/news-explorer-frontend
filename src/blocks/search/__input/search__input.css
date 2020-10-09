@@ -20,3 +20,9 @@
   outline: none;
   border: 1px solid #2f71e5;
 }
+
+@media screen and (min-width: 980px) {
+  .search__input {
+    padding: 20px 16px;
+  }
+}
