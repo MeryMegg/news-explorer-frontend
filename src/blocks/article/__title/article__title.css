@@ -5,13 +5,29 @@
   font-size: 22px;
   line-height: 26px;
   color: #1a1b22;
-  margin: 10px 0 0;
+  margin: 10px 0;
+}
+
+@media screen and (min-width: 380px) {
+  .article__title {
+    font-size: 26px;
+    line-height: 30px;
+    margin: 12px 0 16px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .article__title {
+    font-size: 22px;
+  line-height: 26px;
+    margin: 10px 0;
+  }
 }
 
 @media screen and (min-width: 980px) {
   .article__title {
     font-size: 26px;
     line-height: 30px;
-    margin: 12px 0 0;
+    margin: 12px 0 16px;
   }
 }

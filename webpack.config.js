@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const webpack = require("webpack");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: {
@@ -22,16 +23,15 @@ module.exports = {
     },
     {
       test: /\.css$/i, // применять это правило только к CSS-файлам
-      use: [
-        { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 2
-          }
-        },
+      use: [(isDev ? 'style-loader' : { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } }),
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2
+        }
+      },
         'postcss-loader',
-      ], // к этим файлам нужно применить пакеты, которые мы уже установили
+      ]
     },
     {
       test: /\.(gif|png|jpe?g|svg|ico|webp)$/i,
@@ -89,13 +89,13 @@ module.exports = {
       },
       canPrint: true,
     }),
-    new HtmlWebpackPlugin({ // настроили плагин
+    new HtmlWebpackPlugin({
       inject: false, // стили НЕ нужно прописывать внутри тегов
       template: './src/pages/index.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'index.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
       chunks: ['main']
     }),
-    new HtmlWebpackPlugin({ // настроили плагин
+    new HtmlWebpackPlugin({
       inject: false, // стили НЕ нужно прописывать внутри тегов
       template: './src/pages/favourites.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'favourites.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
