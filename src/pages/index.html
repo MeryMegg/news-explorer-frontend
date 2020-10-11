@@ -12,12 +12,12 @@
 </head>
 
 <body class=body>
-  <!-- класс root_overflow_hidden блокирует скролл на странице при открытии попапов -->
+  <!-- класс root_overflow_hidden блокирует скролл на странице при открытии попапов (js)-->
   <div class="root">
     <div class="header-block">
       <header class="header header_theme_dark container">
         <a href="./" class="link logo logo_color_white">NewsExplorer</a>
-        <!-- класс button-icon_is-invisible для скрытия кнопок вызова и скрытия мобильного меню -->
+        <!-- класс button-icon_is-invisible для скрытия кнопок вызова и скрытия мобильного меню (js) -->
         <button type="button" class="header__button-icon button-icon button-icon_type_open-white "
           id="openMenu"></button>
         <button type="button"
@@ -30,15 +30,15 @@
               <a href="./" class="link link_theme_dark header__link header__link_is_active-white">Главная</a>
             </li>
             <!-- класс list__item_is-invisible для скрытия пункта меню -->
-            <li class="list__item  list__item_auth">
+            <li class="list__item  list__item_auth list__item_is-invisible">
               <a href="./favourites.html"
                 class="link link_theme_dark header__link header__link_is_inactive-white">Сохраненные статьи</a>
             </li>
-            <li class="list__item  list__item_unauth list__item_is-invisible">
+            <li class="list__item  list__item_unauth">
               <button type="button" class="button button_color_transparent header__button header__button_type_auth "
                 id="openLoginPopup">Авторизоваться</button>
             </li>
-            <li class="list__item  list__item_auth">
+            <li class="list__item  list__item_auth list__item_is-invisible">
               <button type="button"
                 class="button button_color_transparent header__button header__button_type_logout-white">Гретта</button>
             </li>
@@ -63,7 +63,7 @@
     <main class="main">
       <section class="result-search container">
         <!-- класс result-search__preloader_is-invisible при необходимости скрывает блок result-search__preloader -->
-        <div class="result-search__preloader result-search__preloader_is-invisible">
+        <div class="result-search__preloader">
           <i class="result-search__circle-preloader"></i>
           <p class="subtitle result-search__subtitle">Идет поиск новостей...</p>
         </div>
@@ -130,7 +130,7 @@
         </div>
 
         <!-- класс result-search__not-found_is-invisible при необходимости скрывает блок result-search__not-found -->
-        <div class="result-search__not-found result-search__not-found_is-invisible">
+        <div class="result-search__not-found">
           <span class="result-search__image"></span>
           <h3 class="result-search__title">Ничего не найдено</h3>
           <p class="subtitle result-search__subtitle">К сожалению, по вашему запросу<br>ничего не найдено.</p>
