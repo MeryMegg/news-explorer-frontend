@@ -12,46 +12,10 @@
   background: #fff;
   border-radius: 15px;
   position: relative;
-  height: 440px;
   display: grid;
-  grid-template-rows: auto 244px;
+  grid-template-rows: max-content;
 }
 
 .article:hover {
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-}
-
-@media screen and (min-width: 380px) {
-  .article {
-    height: 500px;
-    grid-template-rows: auto 270px;
-  }
-}
-
-@media screen and (min-width: 435px) {
-  .article {
-    height: 576px;
-    grid-template-rows: auto 304px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .article {
-    height: 420px;
-    grid-template-rows: auto 270px;
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .article {
-    height: 500px;
-    grid-template-rows: auto 300px;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .article {
-    min-height: 576px;
-    grid-template-rows: auto 304px;
-  }
 }

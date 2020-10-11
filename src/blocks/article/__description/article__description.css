@@ -1,10 +1,7 @@
 .article__description {
-  height: 100%;
   padding: 16px;
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
-  /* display: grid;
-  grid-template-rows: 1fr 1fr auto 1fr; */
   box-sizing: border-box;
+  justify-content: space-between;
 }
