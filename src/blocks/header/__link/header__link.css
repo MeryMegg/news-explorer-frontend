@@ -1,8 +1,10 @@
-@import url('./_is-active/header__link_is-active-white.css');
-@import url('./_is-active/header__link_is-active-black.css');
+@import url('./_is/header__link_is_active-white.css');
+@import url('./_is/header__link_is_active-black.css');
+@import url('./_is/header__link_is_inactive-white.css');
+@import url('./_is/header__link_is_inactive-black.css');
 
 @media screen and (min-width: 655px) {
   .header__link {
-    padding-bottom: 21px;
+    padding-bottom: 23px;
   }
 }

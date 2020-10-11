@@ -15,22 +15,23 @@
   <!-- класс root_overflow_hidden блокирует скролл на странице при открытии попапов -->
   <div class="root">
     <header class="header header_theme_white container">
-      <a href="../index.html" class="link logo logo_color_black">NewsExplorer</a>
+      <a href="./" class="link logo logo_color_black">NewsExplorer</a>
       <!-- класс button-icon_is-invisible для скрытия кнопок вызова и скрытия мобильного меню -->
-      <button class="header__button-icon button-icon button-icon_type_open-black " id="openMenu"></button>
-      <button class="header__button-icon button-icon button-icon_type_close-menu button-icon_is-invisible"
+      <button type="button" class="header__button-icon button-icon button-icon_type_open-black " id="openMenu"></button>
+      <button type="button" class="header__button-icon button-icon button-icon_type_close-menu button-icon_is-invisible"
         id="closeMenu"></button>
-      <!-- класс header__menu_is-visible для открытия мобильного меню -->
+      <!-- класс header__menu_is-visible для открытия мобильного меню (мобильное меню подключено через js и может быть открыто нажатием на соответствующую кнопку) -->
       <nav class="header__menu">
         <ul class="list header__list">
           <li class="list__item">
-            <a href="./" class="link link_theme_light header__link">Главная</a>
+            <a href="./" class="link header__link header__link_is_inactive-black">Главная</a>
           </li>
           <li class="list__item  list__item_auth">
-            <a href="#" class="link link_theme_light header__link  header__link_is-active-black">Сохраненные статьи</a>
+            <a href="./favourites.html" class="link header__link  header__link_is_active-black">Сохраненные статьи</a>
           </li>
           <li class="list__item  list__item_auth">
-            <button class="button button_color_white-border header__button header__button_type_logout">Гретта</button>
+            <button type="button"
+              class="button button_color_white-border header__button header__button_type_logout-black">Гретта</button>
           </li>
         </ul>
       </nav>
@@ -54,7 +55,7 @@
             <article class="article">
               <div class="article__image article__image_loc_fav">
                 <span class="article__keyword">Природа</span>
-                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                <button type="button" class="button-icon article__button-icon article__button-icon_type_del"><span
                     class="article__tooltip">Убрать из сохраненных</span></button>
               </div>
               <div class="article__description">
@@ -71,7 +72,7 @@
             <article class="article">
               <div class="article__image article__image_loc_fav">
                 <span class="article__keyword">Природа</span>
-                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                <button type="button" class="button-icon article__button-icon article__button-icon_type_del"><span
                     class="article__tooltip">Убрать из сохраненных</span></button>
               </div>
               <div class="article__description">
@@ -88,7 +89,7 @@
             <article class="article">
               <div class="article__image article__image_loc_fav">
                 <span class="article__keyword">Природа</span>
-                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                <button type="button" class="button-icon article__button-icon article__button-icon_type_del"><span
                     class="article__tooltip">Убрать из сохраненных</span></button>
               </div>
               <div class="article__description">
@@ -105,7 +106,7 @@
             <article class="article">
               <div class="article__image article__image_loc_fav">
                 <span class="article__keyword">Природа</span>
-                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                <button type="button" class="button-icon article__button-icon article__button-icon_type_del"><span
                     class="article__tooltip">Убрать из сохраненных</span></button>
               </div>
               <div class="article__description">
@@ -122,7 +123,7 @@
             <article class="article">
               <div class="article__image article__image_loc_fav">
                 <span class="article__keyword">Природа</span>
-                <button class="button-icon article__button-icon article__button-icon_type_del"><span
+                <button type="button" class="button-icon article__button-icon article__button-icon_type_del"><span
                     class="article__tooltip">Убрать из сохраненных</span></button>
               </div>
               <div class="article__description">
@@ -136,13 +137,13 @@
               </div>
             </article>
           </div>
-          <button class="button button_color_white result-search__button">Показать еще</button>
+          <button type="button" class="button button_color_white result-search__button">Показать еще</button>
         </div>
       </section>
     </main>
 
     <!-- popup overlay открывается в момент открытия мобильного меню-->
-    <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
+    <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием на кнопку открытия мобильного меню) -->
     <div id="overlay" class="popup popup_overlay"></div>
 
     <footer class="footer container">
@@ -159,12 +160,12 @@
         <ul class="list list_content_social">
           <li class="list__item">
             <a href="https://github.com/MeryMegg" target="_blank" class="link social__link">
-              <img src="<%=require('../images/github.svg').default%>" alt="Github" class="list__icon">
+              <img src="<%=require('../images/github.svg').default%>" alt="ссылка на Github" class="list__icon">
             </a>
           </li>
           <li class="list__item">
             <a href="https://facebook.com" target="_blank" class="link social__link">
-              <img src="<%=require('../images/fb.svg').default%>" alt="Facebook" class="list__icon">
+              <img src="<%=require('../images/fb.svg').default%>" alt="ссылка на Facebook" class="list__icon">
             </a>
           </li>
         </ul>

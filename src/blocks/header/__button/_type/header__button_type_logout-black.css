@@ -2,8 +2,8 @@
   padding: 17px 10px;
 }
 
-.header__button_type_logout::after {
-  content: url("../../../../images/icon-logout-black.svg");
+.header__button_type_logout-black::after {
+  content: url("../../../../images/icon-logout-white.svg");
   position: relative;
   margin-left: 5px;
   top:2px;
@@ -12,5 +12,11 @@
 @media screen and (min-width: 500px) {
   .header__button.header__button_type_logout-black {
     padding: 12px 16px;
+  }
+}
+
+@media screen and (min-width: 655px) {
+  .header__button.header__button_type_logout-black::after {
+    content: url("../../../../images/icon-logout-black.svg");
   }
 }

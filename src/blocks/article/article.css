@@ -17,6 +17,10 @@
   grid-template-rows: auto 244px;
 }
 
+.article:hover {
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
 @media screen and (min-width: 380px) {
   .article {
     height: 500px;

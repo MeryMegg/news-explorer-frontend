@@ -1,4 +1,5 @@
 @import url('./_type/article__button-icon_type_save.css');
+@import url('./_type/article__button-icon_type_save-active.css');
 @import url('./_type/article__button-icon_type_del.css');
 
 .article__button-icon {
@@ -10,7 +11,12 @@
   padding: 0;
   margin-top: 16px;
   margin-right: 16px;
-  z-index: 1;
+  z-index: 3;
+}
+
+.article__button-icon:hover {
+  background-color: #fff;
+  opacity: 1;
 }
 
 .article__button-icon:hover .article__tooltip {

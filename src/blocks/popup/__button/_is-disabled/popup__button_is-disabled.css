@@ -1,7 +1,7 @@
 .popup__button.popup__button_is-disabled {
   background: #e6e8eb;
   cursor: default;
-  font-family: Roboto;
+  font-family: 'Roboto' , Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

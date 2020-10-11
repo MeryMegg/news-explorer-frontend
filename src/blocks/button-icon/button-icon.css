@@ -9,3 +9,7 @@
   outline: none;
   transition: opacity .5s ease;
 }
+
+.button-icon:hover {
+  opacity: .6;
+}

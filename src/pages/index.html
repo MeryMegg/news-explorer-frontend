@@ -16,27 +16,30 @@
   <div class="root">
     <div class="header-block">
       <header class="header header_theme_dark container">
-        <a href="../index.html" class="link logo logo_color_white">NewsExplorer</a>
+        <a href="./" class="link logo logo_color_white">NewsExplorer</a>
         <!-- класс button-icon_is-invisible для скрытия кнопок вызова и скрытия мобильного меню -->
-        <button class="header__button-icon button-icon button-icon_type_open-white " id="openMenu"></button>
-        <button class="header__button-icon button-icon button-icon_type_close-menu button-icon_is-invisible"
+        <button type="button" class="header__button-icon button-icon button-icon_type_open-white "
+          id="openMenu"></button>
+        <button type="button"
+          class="header__button-icon button-icon button-icon_type_close-menu button-icon_is-invisible"
           id="closeMenu"></button>
-        <!-- класс header__menu_is-visible для открытия мобильного меню -->
+        <!-- класс header__menu_is-visible для открытия мобильного меню (мобильное меню подключено через js и может быть открыто нажатием на соответствующую кнопку) -->
         <nav class="header__menu">
           <ul class="list header__list">
             <li class="list__item">
-              <a href="./" class="link link_theme_dark header__link header__link_is-active">Главная</a>
+              <a href="./" class="link link_theme_dark header__link header__link_is_active-white">Главная</a>
             </li>
             <!-- класс list__item_is-invisible для скрытия пункта меню -->
             <li class="list__item  list__item_auth">
-              <a href="./favourites.html" class="link link_theme_dark header__link">Сохраненные статьи</a>
+              <a href="./favourites.html"
+                class="link link_theme_dark header__link header__link_is_inactive-white">Сохраненные статьи</a>
             </li>
-            <li class="list__item  list__item_unauth  list__item_is-invisible">
-              <button class="button button_color_transparent header__button header__button_type_auth "
+            <li class="list__item  list__item_unauth list__item_is-invisible">
+              <button type="button" class="button button_color_transparent header__button header__button_type_auth "
                 id="openLoginPopup">Авторизоваться</button>
             </li>
             <li class="list__item  list__item_auth">
-              <button
+              <button type="button"
                 class="button button_color_transparent header__button header__button_type_logout-white">Гретта</button>
             </li>
           </ul>
@@ -72,7 +75,7 @@
           <div class="result-search__article-list">
             <article class="article">
               <div class="article__image">
-                <button class="button-icon article__button-icon article__button-icon_type_save"><span
+                <button type="button" class="button-icon article__button-icon article__button-icon_type_save"><span
                     class="article__tooltip">Войдите, чтобы
                     сохранять статьи</span></button>
               </div>
@@ -89,7 +92,8 @@
 
             <article class="article">
               <div class="article__image">
-                <button class="button-icon article__button-icon article__button-icon_type_save"><span
+                <button type="button"
+                  class="button-icon article__button-icon article__button-icon_type_save-active"><span
                     class="article__tooltip">Войдите, чтобы
                     сохранять статьи</span></button>
               </div>
@@ -107,7 +111,7 @@
 
             <article class="article">
               <div class="article__image">
-                <button class="button-icon article__button-icon article__button-icon_type_save"><span
+                <button type="button" class="button-icon article__button-icon article__button-icon_type_save"><span
                     class="article__tooltip">Войдите, чтобы
                     сохранять статьи</span></button>
               </div>
@@ -122,7 +126,7 @@
               </div>
             </article>
           </div>
-          <button class="button button_color_white result-search__button">Показать еще</button>
+          <button type="button" class="button button_color_white result-search__button">Показать еще</button>
         </div>
 
         <!-- класс result-search__not-found_is-invisible при необходимости скрывает блок result-search__not-found -->
@@ -154,20 +158,21 @@
     </main>
 
     <!-- popup overlay открывается в момент открытия мобильного меню-->
-    <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
+    <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием на кнопку открытия мобильного меню) -->
     <div id="overlay" class="popup popup_overlay"></div>
 
     <!-- popup login -->
     <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
     <div id="popupLogin" class="popup">
       <div class="popup__content">
-        <img src="<%=require('../images/icon-close-white.svg').default%>" alt="" class="popup__close">
+        <span class="popup__close"></span>
         <h3 class="popup__title">Вход</h3>
         <form class="form" name="formLogin">
           <div class="form__input-block">
             <label for="loginInputEmail" class="form__label">Email</label>
             <input type="email" name="login-email" id="loginInputEmail" class="form__input form__input_type_email"
-              placeholder="Введите почту" required>
+              pattern="(?:^\w{1,}-?\w?)@(?:\w{1,}-?(?:\w{1,})?)\.(?:\w{1,})\.?(?:\w{1,})?" placeholder="Введите почту"
+              required>
             <span id="errorLoginEmail" class="error-message form__error-message">Неправильный формат email</span>
           </div>
           <div class="form__input-block">
@@ -178,8 +183,8 @@
             <span id="errorLoginPassword" class="error-message form__error-message"></span>
           </div>
           <span class="error-message popup__error-message"></span>
-          <button name="submit" id="buttonLogin"
-            class="button button_color_blue popup__button popup__button_is-disabled">Войти</button>
+          <button name="batton-login" id="buttonLogin"
+            class="button button_color_blue popup__button popup__button_is-disabled" disabled>Войти</button>
         </form>
         <span class="popup__choice">
           или
@@ -192,13 +197,14 @@
     <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием соответсвующих кнопок) -->
     <div id="popupReg" class="popup">
       <div class="popup__content">
-        <img src="<%=require('../images/icon-close-white.svg').default%>" alt="" class="popup__close">
+        <span class="popup__close"></span>
         <h3 class="popup__title">Регистрация</h3>
-        <form class="form" name="formReg" e>
+        <form class="form" name="formReg">
           <div class="form__input-block">
             <label for="regInputEmail" class="form__label">Email</label>
             <input type="email" name="reg-email" id="regInputEmail" class="form__input form__input_type_email"
-              placeholder="Введите почту" required>
+              pattern="(?:^\w{1,}-?\w?)@(?:\w{1,}-?(?:\w{1,})?)\.(?:\w{1,})\.?(?:\w{1,})?" placeholder="Введите почту"
+              required>
             <span id="errorRegEmail" class="error-message form__error-message"></span>
           </div>
           <div class="form__input-block">
@@ -208,14 +214,15 @@
             <span id="errorRegPassword" class="error-message form__error-message"></span>
           </div>
           <div class="form__input-block">
-            <label for="regInputNane" class="form__label">Имя</label>
+            <label for="userName" class="form__label">Имя</label>
             <input type="text" name="username" id="userName" class="form__input form__input_type_password"
               placeholder="Введите свое имя" minlength="8" maxlength="30" required>
-            <span id="errorRegPassword" class="error-message form__error-message"></span>
+            <span id="errorRegName" class="error-message form__error-message"></span>
           </div>
           <span class="error-message popup__error-message">Такой пользователь уже есть</span>
-          <button name="submit" id="buttonReg"
-            class="button button_color_blue popup__button popup__button_is-disabled">Зарегистрироваться</button>
+          <!-- класс  popup__button_is-disabled визуализирует кнопку как не активная -->
+          <button name="button-reg" id="buttonReg"
+            class="button button_color_blue popup__button">Зарегистрироваться</button>
         </form>
         <span class="popup__choice">
           или
@@ -225,12 +232,12 @@
     </div>
 
     <!-- popup Registration -->
-    <!-- класс popup_is-opened открывает попапы -->
+    <!-- класс popup_is-opened открывает попапы (добавляется и удаляется при помощи js нажатием на кнопоку "Зарегистрироваться в попапе "Регистрация") -->
     <div id="popupResponse" class="popup">
       <div class="popup__content">
-        <img src="<%=require('../images/icon-close-white.svg').default%>" alt="" class="popup__close">
+        <span class="popup__close"></span>
         <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
-        <span id="buttonChoiceLogin" class="link popup__link">Войти</span>
+        <span id="buttonChoiceLoginFromRes" class="link popup__link popup__link_size_l">Войти</span>
       </div>
     </div>
 
@@ -249,12 +256,12 @@
         <ul class="list list_content_social">
           <li class="list__item">
             <a href="https://github.com/MeryMegg" target="_blank" class="link social__link">
-              <img src="<%=require('../images/github.svg').default%>" alt="Github" class="list__icon">
+              <img src="<%=require('../images/github.svg').default%>" alt="ссылка на Github" class="list__icon">
             </a>
           </li>
           <li class="list__item">
             <a href="https://facebook.com" target="_blank" class="link social__link">
-              <img src="<%=require('../images/fb.svg').default%>" alt="Facebook" class="list__icon">
+              <img src="<%=require('../images/fb.svg').default%>" alt="ссылка на Facebook" class="list__icon">
             </a>
           </li>
         </ul>

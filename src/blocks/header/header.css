@@ -19,7 +19,6 @@
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: rgba(196, 196, 196, 0.01);
-  z-index: 6;
 }
 
 @media screen and (min-width: 655px) {

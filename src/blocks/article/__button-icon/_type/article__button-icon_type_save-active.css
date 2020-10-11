@@ -1,0 +1,7 @@
+.article__button-icon_type_save-active {
+  background-image: url('../../../../images/icon-save-marked.svg');
+}
+
+.article__button-icon_type_save-active:hover {
+  background-image: url('../../../../images/icon-save-marked-hover.svg');
+}
