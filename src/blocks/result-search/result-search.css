@@ -7,6 +7,7 @@
 @import url('./__title/result-search__title.css');
 @import url('./__article-list/result-search__article-list.css');
 @import url('./__button/result-search__button.css');
+@import url('./__error/result-search__error.css');
 @import url('./_is-invisible/result-search_is-invisible.css');
 
 .result-search {

@@ -8,17 +8,25 @@ const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: {
-    main: './src/scripts/index.js',
-    favourites: './src/scripts/favourites.js',
+    main: './src/index.js',
+    favourites: './src/favourites/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: './scripts/[name].[chunkhash].js'
+    filename: './[name]/index.[chunkhash].js'
   },
   module: {
     rules: [{ // тут описываются правила
       test: /\.js$/, // регулярное выражение, которое ищет все js файлы
-      use: { loader: "babel-loader" }, // весь JS обрабатывается пакетом babel-loader
+      enforce: 'pre',
+      use: [{
+        loader: "babel-loader",
+        options: {
+          plugins: ["transform-class-properties"],
+        },
+      },
+        'source-map-loader'
+      ], // весь JS обрабатывается пакетом babel-loader
       exclude: /node_modules/ // исключает папку node_modules
     },
     {
@@ -71,7 +79,7 @@ module.exports = {
       use: {
         loader: "file-loader",
         options: {
-          name: "./vendor/fonts/[name].[ext]",
+          name: "/vendor/fonts/[name].[ext]",
         },
       },
     },
@@ -93,13 +101,13 @@ module.exports = {
       inject: false, // стили НЕ нужно прописывать внутри тегов
       template: './src/pages/index.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'index.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
-      chunks: ['main']
+      chunks: ['main'] //указываем точку входа первой страницы
     }),
     new HtmlWebpackPlugin({
       inject: false, // стили НЕ нужно прописывать внутри тегов
       template: './src/pages/favourites.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'favourites.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
-      chunks: ['favourites']
+      chunks: ['favourites'] //указываем точку входа второй страницы
     }),
     new WebpackMd5Hash(),
     new webpack.DefinePlugin({
