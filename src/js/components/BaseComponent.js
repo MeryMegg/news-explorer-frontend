@@ -9,7 +9,6 @@ export default class BaseComponent {
   }
 
   _addHandler(element, event, handler) {
-    console.log('на меня повесили слушатель')
     element.addEventListener(event, handler);
   };
 

@@ -4,6 +4,33 @@ export default class MainApi {
     this._header = config.headers;
   }
 
+  signUp(data) {
+    return fetch(`${this._url}/signup`, {
+      method: 'POST',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+        email: data.regEmail,
+        password: data.regPassword,
+        name: data.userName
+      }),
+    })
+      .then((res) => this._requestHandler(res));
+  }
+
+  signIn(data) {
+    return fetch('http://localhost:30000/signin', {
+      method: 'POST',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+        email: data.loginEmail,
+        password: data.loginPassword,
+      }),
+    })
+      .then((res) => this._requestHandler(res));
+  }
+
   getUserData() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
@@ -17,6 +44,7 @@ export default class MainApi {
     if (res.ok) {
       return res.json();
     }
+    //console.log(res.status)
     return Promise.reject(res);
   }
 }

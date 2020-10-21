@@ -1,11 +1,11 @@
 import BaseComponent from './BaseComponent';
 
 export default class Popup extends BaseComponent {
-  constructor(body, overlay, removeContentPopupListeners) {
+  constructor(parametrs) {
     super();
-    this._overlay = overlay;
-    this._body = body;
-    this._removeContentPopupListeners = removeContentPopupListeners;
+    this._overlay = parametrs.overlay;
+    this._body = parametrs.body;
+    this._removeContentPopupListeners = parametrs.removeContentPopupListeners;
 
     this._handleCloseByEsc = this._handleCloseByEsc.bind(this);
     this._handleCloseByOverlay = this._handleCloseByOverlay.bind(this);

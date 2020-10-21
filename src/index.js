@@ -1,27 +1,32 @@
 import './styles/index.css';
 import { newsServerConfig, myServerConfig } from "./js/constants/config"
 import {
-  body, overlay, menuMobile, buttonOpenLoginPopup,
+  body, overlay, buttonOpenMenu, buttonCloseMenu,
+  menuMobile, buttonOpenLoginPopup,
   buttonLogout, itemsAuth, itemUnauth,
-  buttonOpenMenu, buttonCloseMenu, popupLogin,
-  popupReg, popupRes, preloader
+  popupLogin, formLogin, closeButtonPopupLogin,
+  linkPopupLogin, inputsFormLogin, buttonFormLogin,
+  popupReg, formReg, closeButtonPopupReg,
+  linkPopupReg, inputsFormReg, buttonFormReg,
+  popupRes, closeButtonPopupRes, linkPopupRes,
+  preloader
 } from "./js/constants/constants";
 import { errorMessages } from "./js/constants/messages";
 
 import MainApi from "./js/api/MainApi";
 import Header from "./js/components/Header";
 import Popup from './js/components/Popup';
-import FormRegistration from './js/components/FormRegistration';
+import Form from './js/components/Form';
+import UserInfo from './js/components/UserInfo';
 import FormValidation from './js/components/FormValidation';
-import FormAuthorization from './js/components/FormAuthorization';
+import PopupContent from './js/components/PopupContent';
 
 
 (function () {
   /* -- функции -- */
-
   //открытие формы авторизации из хедера
   function openLoginPopup() {
-    popup.open(formAuth.createContent());
+    popup.open(popupContent.createContent(popupLogin));
   }
   //открытие мобильного меню
   function openMenuMobile() {
@@ -32,19 +37,65 @@ import FormAuthorization from './js/components/FormAuthorization';
     popup.close();
   }
   //переключение форм по ссылке в попапе
-  function choiceRegPopup() {
-    popup.choicePopup(formReg.createContent());
+  function choicePopup(content) {
+    popup.choicePopup(content);
   }
 
-  function choiceLoginPopup() {
-    popup.choicePopup(formAuth.createContent());
+  //вызывает обработчик инпутов формы в экземпляре класса formValidation
+  function formInputHandler(event) {
+    formValidation.inputHandler(event);
   }
 
-  //вызывает метод класса FormValidator для добавления слушателей
-  const setInputListener = (form) => {
-    console.log(form)
-    formValidation.setEventListeners(form);
+  //вызывает обработчик отправки формы в экземпляре класса form
+  function formSubmitHandler(event) {
+    event.preventDefault();
+    const activeForm = event.target;
+    addUserInfo(activeForm, form.submitHandler(activeForm));
+    //form.submitHandler(event);
   }
+
+  function addUserInfo(activeForm, data) {
+    switch (true) {
+      case activeForm.name === "formLogin":
+        authUser(data);
+        break;
+      case activeForm.name === "formReg":
+        regUser(data);
+        break;
+    }
+    // console.log(activeForm);
+    // console.log(data)
+  }
+
+
+  function authUser(data) {
+    console.log(data)
+    mainApi.signIn(data)
+      .then((res) => {
+        console.log(res)
+        userInfo.setUserInfo(res);
+        //header.render(userInfo.takeButtonName());
+      })
+      .catch((err) => {
+        console.log(err)
+        form.setErrorMessage(err);
+      })
+  };
+
+  function regUser(data) {
+    console.log(data)
+    mainApi.signUp(data)
+      .then((res) => {
+        console.log(res)
+        //userInfo.setUserInfo(res);
+        //header.render(userInfo.takeButtonName());
+      })
+      .catch((err) => {
+        console.log(err)
+        //form.setErrorMessage(err);
+      })
+  };
+
 
   function logout() {
     console.log('Выход из системы')
@@ -76,33 +127,35 @@ import FormAuthorization from './js/components/FormAuthorization';
   };
 
   /* -- Создание экземпляров классов -- */
-  //MainApi
-  const mainApi = new MainApi(myServerConfig);
 
+  const mainApi = new MainApi(myServerConfig); //MainApi
   //Header
   const header = new Header({ buttonOpenLoginPopup, buttonLogout, itemsAuth, itemUnauth, buttonOpenMenu, openLoginPopup, openMenuMobile, logout });
-
   //Overlay
-  const popup = new Popup(body, overlay, removeContentPopupListeners);
+  const popup = new Popup({ body, overlay, removeContentPopupListeners });
+  //Form
+  const form = new Form(popupReg);
+  //UserInfo
+  const userInfo = new UserInfo();
+  //PopupContent
+  const popupContent = new PopupContent(popupReg, popupLogin, closePopup, choicePopup, formInputHandler, formSubmitHandler)
 
-  //FormAuthorization
-  const formAuth = new FormAuthorization(popupLogin, setInputListener, closePopup, choiceRegPopup);
-
-  //FormRegistration
-  const formReg = new FormRegistration(popupReg, setInputListener, closePopup, choiceLoginPopup);
 
   //FormValidator
-  const formValidation = new FormValidation(errorMessages);
+  const formValidation = new FormValidation();
 
   //запрос данные пользователя
   mainApi.getUserData()
     .then((res) => {
-      header.render(res)
+      console.log(res)
+      userInfo.setUserInfo(res);
+      //header.render(userInfo.takeButtonName());
     })
     .catch((err) => {
       if (err.status === 401) {
         header.render();
         // buttonOpenLoginPopup.addEventListener('click', openLoginPopup);
+        console.log(err)
       }
     });
 })();

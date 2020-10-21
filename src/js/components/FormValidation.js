@@ -4,30 +4,13 @@ import BaseComponent from './BaseComponent';
 export default class FormValidation extends BaseComponent {
   constructor() {
     super();
-    this._inputHandler = this._inputHandler.bind(this);
   }
 
-  setEventListeners(form) {
-    console.log(form)
-    const inputs = form.querySelectorAll(".form__input");
-    inputs.forEach((input) =>
-      this._addHandler(input, 'input', this._inputHandler)
-    );
-  };
-
-  removeEventListeners(form) {
-    const inputs = form.querySelectorAll(".form__input");
-    inputs.forEach((input) =>
-      this._removeHandler(input, 'input', this._inputHandler)
-    );
-  };
-
   //обработчик событий
-  _inputHandler(event) {
+  inputHandler(event) {
     this._submit = event.target
       .closest(".form")
       .querySelector(".button");
-    console.log(this._submit)
     const inputs = [...event.target.closest(".form").elements].filter(
       (input) => input.type !== "submit"
     );
