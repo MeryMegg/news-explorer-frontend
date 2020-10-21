@@ -1,6 +1,6 @@
-import BaseComponent from './BaseComponent';
+import PopupContent from './PopupContent';
 
-export default class FormRegistration extends BaseComponent {
+export default class FormRegistration extends PopupContent {
   constructor(popupReg, setInputListener, closePopup, choiceLoginPopup) {
     super();
     this._popup = popupReg;
@@ -31,13 +31,26 @@ export default class FormRegistration extends BaseComponent {
     this._setInputListener(this._form);
   }
 
+  _disableFormInputs() {
+    this._submit = this._form.querySelector(".button");
+    this._inputs = this._form.querySelectorAll("input");
+    this._disableInputs(this._inputs, this._submit);
+  };
+
+  enableFormInputs() {
+    this._submit = this._form.querySelector(".button");
+    this._inputs = this._form.querySelectorAll("input");
+    this._enableInputs(this._inputs, this._submit);
+  };
+
   _submitHandler(event) {
     event.preventDefault();
     console.log("меня отправили")
-    // const link = this._view.querySelector("[name = url]");
-    // const userInfo = { avatar: link.value };
-    // this._addUserAvatar(userInfo);
-
-    // this._renderLoading(true, this._view.querySelector(".button"));
+    const email = this._view.querySelector("#regInputEmail");
+    const password = this._view.querySelector("#regInputPassword");
+    const name = this._view.querySelector("#userName");
+    const userInfo = { email: email.value, password: password.value, name: name.value };
+    this._addUserInfo(userInfo);
+    this._disableFormInputs();
   };
 }

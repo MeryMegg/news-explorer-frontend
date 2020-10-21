@@ -26,6 +26,8 @@ export const popupRes = document.querySelector('#form-response-template').conten
 /* -- все попапы -- */
 //export const closeButtons = document.querySelectorAll('.popup__close'); //кнопка закрытия всех попапов
 
+/* -- блоки из секции resurse-search -- */
+export const preloader = document.querySelector('.result-search__preloader');
 
 
 

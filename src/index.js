@@ -4,7 +4,7 @@ import {
   body, overlay, menuMobile, buttonOpenLoginPopup,
   buttonLogout, itemsAuth, itemUnauth,
   buttonOpenMenu, buttonCloseMenu, popupLogin,
-  popupReg, popupRes
+  popupReg, popupRes, preloader
 } from "./js/constants/constants";
 import { errorMessages } from "./js/constants/messages";
 
@@ -18,19 +18,20 @@ import FormAuthorization from './js/components/FormAuthorization';
 
 (function () {
   /* -- функции -- */
+
+  //открытие формы авторизации из хедера
   function openLoginPopup() {
-    console.log('меня нажали');
     popup.open(formAuth.createContent());
   }
-
+  //открытие мобильного меню
   function openMenuMobile() {
     console.log('меня открыли');
   }
-
+  //закрытие всех попапов по крестику
   function closePopup() {
     popup.close();
   }
-
+  //переключение форм по ссылке в попапе
   function choiceRegPopup() {
     popup.choicePopup(formReg.createContent());
   }
@@ -58,10 +59,20 @@ import FormAuthorization from './js/components/FormAuthorization';
     if (form.name === "formReg") {
       formReg.removeEventListeners();
     }
-    // if (form.name === "formR") {
-    //   instanceFormAvatar.removeEventListeners();
-    // }
+    if (form.name === "formRes") {
+      instanceFormAvatar.removeEventListeners();
+      return
+    }
     formValidation.removeEventListeners(form);
+  };
+
+  //Preloader
+  const renderLoading = (isLoading) => {
+    if (isLoading) {
+      preloader.classList.add('result-search__preloader_is-invisible');
+    } else {
+      preloader.classList.remove('result-search__preloader_is-invisible');
+    }
   };
 
   /* -- Создание экземпляров классов -- */
