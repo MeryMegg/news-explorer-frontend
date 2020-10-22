@@ -12,13 +12,9 @@ export const myServerConfig = {
 
 export const newsServerConfig = {
   baseUrl: `${NEWS_SERVER}`,
-  query: new URLSearchParams({
-    q: word,
-    apiKey: '8518cb97ba1c4acbbf21041a49a85093',
-    from: date.toISOString().substr(0, 10),
-    to: (new Date()).toISOString().substr(0, 10),
-    pageSize: 100
-  })
+  apiKey: '8518cb97ba1c4acbbf21041a49a85093',
+  pageSize: 100
 }
+
 
 
