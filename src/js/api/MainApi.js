@@ -5,6 +5,11 @@ export default class MainApi {
   }
 
   signUp(data) {
+    console.log(JSON.stringify({
+      email: data.regEmail,
+      password: data.regPassword,
+      name: data.userName
+    }))
     return fetch(`${this._url}/signup`, {
       method: 'POST',
       headers: this._headers,
@@ -19,7 +24,8 @@ export default class MainApi {
   }
 
   signIn(data) {
-    return fetch('http://localhost:30000/signin', {
+    console.log(data)
+    return fetch(`${this._url}/signin`, {
       method: 'POST',
       headers: this._headers,
       credentials: 'include',

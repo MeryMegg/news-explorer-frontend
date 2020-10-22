@@ -26,16 +26,16 @@ export default class Form extends PopupContent {
     this._button.setAttribute('disabled', true)
   };
 
-  enableInputs(inputs, button) {
-    inputs.forEach((input) =>
+  enableInputs() {
+    this._inputs.forEach((input) =>
       input.removeAttribute('disabled', true)
     );
-    button.classList.remove('popup__button_is-disabled');
-    button.removeAttribute('disabled', true)
+    this._button.classList.remove('popup__button_is-disabled');
+    this._button.removeAttribute('disabled', true)
   };
 
-  setErrorMessage(err) {
+  setErrorMessage(message) {
     this._errorMessage = this._form.querySelector('.popup__error-message');
-    this._errorMessage.textContent = err.message || "произошла ошибка"
+    this._errorMessage.textContent = message
   }
 }

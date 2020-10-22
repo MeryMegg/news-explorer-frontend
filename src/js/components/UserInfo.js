@@ -6,13 +6,13 @@ export default class UserInfo {
   }
 
   setUserInfo(userInfo) {
-    this.name = userInfo.name;
+    this._name = userInfo.name;
     this._email = userInfo.email;
     //this._setButtonName();
     //this._config.myId = this._userInfo._id;
   }
 
-  takeButtonName() {
-    return this.name;
+  getButtonName() {
+    return this._name;
   }
 }

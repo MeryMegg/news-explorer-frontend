@@ -12,12 +12,13 @@ export const myServerConfig = {
 
 export const newsServerConfig = {
   baseUrl: `${NEWS_SERVER}`,
-  headers: {
+  query: new URLSearchParams({
+    q: word,
     apiKey: '8518cb97ba1c4acbbf21041a49a85093',
-    sortBy: 'popularity',
-    pageSize: 100,
-    days: 7,
-  }
+    from: date.toISOString().substr(0, 10),
+    to: (new Date()).toISOString().substr(0, 10),
+    pageSize: 100
+  })
 }
 
 

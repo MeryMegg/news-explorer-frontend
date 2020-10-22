@@ -74,11 +74,12 @@ import PopupContent from './js/components/PopupContent';
       .then((res) => {
         console.log(res)
         userInfo.setUserInfo(res);
+        form.setErrorMessage("")
         //header.render(userInfo.takeButtonName());
       })
       .catch((err) => {
-        console.log(err)
-        form.setErrorMessage(err);
+        err.json().then((res) => form.setErrorMessage(res.message))
+        form.enableInputs();
       })
   };
 
@@ -93,6 +94,7 @@ import PopupContent from './js/components/PopupContent';
       .catch((err) => {
         console.log(err)
         //form.setErrorMessage(err);
+        form.enableInputs();
       })
   };
 
@@ -155,7 +157,7 @@ import PopupContent from './js/components/PopupContent';
       if (err.status === 401) {
         header.render();
         // buttonOpenLoginPopup.addEventListener('click', openLoginPopup);
-        console.log(err)
+        err.json().then(res => console.log(res.message))
       }
     });
 })();
