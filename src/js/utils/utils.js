@@ -2,8 +2,9 @@ import { newsServerConfig } from "../constants/config";
 
 function getDate() {
   const lengthPeriod = newsServerConfig.days * 60 * 60 * 1000;
-  const toDate = new Date().toISOString();
-  const fromDate = (startDate.getTime() - lengthPeriod).toISOString();
+  const currentDate = new Date();
+  const toDate = currentDate.toISOString();
+  const fromDate = new Date(currentDate.getTime() - lengthPeriod).toISOString();
   return { fromDate, toDate }
 }
 
