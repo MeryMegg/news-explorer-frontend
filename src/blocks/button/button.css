@@ -2,6 +2,7 @@
 @import url('./_color/button_color_blue.css');
 @import url('./_color/button_color_white.css');
 @import url('./_color/button_color_white-border.css');
+@import url('./_is-disabled/button_is-disabled.css');
 
 .button {
   cursor: pointer;

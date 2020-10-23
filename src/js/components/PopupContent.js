@@ -20,19 +20,11 @@ export default class PopupContent extends BaseComponent {
   }
 
   _choiceContent(event) {
-    // switch (true) {
-    //   case event.target.id === "buttonChoiceReg":
-    //     this._choicePopup(this._popupReg);
-    //     break;
-    //   case event.target.id === "buttonChoiceLogin":
-    //     this._choicePopup(this._popupLogin);
-    //     break;
-    // }
     switch (true) {
       case event.target.id === "buttonChoiceReg":
         this._choicePopup(this.createContent(this._popupReg));
         break;
-      case event.target.id === "buttonChoiceLogin":
+      case event.target.id === "buttonChoiceLogin" || event.target.id === "buttonChoiceLoginFromRes":
         this._choicePopup(this.createContent(this._popupLogin));
         break;
     }
@@ -48,7 +40,7 @@ export default class PopupContent extends BaseComponent {
       });
     }
     this._closeButton = this.content.querySelector('.popup__close');
-    this._link = this.content.querySelector('.popup__choice');
+    this._link = this.content.querySelector('.popup__link');
     this._setHandlers([
       [this._link, 'click', this._choiceContent],
       [this._closeButton, 'click', this._closePopup],

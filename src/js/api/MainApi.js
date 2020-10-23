@@ -1,15 +1,10 @@
 export default class MainApi {
   constructor(config) {
     this._url = config.baseUrl;
-    this._header = config.headers;
+    this._headers = config.headers;
   }
 
   signUp(data) {
-    console.log(JSON.stringify({
-      email: data.regEmail,
-      password: data.regPassword,
-      name: data.userName
-    }))
     return fetch(`${this._url}/signup`, {
       method: 'POST',
       headers: this._headers,
@@ -24,7 +19,6 @@ export default class MainApi {
   }
 
   signIn(data) {
-    console.log(data)
     return fetch(`${this._url}/signin`, {
       method: 'POST',
       headers: this._headers,
@@ -52,5 +46,16 @@ export default class MainApi {
     }
     //console.log(res.status)
     return Promise.reject(res);
+  }
+
+  signOut() {
+    return fetch(`${this._url}/signout`, {
+      method: 'POST',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+      }),
+    })
+      .then((res) => this._requestHandler(res));
   }
 }

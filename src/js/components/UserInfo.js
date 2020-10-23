@@ -6,8 +6,8 @@ export default class UserInfo {
   }
 
   setUserInfo(userInfo) {
-    this._name = userInfo.name;
-    this._email = userInfo.email;
+    this._name = userInfo ? userInfo.name : "";
+    this._email = userInfo ? userInfo.email : "";
     //this._setButtonName();
     //this._config.myId = this._userInfo._id;
   }

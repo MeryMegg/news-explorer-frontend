@@ -1,4 +1,4 @@
-.popup__button.popup__button_is-disabled {
+.button.button_is-disabled {
   background: #e6e8eb;
   cursor: default;
   font-family: 'Roboto' , Arial, sans-serif;

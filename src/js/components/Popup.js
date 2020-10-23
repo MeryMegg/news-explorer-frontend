@@ -5,11 +5,11 @@ export default class Popup extends BaseComponent {
     super();
     this._overlay = parametrs.overlay;
     this._body = parametrs.body;
-    this._removeContentPopupListeners = parametrs.removeContentPopupListeners;
+
 
     this._handleCloseByEsc = this._handleCloseByEsc.bind(this);
     this._handleCloseByOverlay = this._handleCloseByOverlay.bind(this);
-    this._removeEventListeners = this._removeEventListeners.bind(this);
+
 
   }
 

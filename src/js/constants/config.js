@@ -1,3 +1,4 @@
+
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const NEWS_SERVER = NODE_ENV === 'development' ? 'https://newsapi.org/v2/everything?' : 'https://nomoreparties.co/news/v2/everything?';
@@ -13,7 +14,10 @@ export const myServerConfig = {
 export const newsServerConfig = {
   baseUrl: `${NEWS_SERVER}`,
   apiKey: '8518cb97ba1c4acbbf21041a49a85093',
-  pageSize: 100
+  pageSize: 100,
+  language: 'ru',
+  sortBy: 'popularity',
+  days: 7
 }
 
 

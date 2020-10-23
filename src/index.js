@@ -4,11 +4,8 @@ import {
   body, overlay, buttonOpenMenu, buttonCloseMenu,
   menuMobile, buttonOpenLoginPopup,
   buttonLogout, itemsAuth, itemUnauth,
-  popupLogin, formLogin, closeButtonPopupLogin,
-  linkPopupLogin, inputsFormLogin, buttonFormLogin,
-  popupReg, formReg, closeButtonPopupReg,
-  linkPopupReg, inputsFormReg, buttonFormReg,
-  popupRes, closeButtonPopupRes, linkPopupRes,
+  serchForm, searchInput, serchButton,
+  popupLogin, popupReg, popupRes,
   preloader
 } from "./js/constants/constants";
 import { errorMessages } from "./js/constants/messages";
@@ -43,6 +40,7 @@ import PopupContent from './js/components/PopupContent';
 
   //вызывает обработчик инпутов формы в экземпляре класса formValidation
   function formInputHandler(event) {
+    console.log(event.target)
     formValidation.inputHandler(event);
   }
 
@@ -50,11 +48,10 @@ import PopupContent from './js/components/PopupContent';
   function formSubmitHandler(event) {
     event.preventDefault();
     const activeForm = event.target;
-    addUserInfo(activeForm, form.submitHandler(activeForm));
-    //form.submitHandler(event);
+    sendData(activeForm, form.submitHandler(activeForm));
   }
 
-  function addUserInfo(activeForm, data) {
+  function sendData(activeForm, data) {
     switch (true) {
       case activeForm.name === "formLogin":
         authUser(data);
@@ -62,62 +59,72 @@ import PopupContent from './js/components/PopupContent';
       case activeForm.name === "formReg":
         regUser(data);
         break;
+      case activeForm.name === "formSearch":
+        console.log(data)
+        break;
     }
-    // console.log(activeForm);
-    // console.log(data)
   }
 
 
   function authUser(data) {
-    console.log(data)
     mainApi.signIn(data)
       .then((res) => {
         console.log(res)
         userInfo.setUserInfo(res);
-        form.setErrorMessage("")
-        //header.render(userInfo.takeButtonName());
+        form.setErrorMessage();
+        closePopup();
+        console.log(userInfo.getButtonName())
+        header.render(userInfo.getButtonName());
       })
       .catch((err) => {
-        err.json().then((res) => form.setErrorMessage(res.message))
+        err.json().then(res => form.setErrorMessage(res.message))
         form.enableInputs();
       })
   };
 
   function regUser(data) {
-    console.log(data)
     mainApi.signUp(data)
       .then((res) => {
         console.log(res)
-        //userInfo.setUserInfo(res);
-        //header.render(userInfo.takeButtonName());
+        userInfo.setUserInfo(res);
+        header.render(userInfo.getButtonName());
+        console.log(popupContent.createContent(popupRes))
+        choicePopup(popupContent.createContent(popupRes));
       })
       .catch((err) => {
         console.log(err)
-        //form.setErrorMessage(err);
+        err.json().then(res => form.setErrorMessage(res.message))
         form.enableInputs();
       })
   };
 
 
   function logout() {
-    console.log('Выход из системы')
-    header.logoutRendered();
+    mainApi.signOut()
+      .then((res) => {
+        console.log(res)
+        userInfo.setUserInfo();
+        header.logoutRendered();
+      })
+      .catch((err) =>
+        err.json().then(res => console.log(res.message))
+      );
   }
 
   //вызывает методы классов FormAddCard или FormEditProfile для снятия слушателей при закрытии popup по крестику
-  const removeContentPopupListeners = (form) => {
-    if (form.name === "formLogin") {
-      formAuth.removeEventListeners();
-    }
-    if (form.name === "formReg") {
-      formReg.removeEventListeners();
-    }
-    if (form.name === "formRes") {
-      instanceFormAvatar.removeEventListeners();
-      return
-    }
-    formValidation.removeEventListeners(form);
-  };
+  // const removeContentPopupListeners = (form) => {
+  //   if (form.name === "formLogin") {
+  //     formAuth.removeEventListeners();
+  //   }
+  //   if (form.name === "formReg") {
+  //     formReg.removeEventListeners();
+  //   }
+  //   if (form.name === "formRes") {
+  //     instanceFormAvatar.removeEventListeners();
+  //     return
+  //   }
+  //   formValidation.removeEventListeners(form);
+  // };
 
   //Preloader
   const renderLoading = (isLoading) => {
@@ -129,34 +136,35 @@ import PopupContent from './js/components/PopupContent';
   };
 
   /* -- Создание экземпляров классов -- */
-
-  const mainApi = new MainApi(myServerConfig); //MainApi
+  //MainApi
+  const mainApi = new MainApi(myServerConfig);
   //Header
   const header = new Header({ buttonOpenLoginPopup, buttonLogout, itemsAuth, itemUnauth, buttonOpenMenu, openLoginPopup, openMenuMobile, logout });
   //Overlay
-  const popup = new Popup({ body, overlay, removeContentPopupListeners });
+  const popup = new Popup({ body, overlay });
   //Form
   const form = new Form(popupReg);
   //UserInfo
   const userInfo = new UserInfo();
   //PopupContent
   const popupContent = new PopupContent(popupReg, popupLogin, closePopup, choicePopup, formInputHandler, formSubmitHandler)
-
-
-  //FormValidator
+  //FormValidator для форм в poppup
   const formValidation = new FormValidation();
+
+  /* -- слушатели -- */
+  serchForm.addEventListener("submit", formSubmitHandler);
+  searchInput.addEventListener('input', formInputHandler);
+
 
   //запрос данные пользователя
   mainApi.getUserData()
     .then((res) => {
-      console.log(res)
       userInfo.setUserInfo(res);
-      //header.render(userInfo.takeButtonName());
+      header.render(userInfo.getButtonName());
     })
     .catch((err) => {
       if (err.status === 401) {
         header.render();
-        // buttonOpenLoginPopup.addEventListener('click', openLoginPopup);
         err.json().then(res => console.log(res.message))
       }
     });

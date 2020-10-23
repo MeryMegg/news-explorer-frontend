@@ -14,6 +14,7 @@ export default class FormValidation extends BaseComponent {
     const inputs = [...event.target.closest(".form").elements].filter(
       (input) => input.type !== "submit"
     );
+    console.log(inputs)
 
     this.isFieldValid(event.target);
 
@@ -55,7 +56,7 @@ export default class FormValidation extends BaseComponent {
       return false;
     }
 
-    if (input.validity.typeMismatch && input.type === "email") {
+    if (input.validity.patternMismatch && input.type === "email") {
       input.setCustomValidity(errorMessages.wrongEmail);
       return false;
     }
@@ -66,11 +67,11 @@ export default class FormValidation extends BaseComponent {
   // Активирует и деактивирует кнопку submit
   setSubmitButtonState(submit, state) {
     if (state) {
-      this._submit.removeAttribute("disabled");
-      this._submit.classList.remove(`popup__button_is-disabled`);
+      submit.removeAttribute("disabled");
+      submit.classList.remove(`button_is-disabled`);
     } else {
-      this._submit.setAttribute("disabled", true);
-      this._submit.classList.add(`popup__button_is-disabled`);
+      submit.setAttribute("disabled", true);
+      submit.classList.add(`button_is-disabled`);
     }
   }
 }
