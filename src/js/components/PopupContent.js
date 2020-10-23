@@ -1,11 +1,11 @@
 import BaseComponent from './BaseComponent';
 
 export default class PopupContent extends BaseComponent {
-  constructor(popupReg, popupLogin, closePopup, choicePopup, formInputHandler, formSubmitHandler) {
+  constructor(popupReg, popupLogin, closeOverlay, choicePopup, formInputHandler, formSubmitHandler) {
     super();
     this._popupReg = popupReg;
     this._popupLogin = popupLogin;
-    this._closePopup = closePopup;
+    this._closeOverlay = closeOverlay;
     this._choicePopup = choicePopup;
     this._formInputHandler = formInputHandler;
     this._formSubmitHandler = formSubmitHandler;
@@ -43,11 +43,11 @@ export default class PopupContent extends BaseComponent {
     this._link = this.content.querySelector('.popup__link');
     this._setHandlers([
       [this._link, 'click', this._choiceContent],
-      [this._closeButton, 'click', this._closePopup],
+      [this._closeButton, 'click', this._closeOverlay],
     ]);
   }
 
-  _removeEventListeners() {
+  removeEventListeners() {
     if (this._view.classList.contains('.popup__content_form')) {
       this._removeHandler(this._form, 'submit', this._formSubmitHandler);
       this._inputs.forEach((input) => {
@@ -59,14 +59,5 @@ export default class PopupContent extends BaseComponent {
       [this._closeButton, 'click', this._closeContent],
       [this._link, 'click', this._choicePopup]
     ]);
-    // this._setInputListener(this._form);
   }
-
-
-  // setEventListeners(form) {
-  //   const inputs = form.querySelectorAll(".form__input");
-  //   inputs.forEach((input) =>
-  //     this._addHandler(input, 'input', this._inputHandler)
-  //   );
-  // };
 }
