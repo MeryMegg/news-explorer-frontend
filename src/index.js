@@ -11,6 +11,7 @@ import {
 import { errorMessages } from "./js/constants/messages";
 
 import MainApi from "./js/api/MainApi";
+import NewsApi from "./js/api/newsApi";
 import Header from "./js/components/Header";
 import Popup from './js/components/Popup';
 import Form from './js/components/Form';
@@ -40,7 +41,6 @@ import PopupContent from './js/components/PopupContent';
 
   //вызывает обработчик инпутов формы в экземпляре класса formValidation
   function formInputHandler(event) {
-    console.log(event.target)
     formValidation.inputHandler(event);
   }
 
@@ -60,7 +60,7 @@ import PopupContent from './js/components/PopupContent';
         regUser(data);
         break;
       case activeForm.name === "formSearch":
-        console.log(data)
+        searchNews(activeForm, data);
         break;
     }
   }
@@ -98,6 +98,25 @@ import PopupContent from './js/components/PopupContent';
       })
   };
 
+  function searchNews(form, data) {
+    const keyWord = formValidation.getValidateData(form, data)
+    if (!keyWord) {
+      console.log('Поле пустое')
+      return;
+    }
+    newsApi.getArticles(keyWord)
+      .then((res) => {
+        console.log(res)
+        // userInfo.setUserInfo(res);
+        // header.render(userInfo.getButtonName());
+        // console.log(popupContent.createContent(popupRes))
+        // choicePopup(popupContent.createContent(popupRes));
+      })
+      .catch((err) => {
+        err.json().then(res => console.log(res.message))
+        form.enableInputs();
+      })
+  }
 
   function logout() {
     mainApi.signOut()
@@ -138,6 +157,8 @@ import PopupContent from './js/components/PopupContent';
   /* -- Создание экземпляров классов -- */
   //MainApi
   const mainApi = new MainApi(myServerConfig);
+  //NewsApi
+  const newsApi = new NewsApi(newsServerConfig);
   //Header
   const header = new Header({ buttonOpenLoginPopup, buttonLogout, itemsAuth, itemUnauth, buttonOpenMenu, openLoginPopup, openMenuMobile, logout });
   //Overlay

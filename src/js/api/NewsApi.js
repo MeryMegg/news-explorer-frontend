@@ -5,9 +5,10 @@ export default class NewsApi {
     this._url = config.baseUrl;
   }
 
-  getArticles() {
-    const query = getQuery();
-    return fetch(`${this.config.baseUrl}/v2/everything?${query}`)
+  getArticles(keyWord) {
+    const query = getQuery(keyWord);
+    console.log(query);
+    return fetch(`${this._url}${query}`)
       .then((res) => this._requestHandler(res));
   }
 

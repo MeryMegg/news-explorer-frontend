@@ -11,10 +11,8 @@ export default class FormValidation extends BaseComponent {
     this._submit = event.target
       .closest(".form")
       .querySelector(".button");
-    const inputs = [...event.target.closest(".form").elements].filter(
-      (input) => input.type !== "submit"
-    );
-    console.log(inputs)
+    const inputs = [...event.target
+      .closest(".form").querySelectorAll(".input")];
 
     this.isFieldValid(event.target);
 
@@ -23,6 +21,17 @@ export default class FormValidation extends BaseComponent {
     } else {
       this.setSubmitButtonState(this._submit, false);
     }
+  }
+
+  //Проверяет наличие данных в форме поиска новостей перед отправкой
+  getValidateData(form, data) {
+    const values = Object.values(data);
+    const errorElem = form.querySelector(`.error-message`);
+    const keyWord = values[0];
+    if (keyWord === "") {
+      errorElem.textContent = errorMessages.empty;
+    }
+    return keyWord;
   }
 
   //Добавляет или удаляет ошибку
@@ -66,6 +75,9 @@ export default class FormValidation extends BaseComponent {
 
   // Активирует и деактивирует кнопку submit
   setSubmitButtonState(submit, state) {
+    if (submit.id === "searchNews") {
+      return;
+    }
     if (state) {
       submit.removeAttribute("disabled");
       submit.classList.remove(`button_is-disabled`);

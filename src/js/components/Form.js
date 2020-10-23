@@ -14,9 +14,9 @@ export default class Form extends PopupContent {
       return acc;
     }, {});
     this._disableInputs();
-    if (this._form.name === "formSearch" && !userInfo[this._inputs[0].name]) {
-      console.log('Это поле пустое')
-    }
+    // if (this._form.name === "formSearch" && !userInfo[this._inputs[0].name]) {
+    //   console.log('Это поле пустое')
+    // }
     return userInfo;
   };
 
