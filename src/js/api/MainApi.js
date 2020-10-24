@@ -44,7 +44,6 @@ export default class MainApi {
     if (res.ok) {
       return res.json();
     }
-    //console.log(res.status)
     return Promise.reject(res);
   }
 

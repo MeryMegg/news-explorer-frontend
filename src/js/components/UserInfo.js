@@ -1,18 +1,18 @@
 export default class UserInfo {
-  constructor(renderHeader) {
-    // this._renderHeader = renderHeader;
-    // this._buttonLogout = buttonLogout;
-
+  constructor() {
   }
 
-  setUserInfo(userInfo) {
-    this._name = userInfo ? userInfo.name : "";
-    this._email = userInfo ? userInfo.email : "";
-    //this._setButtonName();
-    //this._config.myId = this._userInfo._id;
+  setUserInfo(data) {
+    this._name = data ? data.name : "";
+    this._email = data ? data.email : "";
+    this._id = data ? data._id : "";
   }
 
-  getButtonName() {
+  getUserName() {
+    return this._name;
+  }
+
+  getUserId() {
     return this._name;
   }
 }

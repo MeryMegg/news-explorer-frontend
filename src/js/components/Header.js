@@ -1,27 +1,28 @@
 import BaseComponent from './BaseComponent';
 
 export default class Header extends BaseComponent {
-  constructor(parametrs) {
+  constructor(params) {
     super();
     /* dom elements */
-    this._buttonLogin = parametrs.buttonOpenLoginPopup;
-    this._buttonLogout = parametrs.buttonLogout;
-    this._itemsAuth = parametrs.itemsAuth;
-    this._itemUnauth = parametrs.itemUnauth;
-    this._buttonOpenMenu = parametrs.buttonOpenMenu;
-    this._logout = parametrs.logout.bind(this);
+    this._buttonLogin = params.buttonOpenLoginPopup;
+    this._buttonLogout = params.buttonLogout;
+    this._itemsAuth = params.itemsAuth;
+    this._itemUnauth = params.itemUnauth;
+    this._buttonOpenMenu = params.buttonOpenMenu;
+    this._popupLogin = params.popupLogin;
 
     /* functions */
-    this._openLoginPopup = parametrs.openLoginPopup;
-    this._openMenuMobile = parametrs.openMenuMobile;
+    this._openOverlay = params.openOverlay;
+    //this._openMenuMobile = params.openMenuMobile;
+    this._logout = params.logout;
 
-
+    this._openPopup = this._openPopup.bind(this);
   }
 
   render(name) {
-    this._addHandler(this._buttonOpenMenu, 'click', this._openMenuMobile);
+    // this._addHandler(this._buttonOpenMenu, 'click', this._openMenuMobile);
     if (!name) {
-      this._addHandler(this._buttonLogin, 'click', this._openLoginPopup);
+      this._addHandler(this._buttonLogin, 'click', this._openPopup);
       return;
     }
     this._buttonLogout.textContent = name;
@@ -38,6 +39,10 @@ export default class Header extends BaseComponent {
     });
     this._itemUnauth.classList.remove(`list__item_is-invisible`);
     this._changeListeners(false);
+  }
+
+  _openPopup() {
+    this._openOverlay(this._popupLogin);
   }
 
   _changeListeners(flag) {

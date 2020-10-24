@@ -1,11 +1,17 @@
 import BaseComponent from './BaseComponent';
 
 export default class Popup extends BaseComponent {
-  constructor(parametrs) {
+  constructor(params) {
     super();
-    this._overlay = parametrs.overlay;
-    this._body = parametrs.body;
-
+    this._overlay = params.overlay;
+    this._body = params.body;
+    this._buttonOpenMenu = params.buttonOpenMenu;
+    //функции
+    this._showButtonOpenMenu = params.showButtonOpenMenu.bind(this);
+    this._hideButtonOpenMenu = params.hideButtonOpenMenu.bind(this);
+    this._closeMenuMobile = params.closeMenuMobile;
+    this._isOpenMenuMobile = params.isOpenMenuMobile;
+    this._removeContentPopupListeners = params.removeContentPopupListeners;
 
     this._handleCloseByEsc = this._handleCloseByEsc.bind(this);
     this._handleCloseByOverlay = this._handleCloseByOverlay.bind(this);
@@ -14,7 +20,10 @@ export default class Popup extends BaseComponent {
   }
 
   open(content) {
-    this._overlay.append(content);
+    if (content) {
+      this._overlay.append(content);
+    }
+    this._hideButtonOpenMenu(this._buttonOpenMenu);
     this._body.classList.toggle('body_overflow_hidden');
     this._setEventListeners();
     this._togglePopup();
@@ -22,6 +31,7 @@ export default class Popup extends BaseComponent {
 
   _togglePopup() {
     this._overlay.classList.toggle("popup_is-opened");
+
   };
 
   choicePopup(content) {
@@ -39,7 +49,9 @@ export default class Popup extends BaseComponent {
 
   _clearContent() {
     this._removeEventListeners();
-    this._overlay.querySelector('.popup__content').remove();
+    if (this._overlay.querySelector('.popup__content')) {
+      this._overlay.querySelector('.popup__content').remove();
+    }
   }
 
   _removeEventListeners() {
@@ -47,18 +59,15 @@ export default class Popup extends BaseComponent {
       [this._overlay, 'click', this._handleCloseByOverlay],
       [document, 'keyup', this._handleCloseByEsc],
     ]);
-    if (
-      this._overlay
-        .querySelector(".popup__content")
-        .classList.contains("popup__content_type_form")
-    ) {
-      const form = this._overlay.querySelector(".form");
-
-      this._removeContentPopupListeners(form);
+    const content = this._overlay
+      .querySelector(".popup__content");
+    if (content) {
+      this._removeContentPopupListeners();
     }
   }
 
   close() {
+    this._showButtonOpenMenu(this._buttonOpenMenu);
     this._body.classList.toggle('body_overflow_hidden');
     this._clearContent();
     this._togglePopup();
@@ -66,13 +75,13 @@ export default class Popup extends BaseComponent {
 
   _handleCloseByOverlay(event) {
     if (event.target === this._overlay && event.target !== this._overlay.querySelector('.popup__content')) {
-      this.close();
+      this._isOpenMenuMobile() ? this._closeMenuMobile() : this.close();
     }
   }
 
   _handleCloseByEsc(event) {
     if (event.key === 'Escape') {
-      this.close();
+      this._isOpenMenuMobile() ? this._closeMenuMobile() : this.close();
     }
   }
 }

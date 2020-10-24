@@ -3,7 +3,7 @@ import PopupContent from './PopupContent';
 export default class Form extends PopupContent {
   constructor(popupReg) {
     super();
-
+    this.enableInputs = this.enableInputs.bind(this)
   }
 
   submitHandler(form) {
@@ -14,9 +14,6 @@ export default class Form extends PopupContent {
       return acc;
     }, {});
     this._disableInputs();
-    // if (this._form.name === "formSearch" && !userInfo[this._inputs[0].name]) {
-    //   console.log('Это поле пустое')
-    // }
     return userInfo;
   };
 
@@ -31,14 +28,14 @@ export default class Form extends PopupContent {
 
   enableInputs() {
     this._inputs.forEach((input) =>
-      input.removeAttribute('disabled', true)
+      input.removeAttribute('disabled')
     );
     this._button.classList.remove('button_is-disabled');
-    this._button.removeAttribute('disabled', true)
+    this._button.removeAttribute('disabled')
   };
 
   setErrorMessage(message) {
-    this._errorMessage = this._form.name === "formSearch" ? this._form.querySelector('.search__error-message') : this._form.querySelector('.popup__error-message');
+    this._errorMessage = this._form.querySelector('.popup__error-message');
     this._errorMessage.textContent = message ? message : "";
   }
 }
