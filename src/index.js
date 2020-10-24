@@ -18,12 +18,13 @@ import UserInfo from './js/components/UserInfo';
 import FormValidation from './js/components/FormValidation';
 import PopupContent from './js/components/PopupContent';
 import Menu from './js/components/Menu';
+import NewsCardList from './js/components/NewsCardList';
+import NewsCard from './js/components/NewsCard';
 
 
 (function () {
-  /* -- функции -- */
-
-  //открытие формы авторизации
+  /* -- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ  -- */
+  //октрыть форму авторизации
   function openOverlay(template) {
     if (template) {
       const content = popupContent.createContent(template);
@@ -36,6 +37,7 @@ import Menu from './js/components/Menu';
     popup.open();
   }
 
+  //закрыть мобильное меню
   function closeMenuMobile() {
     menu.close();
   }
@@ -44,6 +46,7 @@ import Menu from './js/components/Menu';
   function closeOverlay() {
     popup.close();
   }
+
   //переключение форм по ссылке в попапе
   function choicePopup(content) {
     popup.choicePopup(content);
@@ -82,7 +85,6 @@ import Menu from './js/components/Menu';
 
   //настроить страницу под пользователя
   function renderAuthPage(data) {
-    console.log(data)
     userInfo.setUserInfo(data);
     header.render(userInfo.getUserName());
   }
@@ -95,7 +97,19 @@ import Menu from './js/components/Menu';
     if (isOpenMenuMobile()) {
       menu.close();
     }
+  };
+
+  //вызывает метод класса Form для снятия слушателей c контента
+  function removeContentPopupListeners() {
+    popupContent.removeEventListeners();
   }
+
+  //Preloader
+  function renderLoading(isLoading) {
+    isLoading ?
+      preloader.classList.remove('result-search__preloader_is-invisible')
+      : preloader.classList.add('result-search__preloader_is-invisible');
+  };
 
   //роут
   function sendData(activeForm, data) {
@@ -112,82 +126,7 @@ import Menu from './js/components/Menu';
     }
   }
 
-
-  function authUser(data) {
-    mainApi.signIn(data)
-      .then((res) => {
-        userInfo.setUserInfo(res);
-        form.setErrorMessage();
-        closeOverlay();
-        header.render(userInfo.getUserName());
-      })
-      .catch((err) => {
-        err.json().then(res => form.setErrorMessage(res.message))
-        form.enableInputs();
-      })
-  };
-
-  function regUser(data) {
-    mainApi.signUp(data)
-      .then((res) => {
-        userInfo.setUserInfo(res);
-        header.render(userInfo.getUserName());
-        choicePopup(popupContent.createContent(popupRes));
-      })
-      .catch((err) => {
-        console.log(err)
-        err.json().then(res => form.setErrorMessage(res.message))
-        form.enableInputs();
-      })
-  };
-
-  function searchNews(form, data) {
-    const keyWord = formValidation.getValidateData(form, data)
-    if (!keyWord) {
-      console.log('Поле пустое');
-      return;
-    }
-    newsApi.getArticles(keyWord)
-      .then((res) => {
-        console.log(res)
-        form.enableInputs();
-        // userInfo.setUserInfo(res);
-        // header.render(userInfo.getUserName());
-        // console.log(popupContent.createContent(popupRes))
-        // choicePopup(popupContent.createContent(popupRes));
-      })
-      .catch((err) => {
-        err.json().then(res => console.log(res.message))
-        form.enableInputs();
-      })
-  }
-
-  // выход из системы
-  function logout() {
-    mainApi.signOut()
-      .then(() => {
-        renderUnauthPage();
-      })
-      .catch((err) =>
-        err.json().then(res => console.log(res.message))
-      );
-  }
-
-  //вызывает метод класса Form для снятия слушателей c контента
-  function removeContentPopupListeners() {
-    popupContent.removeEventListeners();
-  }
-
-  //Preloader
-  const renderLoading = (isLoading) => {
-    if (isLoading) {
-      preloader.classList.add('result-search__preloader_is-invisible');
-    } else {
-      preloader.classList.remove('result-search__preloader_is-invisible');
-    }
-  };
-
-  /* -- Создание экземпляров классов -- */
+  /* -- ЭКЗЕМПЛЯРЫ КЛАССОВ -- */
   //MainApi
   const mainApi = new MainApi(myServerConfig);
   //NewsApi
@@ -205,16 +144,46 @@ import Menu from './js/components/Menu';
   //FormValidator
   const formValidation = new FormValidation(enableSearchInputs);
   const menu = new Menu({ menuMobile, buttonOpenMenu, buttonCloseMenu, openOverlay, closeOverlay })
+  //class NewsCard
+  const newsCard = ([...arg]) => new Card([...arg]);
 
-  /* -- слушатели -- */
+  /* -- СЛУШАТЕЛИ -- */
   function setEventListeners() {
     serchForm.addEventListener("submit", formSubmitHandler);
     searchInput.addEventListener('input', formInputHandler);
     menu.setEventListener(buttonOpenMenu);
   }
 
+  /* -- ЗАПРОСЫ -- */
+  //регистрация пользователя
+  function regUser(data) {
+    mainApi.signUp(data)
+      .then((res) => {
+        choicePopup(popupContent.createContent(popupRes));
+      })
+      .catch((err) => {
+        err.json().then(res => form.setErrorMessage(res.message))
+      })
+      .finally(() => form.enableInputs())
+  };
 
-  //запрос данные пользователя
+  //авторизация пользователя
+  function authUser(data) {
+    mainApi.signIn(data)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        form.setErrorMessage();
+        closeOverlay();
+        header.render(userInfo.getUserName());
+      })
+      .catch((err) => {
+        err.json().then(res => form.setErrorMessage(res.message))
+        form.enableInputs();
+      })
+      .finally(() => form.enableInputs())
+  };
+
+  //данные пользователя
   mainApi.getUserData()
     .then((res) => {
       renderAuthPage(res);
@@ -226,4 +195,40 @@ import Menu from './js/components/Menu';
       }
     })
     .finally(() => setEventListeners());
+
+  // выход из системы
+  function logout() {
+    mainApi.signOut()
+      .then(() => {
+        renderUnauthPage();
+      })
+      .catch((err) =>
+        err.json().then(res => console.log(res.message))
+      );
+  }
+
+  //поиск статей
+  function searchNews(form, data) {
+    const keyWord = formValidation.getValidateData(form, data)
+    if (!keyWord) {
+      console.log('Поле пустое');
+      return;
+    }
+    renderLoading(true);
+    newsApi.getArticles(keyWord)
+      .then((res) => {
+        console.log(res)
+        // userInfo.setUserInfo(res);
+        // header.render(userInfo.getUserName());
+        // console.log(popupContent.createContent(popupRes))
+        // choicePopup(popupContent.createContent(popupRes));
+      })
+      .catch((err) => {
+        err.json().then(res => console.log(res.message))
+      })
+      .finally(() => {
+        renderLoading(false);
+        enableSearchInputs();
+      })
+  }
 })();

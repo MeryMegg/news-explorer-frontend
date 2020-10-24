@@ -7,7 +7,6 @@ export default class NewsApi {
 
   getArticles(keyWord) {
     const query = getQuery(keyWord);
-    console.log(query);
     return fetch(`${this._url}${query}`)
       .then((res) => this._requestHandler(res));
   }

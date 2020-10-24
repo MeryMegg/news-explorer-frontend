@@ -27,11 +27,9 @@ export default class Form extends PopupContent {
   };
 
   enableInputs() {
-    console.log(this._inputs)
     this._inputs.forEach((input) =>
       input.removeAttribute('disabled')
     );
-    console.log(this._button)
     this._button.classList.remove('button_is-disabled');
     this._button.removeAttribute('disabled')
   };
