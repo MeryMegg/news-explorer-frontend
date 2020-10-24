@@ -1,0 +1,45 @@
+@import url('./_type/article__button-icon_type_save.css');
+@import url('./_type/article__button-icon_type_save-active.css');
+@import url('./_type/article__button-icon_type_del.css');
+
+.article__button-icon {
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 0;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+}
+
+.article__button-icon:hover {
+  background-color: #fff;
+  opacity: 1;
+}
+
+.article__button-icon:hover .article__tooltip {
+  visibility: visible;
+}
+
+@media screen and (min-width: 768px) {
+  .article__button-icon {
+    top: 9px;
+    right: 9px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .article__button-icon {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .article__button-icon {
+    top: 24px;
+    right: 24px;
+  }
+}

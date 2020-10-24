@@ -1,0 +1,16 @@
+@import url('./_mobile/header__list_mobile.css');
+
+.header__list {
+  padding: 0 16px;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (min-width: 655px) {
+  .header__list {
+    padding-right: 30px;
+    padding-left: 30px;
+    border: none;
+    padding: 0;
+  }
+}

@@ -1,0 +1,16 @@
+.search__subtitle {
+  color: #fff;
+  margin: 18px 0 120px;
+}
+@media screen and (min-width: 655px) {
+  .search__subtitle {
+    margin: 16px 0 46px;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .search__subtitle {
+    width: 587px;
+    margin: 33px 0 63px;
+  }
+}

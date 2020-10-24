@@ -1,0 +1,11 @@
+@import url('./_loc/article__image_loc_fav.css');
+
+.article__image {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  object-fit: cover;
+  object-position: center;
+}

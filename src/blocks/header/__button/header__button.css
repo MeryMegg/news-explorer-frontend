@@ -1,0 +1,22 @@
+@import url('./_type/header__button_type_logout-white.css');
+@import url('./_type/header__button_type_logout-black.css');
+
+.header__button {
+  width: 100%;
+  border-radius: 100px;
+  margin: 4px 0 14px;
+  padding: 18px 79px;
+}
+
+@media screen and (min-width: 655px) {
+  .header__button {
+    margin: 0;
+    padding: 6px 14px;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .header__button {
+    padding: 10px 19px;
+  }
+}

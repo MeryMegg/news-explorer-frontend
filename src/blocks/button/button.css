@@ -1,0 +1,29 @@
+@import url('./_color/button_color_transparent.css');
+@import url('./_color/button_color_blue.css');
+@import url('./_color/button_color_white.css');
+@import url('./_color/button_color_white-border.css');
+@import url('./_is-disabled/button_is-disabled.css');
+
+.button {
+  cursor: pointer;
+  outline: none;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  align-items: center;
+  text-align: center;
+}
+
+@media screen and (min-width: 655px) {
+  .button {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .button {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,21 @@
+@import url('./_is-invisible/list__item_is-invisible.css');
+
+.list__item {
+  margin: 30px 0 0;
+}
+
+.list__item:first-child {
+  margin-left: 0;
+}
+
+@media screen and (min-width: 655px) {
+  .list__item {
+    margin: 0 0 0 17px;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .list__item {
+    margin: 0 0 0 33px;
+  }
+}

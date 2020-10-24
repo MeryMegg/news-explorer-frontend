@@ -1,0 +1,22 @@
+.author__avatar {
+  width: 272px;
+  height: auto;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (min-width: 655px) {
+  .author__avatar {
+  margin-right: 32px;
+  width: 232px;
+  margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .author__avatar {
+    width: 464px;
+    margin-right: 56px;
+  }
+}

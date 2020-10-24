@@ -1,0 +1,29 @@
+@import url('./_is-visible/header__menu_is-visible.css');
+
+.header__menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background-color: #1A1B22;
+  border-radius: 0  0 16px 16px;
+  box-sizing: border-box;
+  padding: 53px 0 7px;
+  right: 0;
+  left: 0;
+  top: 0;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(196, 196, 196, 0.09);
+}
+
+@media screen and (min-width: 655px) {
+  .header__menu {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+}

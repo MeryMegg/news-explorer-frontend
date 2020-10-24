@@ -1,0 +1,10 @@
+.header__link_is_active-black {
+  color:#fff;
+}
+
+@media screen and (min-width: 655px) {
+  .header__link_is_active-black {
+    color:#1a1b22;
+    border-bottom: 4px solid #1a1b22;
+  }
+}

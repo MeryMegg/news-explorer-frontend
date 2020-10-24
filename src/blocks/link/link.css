@@ -1,0 +1,31 @@
+@import url('./_theme/link_theme_light.css');
+@import url('./_theme/link_theme_dark.css');
+
+.link {
+  text-decoration: none;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  transition: opacity .5s ease;
+  cursor: pointer;
+}
+
+.link:hover {
+  opacity: .6;
+}
+
+@media screen and (min-width: 655px) {
+  .link {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  .link {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+

@@ -1,0 +1,27 @@
+.search__input {
+  width: 100%;
+	font-size: 13px;
+	padding: 17px 16px;
+	border: 1px solid #d1d2d6;
+	background: #fff;
+  border-radius: 100px;
+  box-sizing: border-box;
+  backdrop-filter: blur(100px);
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1A1B22;
+}
+
+.search__input:focus {
+  outline: none;
+  border: 1px solid #2f71e5;
+}
+
+@media screen and (min-width: 980px) {
+  .search__input {
+    padding: 20px 16px;
+  }
+}

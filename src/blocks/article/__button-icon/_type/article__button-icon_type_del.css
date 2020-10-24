@@ -1,0 +1,7 @@
+.article__button-icon_type_del {
+  background-image: url('../../../../images/icon-del-normal.svg');
+}
+
+.article__button-icon_type_del:hover {
+  background-image: url('../../../../images/icon-del-hover.svg');
+}

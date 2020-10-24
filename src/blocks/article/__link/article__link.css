@@ -1,0 +1,32 @@
+.link.article__link {
+  color: #b6bcbf;
+  text-transform: uppercase;
+  background: transparent;
+  /* justify-items: flex-end;
+  display: flex; */
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 8px;
+}
+
+.article__link:after {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+}
+
+@media screen and (min-width: 380px) {
+  .link.article__link {
+    margin-top: 12px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .link.article__link {
+    margin-top: 17px;
+  }
+}

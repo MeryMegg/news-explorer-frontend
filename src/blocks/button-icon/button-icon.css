@@ -1,0 +1,15 @@
+@import url('./_type/button-icon_type_open-white.css');
+@import url('./_type/button-icon_type_open-black.css');
+@import url('./_type/button-icon_type_close-menu.css');
+@import url('./_is-invisible/button-icon_is-invisible.css');
+
+.button-icon {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: opacity .5s ease;
+}
+
+.button-icon:hover {
+  opacity: .6;
+}

@@ -1,0 +1,10 @@
+.title-block__title {
+  margin: 16px 0;
+  max-width: 500px;
+}
+
+@media screen and (min-width: 1200px) {
+  .title-block__title {
+    margin: 30px 0;
+  }
+}

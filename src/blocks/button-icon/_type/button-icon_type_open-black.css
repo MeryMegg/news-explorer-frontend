@@ -1,0 +1,11 @@
+.button-icon_type_open-black {
+  background-image: url('../../../images/icon-burger-black.svg');
+  background-color: transparent;
+  z-index: 6;
+}
+
+@media screen and (min-width: 655px) {
+  .button-icon.button-icon_type_open-black {
+    display: none;
+  }
+}

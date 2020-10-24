@@ -1,0 +1,21 @@
+@import url('./__image/article__image.css');
+@import url('./__tooltip/article__tooltip.css');
+@import url('./__description/article__description.css');
+@import url('./__date/article__date.css');
+@import url('./__link/article__link.css');
+@import url('./__title/article__title.css');
+@import url('./__text/article__text.css');
+@import url('./__button-icon/article__button-icon.css');
+@import url('./__keyword/article__keyword.css');
+
+.article {
+  background: #fff;
+  border-radius: 15px;
+  position: relative;
+  display: grid;
+  grid-template-rows: max-content;
+}
+
+.article:hover {
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}

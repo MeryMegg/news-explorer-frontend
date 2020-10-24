@@ -1,0 +1,12 @@
+.footer__links {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+@media screen and (min-width: 655px) {
+  .footer__links {
+    margin-bottom: 16px;
+
+  }
+}

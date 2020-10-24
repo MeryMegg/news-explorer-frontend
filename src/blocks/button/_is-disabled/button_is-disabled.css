@@ -1,0 +1,11 @@
+.button.button_is-disabled {
+  background: #e6e8eb;
+  cursor: default;
+  font-family: 'Roboto' , Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  box-shadow: none;
+}

@@ -1,0 +1,15 @@
+.title {
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 34px;
+  color: #1a1b22;
+}
+
+@media screen and (min-width: 980px) {
+  .title {
+    font-size: 40px;
+    line-height: 46px;
+  }
+}
