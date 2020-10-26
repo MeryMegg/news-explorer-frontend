@@ -5,14 +5,12 @@ export default class UserInfo {
   setUserInfo(data) {
     this._name = data ? data.name : "";
     this._email = data ? data.email : "";
-    this._id = data ? data._id : "";
+    this._userId = data ? data._id : "";
   }
 
-  getUserName() {
-    return this._name;
-  }
-
-  getUserId() {
-    return this._name;
+  getUserData() {
+    const name = this._name;
+    const userId = this._userId;
+    return { name, userId }
   }
 }

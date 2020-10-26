@@ -37,14 +37,32 @@ export default class MainApi {
       headers: this._headers,
       credentials: 'include',
     })
-      .then((res) => this._requestHandler(res));
+      .then((res) => this._requestHandler(res))
+    // .catch((err) => {
+    //   err.json().then((err) => Promise.reject(err))
+    // })
+    //.catch(err => err);
   }
 
-  _requestHandler(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(res);
+  createArticle({ keyword, title, text, date, source, link, image }) {
+    return fetch(`${this._url}/articles`, {
+      method: 'POST',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+        keyword, title, text, date, source, link, image,
+      }),
+    })
+      .then((res) => this._requestHandler(res))
+  }
+
+  removeArticle(articleId) {
+    return fetch(`${this._url}/articles/${articleId}`, {
+      method: 'DELETE',
+      headers: this._headers,    
+      credentials: 'include',
+    })
+     .then((res) => this._requestHandler(res))
   }
 
   signOut() {
@@ -55,6 +73,14 @@ export default class MainApi {
       body: JSON.stringify({
       }),
     })
-      .then((res) => this._requestHandler(res));
+      .then((res) => this._requestHandler(res))
+  }
+
+
+  _requestHandler(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res);
   }
 }

@@ -1,3 +1,5 @@
+@import url('./_is-invisible/article__tooltip_is-invisible.css');
+
 .article__tooltip {
   visibility: hidden;
   width: 182px;

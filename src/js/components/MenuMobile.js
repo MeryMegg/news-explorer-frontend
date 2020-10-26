@@ -15,7 +15,7 @@ export default class Menu extends BaseComponent {
   }
 
   setEventListener(button) {
-    this._addHandler(this._buttonOpen, 'click', this._open);
+    this._addHandler(button, 'click', this._open);
   }
 
   _open() {

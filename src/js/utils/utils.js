@@ -1,10 +1,14 @@
-import { newsServerConfig } from "../constants/config";
+import { newsServerConfig, months } from "../constants/config";
 
 
-export function conversionDateForCard(date) {
-  const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа',
-    'сентября', 'октября', 'ноября', 'декабря'];
-  return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
+export function conversionDateForCard(data) {
+  const date = new Date(data);
+  const dateCard = `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
+  const marginErr = 1;
+  const monthAtribute = ((date.getMonth() + marginErr) < 10) ? '0' + (date.getMonth() + marginErr) : (date.getMonth() + marginErr);
+  const dayAtribute = (date.getDate() < 10) ? '0' + date.getDate() : date.getDate();
+  const dateAtribute = `${date.getFullYear()}-${monthAtribute}-${dayAtribute}`
+  return { dateCard, dateAtribute };
 }
 
 function getDate() {

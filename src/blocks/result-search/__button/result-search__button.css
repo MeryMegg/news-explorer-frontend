@@ -1,3 +1,5 @@
+@import url('./_is-invisible/result-search__button_is-invisible.css');
+
 .result-search__button {
   display: block;
   border-radius: 80px;

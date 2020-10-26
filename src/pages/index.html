@@ -64,14 +64,14 @@
 
     <main class="main">
       <section class="result-search container">
-        <!-- класс result-search__preloader_is-invisible при необходимости скрывает блок result-search__preloader -->
-        <div class="result-search__preloader result-search__preloader_is-invisible">
+        <!-- класс result-search__block_is-invisible при необходимости скрывает блоки секции result-search -->
+        <div class="result-search__block result-search__block_type_preloader result-search__block_is-invisible">
           <i class="result-search__circle-preloader"></i>
           <p class="subtitle result-search__subtitle">Идет поиск новостей...</p>
         </div>
 
-        <!-- класс result-search__content_is-invisible при необходимости скрывает блок result-search__content-->
-        <div class="result-search__content result-search__content_is-invisible">
+        <!-- класс result-search__block_is-invisible при необходимости скрывает блоки секции result-search -->
+        <div class="result-search__block result-search__block_type_content result-search__block_is-invisible">
           <h2 class="title result-search__title">Результаты поиска</h2>
 
           <div class="result-search__article-list">
@@ -79,18 +79,21 @@
             <!-- здесь будут карточки -->
 
           </div>
-
-          <button type="button" class="button button_color_white result-search__button">Показать еще</button>
+          <!-- класс result-search__button_is-invisible скрывает кнопку "Показать еще" -->
+          <button type="button"
+            class="button button_color_white result-search__button result-search__button_is-invisible">Показать
+            еще</button>
         </div>
 
-        <!-- класс result-search__not-found_is-invisible при необходимости скрывает блок result-search__not-found -->
-        <div class="result-search__not-found result-search__not-found_is-invisible">
+        <!-- класс result-search__block_is-invisible при необходимости скрывает блоки секции result-search -->
+        <div class="result-search__block result-search__block_type_not-found result-search__block_is-invisible">
           <span class="result-search__image"></span>
           <h3 class="result-search__title">Ничего не найдено</h3>
           <p class="subtitle result-search__subtitle">К сожалению, по вашему запросу<br>ничего не найдено.</p>
         </div>
 
-        <div class="result-search__error result-search__error_is-invisible">
+        <!-- класс result-search__block_is-invisible при необходимости скрывает блоки секции result-search -->
+        <div class="result-search__block result-search__block_type_error result-search__block_is-invisible">
           <span class="result-search__image"></span>
           <h3 class="result-search__title">Что-то пошло не так:(</h3>
           <p class="subtitle result-search__subtitle"> «Во время запроса произошла ошибка. Возможно, проблема с
@@ -156,11 +159,12 @@
   <!-- карточка  -->
   <template id="card-template" style="display: none;">
     <article class="article">
-      <img class="article__image" src="<%= require('../images/image-article-1.png').default %>" alt="Фото
+      <img class="article__image" src="<%= require('../images/no-photo.png').default %>" alt="Фото
       статьи">
-      <button type="button" class="button-icon article__button-icon article__button-icon_type_save"><span
-          class="article__tooltip">Войдите, чтобы
-          сохранять статьи</span></button>
+      <!-- класс article__button-icon_type_save-active делает иконку синей -->
+      <!-- класс article__tooltip_is-invisible скрывает тултип у зарегистрированных пользователей -->
+      <span class="article__keyword article__keyword_is-invisible">Тайга</span>
+      <button type="button" class="button-icon article__button-icon"><span class="article__tooltip"></span></button>
 
       <div class="article__description">
         <time datetime="2019-08-02" class="article__date">2 августа, 2019</time>

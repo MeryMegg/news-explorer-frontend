@@ -17,6 +17,13 @@ export default class Form extends PopupContent {
     return userInfo;
   };
 
+  clearForm(form) {
+    const inputs = form.querySelectorAll('.input');
+    inputs.forEach(input => {
+      input.value = '';
+    });
+  }
+
   _disableInputs() {
     this._button = this._form.querySelector(".button");
     this._inputs.forEach((input) =>
