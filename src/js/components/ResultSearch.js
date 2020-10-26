@@ -12,7 +12,7 @@ export default class Header extends BaseComponent {
     this._renderNextArticles = params.renderNextArticles.bind(this);
     this._articles = [];
     this._blockArticles = [];
-    this._renderArticles = [];
+    //this._renderArticles = [];
   }
 
   renderResultSearch(articles, keyWord) {
@@ -59,7 +59,7 @@ export default class Header extends BaseComponent {
 
   getArticles() {       
     this._blockArticles = this._articles.splice(0, this._numberOfArticles);
-    this._renderArticles = this._renderArticles.concat(this._blockArticles);
+    //this._renderArticles = this._renderArticles.concat(this._blockArticles);
     return this._blockArticles;
   }
 

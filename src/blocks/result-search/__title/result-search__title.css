@@ -1,3 +1,5 @@
+@import url('./_location/result-search__title_location_left.css');
+
 .result-search__title {
 margin: 0 0 24px;
 font-family: 'Roboto Slab', Arial, sans-serif;
@@ -6,7 +8,6 @@ font-weight: normal;
 font-size: 30px;
 line-height: 34px;
 color: hsl(233, 13%, 12%);
-align-self: normal;
 }
 
 @media screen and (min-width: 980px) {
