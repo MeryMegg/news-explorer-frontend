@@ -16,26 +16,30 @@ export default class Header extends BaseComponent {
   }
 
   renderResultSearch(articles, keyWord) {
-  const arrLength = articles.length;
-    switch (true) {
-      case arrLength === 0:
-        this.show(this._blockNotFound)
-        break;
-      case arrLength < 3:
-        this.show(this._blockContent, false)
-        break;
-      case arrLength > 3:
-        this.show(this._blockContent, true)
-        break;
+    const arrLength = articles.length;
+    if (arrLength === 0) {
+      this.show(this._blockNotFound)
     }
+    this.show(this._blockContent, arrLength);
+    // switch (true) {
+    //   case arrLength === 0:
+    //
+    //     break;
+    //   case arrLength < this._numberOfArticles:
+    //     this.show(this._blockContent, false)
+    //     break;
+    //   case arrLength > this._numberOfArticles:
+    //     this.show(this._blockContent, true)
+    //     break;
+    // }
     this._setResArticlesData(articles, keyWord)
   }
 
-  show(block, flag) {
-    if (block === this._blockContent && flag) {
+  show(block, arrLength) {
+    block.classList.remove('result-search__block_is-invisible');
+    if (arrLength > this._numberOfArticles) {
       this._showButtonMore();
     }
-    block.classList.remove('result-search__block_is-invisible');
   }
 
   hide(block) {
@@ -57,7 +61,7 @@ export default class Header extends BaseComponent {
     this._articles = articles.map((article) => ({ ...article, ...keyword }));
   }
 
-  getArticles() {       
+  getArticles() {
     this._blockArticles = this._articles.splice(0, this._numberOfArticles);
     //this._renderArticles = this._renderArticles.concat(this._blockArticles);
     return this._blockArticles;
