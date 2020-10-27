@@ -11,15 +11,20 @@ export function conversionDateForCard(data) {
   return { dateCard, dateAtribute };
 }
 
-function getDate() {
-  const lengthPeriod = newsServerConfig.days * 60 * 60 * 1000;
+export function getDate() {
+  const compOfTime = {
+    min: 60,
+    sec: 60,
+    ms: 1000
+  }
+  const lengthPeriod = newsServerConfig.days * compOfTime.min * compOfTime.sec * compOfTime.ms;
   const currentDate = new Date();
   const toDate = currentDate.toISOString();
   const fromDate = new Date(currentDate.getTime() - lengthPeriod).toISOString();
   return { fromDate, toDate }
 }
 
-function getQuery(keyWord) {
+export function getQuery(keyWord) {
   const query = new URLSearchParams({
     q: keyWord,
     from: getDate().fromDate,
@@ -31,5 +36,3 @@ function getQuery(keyWord) {
 
   return query.toString();
 }
-
-export { getQuery, getDate };
