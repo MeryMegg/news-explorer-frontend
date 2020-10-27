@@ -1,14 +1,10 @@
-@import url('./__preloader/result-search__preloader.css');
 @import url('./__circle-preloader/result-search__circle-preloader.css');
 @import url('./__subtitle/result-search__subtitle.css');
 @import url('./__image/result-search__image.css');
-@import url('./__not-found/result-search__not-found.css');
-@import url('./__content/result-search__content.css');
 @import url('./__title/result-search__title.css');
 @import url('./__article-list/result-search__article-list.css');
 @import url('./__button/result-search__button.css');
-@import url('./__error/result-search__error.css');
-@import url('./_is-invisible/result-search_is-invisible.css');
+@import url('./__block/result-search__block.css');
 
 .result-search {
   background: #f5f6f7;

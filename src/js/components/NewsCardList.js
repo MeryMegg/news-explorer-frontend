@@ -1,6 +1,10 @@
 export default class NewsCardList {
-  constructor(createNewsCard) {
-    this._createNewsCard = createNewsCard;
+  constructor(params) {
+    this._container = params.newsCardList;
+
+    this._createNewsArticle = params.createNewsArticle;    
+    this._getUserId = params.getUserId;
+    this._removeEventListener = params.removeEventListener;
   }
 
   render = (cards) => {
@@ -9,22 +13,17 @@ export default class NewsCardList {
 
   addCard(card) {
     this._container.append(
-      this._createNewsCard(card)
+      this._createNewsArticle(card)
     );
-  }
+  };
 
-  // saveCard = (card) => {
-  //   this._instanceApi
-  //     .createCards(card)
-  //     .then((res) => {
-  //       this.addCard(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       alert("Что-то пошло не так... Повторите попытку...");
-  //     })
-  //     .finally(() => this._renderLoading(false));
-  // };
-
-
+  clear() {
+    const articles = [...this._container.querySelectorAll('.article')];    
+      articles.forEach((article) => {
+        if (this._getUserId()) {
+          this._removeEventListener(article)
+        }
+        article.remove();
+      });    
+  }  
 }

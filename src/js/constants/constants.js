@@ -22,18 +22,19 @@ export const serchButton = document.querySelector('#searchNews');
 /* -- попап с формой входа -- */
 export const popupLogin = document.querySelector('#form-login-template').content.querySelector(".popup__content"); //окно с контентом
 
-
-
-
-
 /* -- попап с формой регистрации -- */
 export const popupReg = document.querySelector('#form-reg-template').content.querySelector(".popup__content"); //окно с контентом
-
 
 /* -- попап с сообщением об успешной регистрации -- */
 export const popupRes = document.querySelector('#form-response-template').content.querySelector(".popup__content"); //окно с контентом
 
-
+/* -- попап с сообщением об успешной регистрации -- */
+export const newsCardMarkup = document.querySelector('#card-template').content.querySelector(".article"); //окно с контентом
 
 /* -- блоки из секции resurse-search -- */
-export const preloader = document.querySelector('.result-search__preloader');
+export const blockSearchContent = document.querySelector('.result-search__block_type_content');
+export const buttonMore = document.querySelector('.result-search__button');
+export const newsCardList = document.querySelector('.result-search__article-list');
+export const preloader = document.querySelector('.result-search__block_type_preloader');
+export const blockNotFound = document.querySelector('.result-search__block_type_not-found');
+export const blockError = document.querySelector('.result-search__block_type_error');

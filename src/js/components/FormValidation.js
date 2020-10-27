@@ -2,9 +2,11 @@ import { errorMessages } from "../constants/messages";
 import BaseComponent from './BaseComponent';
 
 export default class FormValidation extends BaseComponent {
-  constructor(enableSearchInputs) {
+  constructor(errorMessages, enableSearchInputs) {
     super();
+    this.errorMessages = errorMessages;
     this._enableSearchInputs = enableSearchInputs;
+
   }
 
   //обработчик событий
@@ -28,7 +30,8 @@ export default class FormValidation extends BaseComponent {
   getValidateData(form, data) {
     const values = Object.values(data);
     const errorElem = form.querySelector(`.error-message`);
-    const keyWord = values[0];
+    const i = 0;
+    const keyWord = values[i];
     if (keyWord === "") {
       errorElem.textContent = errorMessages.empty;
       this._enableSearchInputs();

@@ -20,7 +20,6 @@ export default class Header extends BaseComponent {
   }
 
   render(name) {
-    // this._addHandler(this._buttonOpenMenu, 'click', this._openMenuMobile);
     if (!name) {
       this._addHandler(this._buttonLogin, 'click', this._openPopup);
       return;
@@ -41,17 +40,22 @@ export default class Header extends BaseComponent {
     this._changeListeners(false);
   }
 
+  setEventListener(button) {
+    this._addHandler(this._buttonLogin, 'click', this._openPopup);
+  }
+
   _openPopup() {
     this._openOverlay(this._popupLogin);
   }
 
   _changeListeners(flag) {
+
     if (flag) {
       this._addHandler(this._buttonLogout, 'click', this._logout);
       this._removeHandler(this._buttonLogin, 'click', this._openLoginPopup);
       return;
     }
-    this._removeHandler(this._buttonLogout, 'click', this._logout);
     this._addHandler(this._buttonLogin, 'click', this._openLoginPopup);
+    this._removeHandler(this._buttonLogout, 'click', this._logout);
   }
 }

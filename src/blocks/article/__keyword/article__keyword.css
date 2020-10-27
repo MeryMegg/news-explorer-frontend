@@ -1,3 +1,5 @@
+@import url('./_is-invisible/article__keyword_is-invisible.css');
+
 .article__keyword {
   background-color: #fff;
   box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);

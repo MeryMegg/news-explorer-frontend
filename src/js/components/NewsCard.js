@@ -1,136 +1,120 @@
+import { conversionDateForCard } from '../utils/utils'
 import BaseComponent from './BaseComponent';
 
 export default class Card extends BaseComponent {
-  constructor(card, config, createPopupImage, instanceApi, cardTemplate) {
+  constructor(params) {
     super();
-    this._card = card;
-    this._config = config;
-    this._createPopupImage = createPopupImage;
-    this._instanceApi = instanceApi;
-    this._template = cardTemplate;
+    this._cardMarkup = params.newsCardMarkup;
+    this._placeholderUrl = params.placeholderUrl;
+    this._tooltipText = params.tooltipMessages;
+    
+    //функции
+    this._getUserId = params.getUserId;
+    this._saveArticle = params.saveArticle;
+    this._revomeArticleData = params.revomeArticleData;
 
-    this._isLiked = this._isLiked.bind(this);
+    this._isSaved = this._isSaved.bind(this);
+    this._removeArticleFromSaved = this._removeArticleFromSaved.bind(this);
   }
 
-  createPlaceCard() {
-    this._view = this._template.cloneNode(true);
-    this._view.querySelector(".place-card__name").textContent = this._card.name;
-    this._view.querySelector(
-      ".place-card__image"
-    ).style.backgroundImage = `url(${this._card.link})`;
-    if (this._isLikedMe()) {
-      this._view
-        .querySelector(".place-card__like-icon")
-        .classList.add("place-card__like-icon_liked");
-    }
-    if (this._isRemovable()) {
-      this._view.querySelector(".place-card__delete-icon").style.display =
-        "block";
-    }
-    this._view.querySelector(
-      ".place-card__like-count"
-    ).textContent = this._card.likes.length;
+  createCard(cardData) {
+    const userId = this._getUserId();
+    this._view = this._cardMarkup.cloneNode(true);
+    const urlImege = this._getUrl(cardData.urlToImage);
+    this._view.querySelector(".article__image").setAttribute('src', urlImege);
+    this._view.querySelector('.article__tooltip').textContent = this._tooltipText.needAuth;
+    this._view.querySelector('.article__button-icon').classList.add('article__button-icon_type_save');
+    const articleDate = this._view.querySelector('.article__date')
+    const dateTime = conversionDateForCard(cardData.publishedAt).dateAtribute;
+    const dateArticle = conversionDateForCard(cardData.publishedAt).dateCard;
+    articleDate.setAttribute('datetime', dateTime);
+    articleDate.textContent = dateArticle;
+    this._view.querySelector(".article__title").textContent = cardData.title;
+    this._view.querySelector('.article__text').textContent = cardData.description;
+    const source = this._view.querySelector('.article__link');
+    source.textContent = cardData.source.name;
+    source.setAttribute('href', cardData.url);
+    this._view.querySelector('.article__keyword').textContent = cardData.keyWord;    
     this.cardElement = this._view;
-    this._setEventListeners();
+    if (userId) {
+      this.activateButton(this.cardElement);
+    }
     return this.cardElement;
   }
 
-  _isLikedMe() {
-    return this._card.likes.some((elem) => elem._id === this._config.myId);
+  //устанавливаем картинку для статьи
+  _getUrl(url) {
+    const urlArticle = url ? url : this._placeholderUrl;
+    return urlArticle;
   }
 
-  _isRemovable() {
-    return this._card.owner._id === this._config.myId;
+  //вешаем слушатель на иконку
+  _setEventListener(icon) {
+    this._addHandler(icon, 'click', this._isSaved)
   }
 
-  _setEventListeners() {
-    this.cardElement
-      .querySelector(".place-card__like-icon")
-      .addEventListener("click", this._isLiked);
-    this.cardElement
-      .querySelector(".place-card__delete-icon")
-      .addEventListener("click", this._confirmDelete);
-    this.cardElement
-      .querySelector(".place-card__image")
-      .addEventListener("click", this._openPopupImage);
+  _removeEventListener(icon) {
+    this._removeHandler(icon, 'click', this._isSaved)
   }
 
-  _isLiked(event) {
-    if (event.target.classList.contains("place-card__like-icon_liked")) {
-      this._dislike(event);
-    } else this._like(event);
+  activateButton(card) {
+    card.querySelector('.article__tooltip').classList.add('article__tooltip_is-invisible');
+    const icon = card.querySelector('.article__button-icon');
+    this._setEventListener(icon);
   }
 
-  _like(event) {
-    this._instanceApi
-      .putLike(this._card._id)
-      .then(() => {
-        this._toggleLike(event);
-        this._view.querySelector(".place-card__like-count").textContent =
-          this._card.likes.length + 1;
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Что-то пошло не так... Повторите попытку...");
-      });
+  _isSaved(event) {
+    if (event.target.classList.contains("article__button-icon_type_save-active")) {      
+      this._removeArticleFromSaved(event);
+    } else this._saved(event);
   }
 
-  _dislike(event) {
-    this._instanceApi
-      .deleteLike(this._card._id)
-      .then(() => {
-        this._toggleLike(event);
-        this._view.querySelector(".place-card__like-count").textContent =
-          this._card.likes.length - 1;
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Что-то пошло не так... Повторите попытку...");
-      });
-  }
-
-  _toggleLike(event) {
-    event.target.classList.toggle("place-card__like-icon_liked");
-  }
-
-  _openPopupImage = (event) => {
-    const url = event.target.style.backgroundImage.slice(5, -2);
-    this._createPopupImage(url);
-  };
-
-  _confirmDelete = (event) => {
-    event.stopPropagation();
-    if (confirm("Вы действительно хотите удалить эту карточку?")) {
-      this.deleteUserCard(this._card._id);
+  _saved(event) {
+    const article = event.target.closest('.article');
+    const sourceLink = article.querySelector('.article__link');
+    const articleData = {
+      keyword: article.querySelector('.article__keyword').textContent,
+      title: article.querySelector('.article__title').textContent,
+      text: article.querySelector('.article__text').textContent,
+      date: article.querySelector('.article__date').textContent,
+      source: sourceLink.textContent,
+      link: sourceLink.getAttribute('href'),
+      image: article.querySelector('.article__image').getAttribute('src')
     }
-  };
-
-  deleteUserCard = (id) => {
-    this._instanceApi
-      .deleteCard(id)
-      .then(() => {
-        this.remove();
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Что-то пошло не так... Повторите попытку...");
-      });
-  };
-
-  remove = () => {
-    this._removeEventListeners();
-    this.cardElement.remove();
-  };
-
-  _removeEventListeners() {
-    this.cardElement
-      .querySelector(".place-card__like-icon")
-      .removeEventListener("click", this._isLiked); // Можно лучше: this._isLiked +++
-    this.cardElement
-      .querySelector(".place-card__delete-icon")
-      .removeEventListener("click", this._confirmDelete);
-    this.cardElement
-      .querySelector(".place-card__image")
-      .removeEventListener("click", this._openPopupImage);
+    this._saveArticle(articleData, article);
   }
+
+  _removeArticleFromSaved (event) {
+    const article = event.target.closest('.article');
+    const articleId = article.getAttribute('id');
+    this._revomeArticleData(articleId, article);
+  }
+
+  updateDataCard(article, articleId) {    
+    console.log(article)    
+    //const attribute = article.getAttribute('id') === articleId;
+    //console.log(attribute)   
+    if (article.getAttribute('id') === articleId) {
+      article.removeAttribute('id')
+    } 
+    article.setAttribute('id', articleId);
+    //attribute ? article.removeAttribute('id') : article.setAttribute('id', articleId);
+    this._changeIcon(article);
+  }
+
+  _changeIcon(card) {
+    console.log(card)
+    const icon = card.querySelector('.article__button-icon');
+    this._toggleClassIcon(icon);    
+  }
+
+  _toggleClassIcon(icon) {
+    icon.classList.toggle("article__button-icon_type_save-active");
+    icon.classList.toggle("article__button-icon_type_save");
+  }
+
+  // _chooseCallBack(icon) {
+  //   const callback = (icon.classList.contains('article__button-icon_type_save')) ? this._isSaved : this._removeArticleFromSaved;
+  //   return callback;
+  // }  
 }
