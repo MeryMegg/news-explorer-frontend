@@ -15,6 +15,6 @@ export default class NewsApi {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(err.message);
+    return res.json().then(Promise.reject.bind(Promise))
   }
 }

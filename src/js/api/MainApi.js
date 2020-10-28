@@ -59,10 +59,10 @@ export default class MainApi {
   removeArticle(articleId) {
     return fetch(`${this._url}/articles/${articleId}`, {
       method: 'DELETE',
-      headers: this._headers,    
+      headers: this._headers,
       credentials: 'include',
     })
-     .then((res) => this._requestHandler(res))
+      .then((res) => this._requestHandler(res))
   }
 
   signOut() {
@@ -76,11 +76,12 @@ export default class MainApi {
       .then((res) => this._requestHandler(res))
   }
 
-
   _requestHandler(res) {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(res);
+    //const json = res.json();
+
+    return res.json().then(Promise.reject.bind(Promise))
   }
 }

@@ -1,5 +1,6 @@
 import './styles/index.css';
-import { newsServerConfig, myServerConfig, placeholderUrl, numberOfArticles } from "./js/constants/config";
+import { newsServerConfig, myServerConfig } from "./js/constants/config";
+import { placeholderUrl, numberOfArticles } from './js/constants/constants';
 import { errorMessages, tooltipMessages } from "./js/constants/messages";
 import {
   body, overlay, buttonOpenMenu, buttonCloseMenu,
@@ -10,7 +11,7 @@ import {
   preloader, newsCardMarkup, newsCardList,
   blockSearchContent, buttonMore, blockNotFound,
   blockError
-} from "./js/constants/constants";
+} from "./js/constants/dom-elements";
 
 import MainApi from "./js/api/MainApi";
 import NewsApi from "./js/api/newsApi";
@@ -33,7 +34,7 @@ import ResultSearch from './js/components/ResultSearch';
     serchForm.addEventListener("submit", formSubmitHandler);
     searchInput.addEventListener('input', formInputHandler);
     instanceMenuMobile.setEventListener(buttonOpenMenu);
-  }  
+  }
 
   //настраивает страницу при первом входе
   function renderPage(data) {
@@ -49,7 +50,7 @@ import ResultSearch from './js/components/ResultSearch';
     instanceHeader.render(instanceUserInfo.getUserData().name);
     if (!blockSearchContent.classList.contains('result-search__block_is-invisible')) {
       const cardsArticle = [...newsCardList.querySelectorAll('.article')];
-      activateButton(cardsArticle)
+      activateButton(cardsArticle);
     }
   }
 
@@ -64,6 +65,9 @@ import ResultSearch from './js/components/ResultSearch';
     instanceHeader.logoutRendered();
     if (isOpenMenuMobile()) {
       instanceMenuMobile.close();
+    }
+    if (!blockSearchContent.classList.contains('result-search__block_is-invisible')) {
+      instanceResultSearch.removeEventListenerOnBlock();
     }
     instanceResultSearch.closeResultSearchBlocks();
   };
@@ -157,41 +161,40 @@ import ResultSearch from './js/components/ResultSearch';
 
   //создание экземпляра новостной карточки
   function createNewsArticle(dataCard) {
-    return createInstanceNewsCard().createCard(dataCard);
+    return instanceNewsCard.createCard(dataCard);
+  }
+
+  function saveArticleData(event) {
+    instanceNewsCard.isSaved(event);
   }
 
   //вызывает метод класса NewsCard активирующий кнопку сохранения статьи
   function activateButton(cards) {
-    const instanceNewsCard = createInstanceNewsCard();
+    instanceResultSearch.setEventListenerOnBlock();
     cards.forEach((card) => instanceNewsCard.activateButton(card));
-  }
-
-  function removeEventListener(article) {
-    const icon = article.querySelector('.article__button-icon');
-    createInstanceNewsCard()._removeEventListener(icon);
   }
 
   //отрисовка карточек
   function renderArticles(articles, keyWord) {
-    instanceResultSearch.renderResultSearch(articles, keyWord);    
-    instanceNewsCardList.render(instanceResultSearch.getArticles());    
-  }  
+    instanceResultSearch.renderResultSearch(articles, keyWord);
+    instanceNewsCardList.render(instanceResultSearch.getArticles());
+  }
 
   //отрисовка по 3 карточки
-  function renderNextArticles() {    
+  function renderNextArticles() {
     instanceNewsCardList.render(instanceResultSearch.getArticles());
     if (instanceResultSearch.getLengthArticles() === 0) {
       instanceResultSearch.hideButtonMore();
     }
-  }  
+  }
 
   //Preloader
   function renderLoading(isLoading) {
     isLoading ?
       instanceResultSearch.show(preloader)
-      : instanceResultSearch.hide(preloader);      
+      : instanceResultSearch.hide(preloader);
   };
-  
+
   /* ***************************************************** ЭКЗЕМПЛЯРЫ КЛАССОВ *************************************************************** */
   //MainApi
   const instanceMainApi = new MainApi(myServerConfig);
@@ -214,12 +217,10 @@ import ResultSearch from './js/components/ResultSearch';
   //class NewsCardList
   const instanceNewsCardList = new NewsCardList({ newsCardList, getUserId, createNewsArticle, removeEventListener });
   //class ResultSearch
-  const instanceResultSearch = new ResultSearch({ blockSearchContent, blockNotFound, blockError, buttonMore, numberOfArticles, clearNewsCardList, renderNextArticles });
+  const instanceResultSearch = new ResultSearch({ blockSearchContent, blockNotFound, blockError, buttonMore, numberOfArticles, saveArticleData, clearNewsCardList, renderNextArticles, getUserId });
   //class NewsCard
-  function createInstanceNewsCard() {
-    const instanceNewsCard = new NewsCard({ placeholderUrl, newsCardMarkup, tooltipMessages, getUserId, saveArticle, revomeArticleData });
-    return instanceNewsCard;
-  };  
+  const instanceNewsCard = new NewsCard({ placeholderUrl, newsCardMarkup, tooltipMessages, getUserId, saveArticle, revomeArticleData });
+
 
   /* -- ЗАПРОСЫ -- */
   //регистрация пользователя
@@ -229,7 +230,8 @@ import ResultSearch from './js/components/ResultSearch';
         choicePopup(instancePopupContent.createContent(popupRes));
       })
       .catch((err) => {
-        err.json().then(res => instanceForm.setErrorMessage(res.message));
+        console.log(err)
+        instanceForm.setErrorMessage(err.message);
       })
       .finally(() => instanceForm.enableInputs());
   };
@@ -242,9 +244,7 @@ import ResultSearch from './js/components/ResultSearch';
       })
       .catch((err) => {
         console.log(err)
-        err.name === "ReferenceError" ? console.log(err) : err.json().then(res => instanceForm.setErrorMessage(res.message))
-        //err.json().then(res => instanceForm.setErrorMessage(res.message))
-        instanceForm.enableInputs();
+        instanceForm.setErrorMessage(err.message)
       })
       .finally(() => instanceForm.enableInputs())
   };
@@ -255,19 +255,16 @@ import ResultSearch from './js/components/ResultSearch';
       renderPage(res);
     })
     .catch((err) => {
-      if (err.status === 401) {
-        instanceHeader.render();
-        //err.json().then(res => console.log(res.message))
-      }
-      err.name === "ReferenceError" ? console.log(err) : err.json().then(res => console.log(res.message))
+      instanceHeader.render();
+      console.log(err)
     })
     .finally(() => setEventListeners());
 
   //сохранение статьи
   function saveArticle(data, article) {
     instanceMainApi.createArticle(data)
-      .then((res) => {        
-        createInstanceNewsCard().updateDataCard(article, res._id);
+      .then((res) => {
+        instanceNewsCard.updateDataCard(article, res._id);
       })
       .catch((err) => console.log(err)
         //err.name === "ReferenceError" ? console.log(err) : err.json().then(res => console.log(res.message))
@@ -276,8 +273,8 @@ import ResultSearch from './js/components/ResultSearch';
 
   function revomeArticleData(articleId, article) {
     instanceMainApi.removeArticle(articleId)
-    .then((res) => {        
-        createInstanceNewsCard().updateDataCard(article);
+      .then((res) => {
+        instanceNewsCard.updateDataCard(article);
       })
       .catch((err) => console.log(err)
         //err.name === "ReferenceError" ? console.log(err) : err.json().then(res => console.log(res.message))
@@ -290,7 +287,8 @@ import ResultSearch from './js/components/ResultSearch';
       .then(() => {
         renderUnauthPage();
       })
-      .catch((err) => err.json().then(res => console.log(res.message))
+      .catch((err) => console.log(err)
+        //err.json().then(res => console.log(res.message))
       );
   }
 
@@ -301,15 +299,16 @@ import ResultSearch from './js/components/ResultSearch';
       return;
     }
     instanceResultSearch.closeResultSearchBlocks();
-    renderLoading(true);        
+    renderLoading(true);
     instanceNewsApi.getArticles(keyWord)
       .then((res) => {
         console.log(res.articles)
-        renderArticles(res.articles, keyWord);        
+        renderArticles(res.articles, keyWord);
       })
-      .catch((err) => console.log(err)
-        //err.name === "ReferenceError" ? console.log(err) : err.json().then(res => console.log(res.message))
-      )
+      .catch((err) => {
+        console.log(err)
+        instanceResultSearch.show(blockError)
+      })
       .finally(() => {
         renderLoading(false);
         enableSearchInputs();
