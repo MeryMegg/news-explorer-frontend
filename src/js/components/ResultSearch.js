@@ -9,36 +9,49 @@ export default class Header extends BaseComponent {
     this._button = params.buttonMore;
     this._numberOfArticles = params.numberOfArticles;
     this._clearNewsCardList = params.clearNewsCardList;
+    this._saveArticleData = params.saveArticleData;
+    this._getUserId = params.getUserId;
     this._renderNextArticles = params.renderNextArticles.bind(this);
+    this._clickHandler = this._clickHandler.bind(this)
+    this.removeEventListenerOnBlock = this.removeEventListenerOnBlock.bind(this);
     this._articles = [];
     this._blockArticles = [];
-    //this._renderArticles = [];
   }
 
   renderResultSearch(articles, keyWord) {
     const arrLength = articles.length;
     if (arrLength === 0) {
       this.show(this._blockNotFound)
+      return
     }
     this.show(this._blockContent, arrLength);
-    // switch (true) {
-    //   case arrLength === 0:
-    //
-    //     break;
-    //   case arrLength < this._numberOfArticles:
-    //     this.show(this._blockContent, false)
-    //     break;
-    //   case arrLength > this._numberOfArticles:
-    //     this.show(this._blockContent, true)
-    //     break;
-    // }
     this._setResArticlesData(articles, keyWord)
   }
 
   show(block, arrLength) {
+    if (block === this._blockContent && this._getUserId()) {
+      this.setEventListenerOnBlock();
+    }
     block.classList.remove('result-search__block_is-invisible');
     if (arrLength > this._numberOfArticles) {
       this._showButtonMore();
+    }
+  }
+
+  setEventListenerOnBlock() {
+    console.log("Вешаем слушатель")
+    this._addHandler(this._blockContent, 'click', this._clickHandler)
+  }
+
+  removeEventListenerOnBlock() {
+    console.log("снимаем слушатель")
+    this._addHandler(this._blockContent, 'click', this._clickHandler)
+  }
+
+  _clickHandler(event) {
+    if (event.target.classList.contains('article__button-icon')) {
+      console.log("меня нажали")
+      this._saveArticleData(event);
     }
   }
 
@@ -63,7 +76,6 @@ export default class Header extends BaseComponent {
 
   getArticles() {
     this._blockArticles = this._articles.splice(0, this._numberOfArticles);
-    //this._renderArticles = this._renderArticles.concat(this._blockArticles);
     return this._blockArticles;
   }
 
@@ -77,6 +89,9 @@ export default class Header extends BaseComponent {
     blocks.forEach((block) => {
       if (!block.classList.contains('result-search__block_is-invisible') && block.classList.contains('result-search__block_type_content')) {
         this._clearNewsCardList();
+        if (this._getUserId()) {
+          this.removeEventListenerOnBlock();
+        }
         block.classList.add('result-search__block_is-invisible');
       }
       if (!block.classList.contains('result-search__block_is-invisible')) {

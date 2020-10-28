@@ -1,4 +1,5 @@
-import { newsServerConfig, months } from "../constants/config";
+import { newsServerConfig, } from "../constants/config";
+import { months, compOfTime } from '../constants/constants';
 
 
 export function conversionDateForCard(data) {
@@ -12,11 +13,6 @@ export function conversionDateForCard(data) {
 }
 
 export function getDate() {
-  const compOfTime = {
-    min: 60,
-    sec: 60,
-    ms: 1000
-  }
   const lengthPeriod = newsServerConfig.days * compOfTime.min * compOfTime.sec * compOfTime.ms;
   const currentDate = new Date();
   const toDate = currentDate.toISOString();
