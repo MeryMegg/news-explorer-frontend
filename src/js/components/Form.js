@@ -1,8 +1,8 @@
 import PopupContent from './PopupContent';
 
 export default class Form extends PopupContent {
-  constructor(popupReg) {
-    super();
+  constructor(params) {
+    super(params);
     this.enableInputs = this.enableInputs.bind(this)
   }
 

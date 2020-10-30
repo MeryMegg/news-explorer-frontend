@@ -1,16 +1,15 @@
 import './styles/index.css';
 import { newsServerConfig, myServerConfig } from "./js/constants/config";
 import { placeholderUrl, numberOfArticles } from './js/constants/constants';
-import { errorMessages, tooltipMessages } from "./js/constants/messages";
+import { errorMessages } from "./js/constants/messages";
 import {
   body, overlay, buttonOpenMenu, buttonCloseMenu,
   menuMobile, buttonOpenLoginPopup,
   buttonLogout, itemsAuth, itemUnauth,
-  serchForm, searchInput, serchButton,
-  popupLogin, popupReg, popupRes,
-  preloader, newsCardMarkup, newsCardList,
-  blockSearchContent, buttonMore, blockNotFound,
-  blockError
+  serchForm, searchInput, popupLogin,
+  popupReg, popupRes, preloader, newsCardMarkup,
+  newsCardList, blockSearchContent, buttonMore,
+  blockNotFound, blockError
 } from "./js/constants/dom-elements";
 
 import MainApi from "./js/api/MainApi";
@@ -161,9 +160,10 @@ import ResultSearch from './js/components/ResultSearch';
 
   //создание экземпляра новостной карточки
   function createNewsArticle(dataCard) {
-    return instanceNewsCard.createCard(dataCard);
+    return instanceNewsCard.createCardForMainPage(dataCard);
   }
 
+  //сохранить статью в избранных
   function saveArticleData(event) {
     instanceNewsCard.isSaved(event);
   }
@@ -171,18 +171,18 @@ import ResultSearch from './js/components/ResultSearch';
   //вызывает метод класса NewsCard активирующий кнопку сохранения статьи
   function activateButton(cards) {
     instanceResultSearch.setEventListenerOnBlock();
-    cards.forEach((card) => instanceNewsCard.activateButton(card));
+    cards.forEach((card) => instanceNewsCard.hideTooltip(card));
   }
 
   //отрисовка карточек
   function renderArticles(articles, keyWord) {
     instanceResultSearch.renderResultSearch(articles, keyWord);
-    instanceNewsCardList.render(instanceResultSearch.getArticles());
+    instanceNewsCardList.render(instanceResultSearch.getBlockArticles());
   }
 
   //отрисовка по 3 карточки
   function renderNextArticles() {
-    instanceNewsCardList.render(instanceResultSearch.getArticles());
+    instanceNewsCardList.render(instanceResultSearch.getBlockArticles());
     if (instanceResultSearch.getLengthArticles() === 0) {
       instanceResultSearch.hideButtonMore();
     }
@@ -205,11 +205,11 @@ import ResultSearch from './js/components/ResultSearch';
   //Overlay
   const instancePopup = new Popup({ body, overlay, showButtonOpenMenu, hideButtonOpenMenu, buttonOpenMenu, closeMenuMobile, isOpenMenuMobile, removeContentPopupListeners });
   //Form
-  const instanceForm = new Form(popupReg);
+  const instanceForm = new Form({ popupReg, popupLogin, closeOverlay, choicePopup, formInputHandler, formSubmitHandler });
   //UserInfo
   const instanceUserInfo = new UserInfo();
   //PopupContent
-  const instancePopupContent = new PopupContent(popupReg, popupLogin, closeOverlay, choicePopup, formInputHandler, formSubmitHandler);
+  const instancePopupContent = new PopupContent({ popupReg, popupLogin, closeOverlay, choicePopup, formInputHandler, formSubmitHandler });
   //FormValidator
   const instanceFormValidation = new FormValidation(errorMessages, enableSearchInputs);
   //MenuMobile
@@ -219,10 +219,9 @@ import ResultSearch from './js/components/ResultSearch';
   //class ResultSearch
   const instanceResultSearch = new ResultSearch({ blockSearchContent, blockNotFound, blockError, buttonMore, numberOfArticles, saveArticleData, clearNewsCardList, renderNextArticles, getUserId });
   //class NewsCard
-  const instanceNewsCard = new NewsCard({ placeholderUrl, newsCardMarkup, tooltipMessages, getUserId, saveArticle, revomeArticleData });
+  const instanceNewsCard = new NewsCard({ placeholderUrl, newsCardMarkup, getUserId, saveArticle, revomeArticleData });
 
-
-  /* -- ЗАПРОСЫ -- */
+  /* *************************************************** ЗАПРОСЫ *************************************************************************** */
   //регистрация пользователя
   function regUser(data) {
     instanceMainApi.signUp(data)
@@ -249,16 +248,18 @@ import ResultSearch from './js/components/ResultSearch';
       .finally(() => instanceForm.enableInputs())
   };
 
-  //данные пользователя
-  instanceMainApi.getUserData()
-    .then((res) => {
-      renderPage(res);
-    })
-    .catch((err) => {
-      instanceHeader.render();
-      console.log(err)
-    })
-    .finally(() => setEventListeners());
+  //данные пользователя / проверка авторизации
+  function isAuth() {
+    instanceMainApi.getUserData()
+      .then((res) => {
+        renderPage(res);
+      })
+      .catch((err) => {
+        instanceHeader.render();
+        console.log(err)
+      })
+      .finally(() => setEventListeners());
+  }
 
   //сохранение статьи
   function saveArticle(data, article) {
@@ -266,9 +267,7 @@ import ResultSearch from './js/components/ResultSearch';
       .then((res) => {
         instanceNewsCard.updateDataCard(article, res._id);
       })
-      .catch((err) => console.log(err)
-        //err.name === "ReferenceError" ? console.log(err) : err.json().then(res => console.log(res.message))
-      )
+      .catch((err) => console.log(err))
   }
 
   function revomeArticleData(articleId, article) {
@@ -276,9 +275,7 @@ import ResultSearch from './js/components/ResultSearch';
       .then((res) => {
         instanceNewsCard.updateDataCard(article);
       })
-      .catch((err) => console.log(err)
-        //err.name === "ReferenceError" ? console.log(err) : err.json().then(res => console.log(res.message))
-      )
+      .catch((err) => console.log(err))
   }
 
   // выход из системы
@@ -287,9 +284,7 @@ import ResultSearch from './js/components/ResultSearch';
       .then(() => {
         renderUnauthPage();
       })
-      .catch((err) => console.log(err)
-        //err.json().then(res => console.log(res.message))
-      );
+      .catch((err) => console.log(err));
   }
 
   //поиск статей
@@ -302,7 +297,6 @@ import ResultSearch from './js/components/ResultSearch';
     renderLoading(true);
     instanceNewsApi.getArticles(keyWord)
       .then((res) => {
-        console.log(res.articles)
         renderArticles(res.articles, keyWord);
       })
       .catch((err) => {
@@ -315,4 +309,6 @@ import ResultSearch from './js/components/ResultSearch';
         instanceForm.clearForm(serchForm);
       })
   }
+
+  isAuth();
 })();

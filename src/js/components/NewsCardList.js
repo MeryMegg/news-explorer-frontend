@@ -19,7 +19,11 @@ export default class NewsCardList {
   clear() {
     const articles = [...this._container.querySelectorAll('.article')];
     articles.forEach((article) => {
-      article.remove();
+      this.removeCard(article);
     });
+  }
+
+  removeCard(article) {
+    article.remove();
   }
 }

@@ -56,6 +56,15 @@ export default class MainApi {
       .then((res) => this._requestHandler(res))
   }
 
+  getArticles() {
+    return fetch(`${this._url}/articles`, {
+      method: 'GET',
+      headers: this._headers,
+      credentials: 'include',
+    })
+      .then((res) => this._requestHandler(res))
+  }
+
   removeArticle(articleId) {
     return fetch(`${this._url}/articles/${articleId}`, {
       method: 'DELETE',
@@ -80,8 +89,6 @@ export default class MainApi {
     if (res.ok) {
       return res.json();
     }
-    //const json = res.json();
-
     return res.json().then(Promise.reject.bind(Promise))
   }
 }

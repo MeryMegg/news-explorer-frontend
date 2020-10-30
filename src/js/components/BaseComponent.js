@@ -2,23 +2,23 @@ export default class BaseComponent {
   constructor() {
   }
 
-  _setHandlers(arrayParams) {
+  _setHandlers = (arrayParams) => {
     arrayParams.forEach((params) => {
       this._addHandler(...params);
     });
   }
 
-  _addHandler(element, event, handler) {
+  _addHandler = (element, event, handler) => {
     element.addEventListener(event, handler);
   };
 
-  _removeHandlers(arrayParams) {
+  _removeHandlers = (arrayParams) => {
     arrayParams.forEach((params) => {
       this._removeHandler(...params);
     });
   };
 
-  _removeHandler(element, event, handler) {
+  _removeHandler = (element, event, handler) => {
     element.removeEventListener(event, handler);
   };
 }

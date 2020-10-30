@@ -7,7 +7,7 @@ export default class NewsApi {
 
   getArticles(keyWord) {
     const query = getQuery(keyWord);
-    return fetch(`https://nomoreparties.co/news/v2/everything?${query}`)
+    return fetch(`${this._url}${query}`)
       .then((res) => this._requestHandler(res));
   }
 

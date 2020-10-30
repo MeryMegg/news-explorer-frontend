@@ -6,6 +6,7 @@ export default class Menu extends BaseComponent {
     this._menu = params.menuMobile;
     this._buttonOpen = params.buttonOpenMenu;
     this._buttonClose = params.buttonCloseMenu;
+    this._logo = params.logo;
 
     this._openOverlay = params.openOverlay;
     this._closeOverlay = params.closeOverlay;
@@ -22,6 +23,9 @@ export default class Menu extends BaseComponent {
     this._openOverlay();
     this._menu.classList.add('header__menu_is-visible');
     this.showButton(this._buttonClose);
+    if (this._logo.classList.contains('logo_color_black')) {
+      this.changeLogoColor();
+    }
   }
 
   hideButton(button) {
@@ -37,6 +41,10 @@ export default class Menu extends BaseComponent {
   _chooseCallBack(button) {
     const callback = (button === this._buttonOpen) ? this._open : this.close;
     return callback;
+  }
+
+  changeLogoColor() {
+    this._logo.classList.toggle('logo_color_black');
   }
 
   close() {

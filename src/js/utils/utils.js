@@ -5,11 +5,7 @@ import { months, compOfTime } from '../constants/constants';
 export function conversionDateForCard(data) {
   const date = new Date(data);
   const dateCard = `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
-  const marginErr = 1;
-  const monthAtribute = ((date.getMonth() + marginErr) < 10) ? '0' + (date.getMonth() + marginErr) : (date.getMonth() + marginErr);
-  const dayAtribute = (date.getDate() < 10) ? '0' + date.getDate() : date.getDate();
-  const dateAtribute = `${date.getFullYear()}-${monthAtribute}-${dayAtribute}`
-  return { dateCard, dateAtribute };
+  return { dateCard };
 }
 
 export function getDate() {
@@ -29,6 +25,21 @@ export function getQuery(keyWord) {
     pageSize: newsServerConfig.pageSize,
     apiKey: newsServerConfig.apiKey
   })
-
   return query.toString();
 }
+
+export function enumerate(num, arr) {
+  if (num > 100) num = num % 100;
+  if (num <= 20 && num >= 10) return arr[2];
+  if (num > 20) num = num % 10;
+  return num === 1 ? arr[0] : num > 1 && num < 5 ? arr[1] : arr[2];
+}
+
+export const sortKeyWords = (articles) => {
+  const repeatCount = articles.map((article) => article.keyword).reduce((acc, tag) => {
+    acc[tag] = (acc[tag] || 0) + 1;
+    return acc;
+  }, {});
+  const keysSorted = Object.keys(repeatCount).sort(function (a, b) { return repeatCount[b] - repeatCount[a] })
+  return keysSorted;
+};
