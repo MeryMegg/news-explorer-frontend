@@ -14,13 +14,13 @@ export default class Header extends BaseComponent {
 
     /* functions */
     this._openOverlay = params.openOverlay;
-    //this._openMenuMobile = params.openMenuMobile;
-    this._logout = params.logout.bind(this);
-
-    this._openPopup = this._openPopup.bind(this);
+    this._logout = params.logout;
+    //this._logout = params.logout.bind(this);
+    //this._openPopup = this._openPopup.bind(this);
   }
 
-  render(name) {
+  //отрисовать header при первом заходе на сайт
+  render = (name) => {
     if (!name) {
       this.setEventListener(this._buttonLogin);
       return;
@@ -33,11 +33,13 @@ export default class Header extends BaseComponent {
     this._changeListeners(true);
   }
 
-  setNameButton(name) {
+  //установить имя на кнопку выхода
+  setNameButton = (name) => {
     this._buttonLogout.textContent = name;
   }
 
-  logoutRendered() {
+  //перерисовать header при изменении статуса посетителя
+  logoutRendered = () => {
     this._itemsAuth.forEach((item) => {
       item.classList.add(`list__item_is-invisible`);
     });
@@ -45,20 +47,24 @@ export default class Header extends BaseComponent {
     this._changeListeners(false);
   }
 
-  setEventListener(button) {
+  //слушатели на кнопки
+  setEventListener = (button) => {
     this._addHandler(button, 'click', this._chooseCallBack(button));
   }
 
-  _openPopup() {
+  //переадресует запрос в класс Popup
+  _openPopup = () => {
     this._openOverlay(this._popupLogin);
   }
 
-  _chooseCallBack(button) {
+  //выбор колбека для слушателя
+  _chooseCallBack = (button) => {
     const callback = (button === this._buttonLogout) ? this._logout : this._openPopup;
     return callback;
   }
 
-  _changeListeners(flag) {
+  //смена слушателей на кнопках при переписовке headera
+  _changeListeners = (flag) => {
     if (flag) {
       this._addHandler(this._buttonLogout, 'click', this._logout);
       this._removeHandler(this._buttonLogin, 'click', this._openLoginPopup);

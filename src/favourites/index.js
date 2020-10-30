@@ -12,7 +12,6 @@ import {
 import MainApi from "../js/api/MainApi";
 import Header from "../js/components/Header";
 import Popup from '../js/components/Popup';
-import PopupContent from '../js/components/PopupContent';
 import UserInfo from '../js/components/UserInfo';
 import MenuMobile from '../js/components/MenuMobile';
 import NewsCardList from '../js/components/NewsCardList';
@@ -127,9 +126,8 @@ import Title from '../js/components/Title';
       .then((res) => {
         renderPage(res);
       })
-      .catch((err) => {
-        console.log(err)
-        //return location = './';
+      .catch(() => {
+        return location = './';
       })
   }
 
@@ -138,12 +136,10 @@ import Title from '../js/components/Title';
     renderLoading(true);
     instanceMainApi.getArticles()
       .then((res) => {
-        console.log(res)
         instanceTitle.setUserInfo(res);
         renderArticles(res);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         instanceResultSearch.show(blockError);
       })
       .finally(() => {
@@ -158,8 +154,7 @@ import Title from '../js/components/Title';
         .then(() => {
           instanceNewsCardList.removeCard(article);
         })
-        .catch((err) => console.log(err)
-        )
+        .catch((err) => alert(err.message))
     }
   }
 
@@ -169,8 +164,7 @@ import Title from '../js/components/Title';
       .then(() => {
         return location = './';
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
         return location = './';
       });
   }

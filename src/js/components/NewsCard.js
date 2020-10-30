@@ -7,10 +7,9 @@ export default class Card {
     this._getUserId = params.getUserId;
     this._saveArticle = params.saveArticle;
     this._revomeArticleData = params.revomeArticleData;
-
-    //this._removeArticleFromSaved = this._removeArticleFromSaved.bind(this);
   }
 
+  //создание карточки для главной страницы
   createCardForMainPage(cardData) {
     const userId = this._getUserId();
     this._view = this._cardMarkup.content.querySelector(".article").cloneNode(true);
@@ -40,6 +39,7 @@ export default class Card {
     return this.cardElement;
   }
 
+  //создает карточку для страницы с сохраненными статьями
   createCardForFavouritesPage(cardData) {
     this._view = this._cardMarkup.content.querySelector(".article").cloneNode(true);
     //id
@@ -72,17 +72,20 @@ export default class Card {
     return urlArticle;
   }
 
+  //скрывает подсказку для кнопки на главной странице, если пользователь авторизировался
   hideTooltip(card) {
     card.querySelector('.article__tooltip').classList.add('article__tooltip_is-invisible');
   }
 
+  //при клике на иконку сохранения карточки проверяет сохранена она или нет
   isSaved(event) {
     if (event.target.classList.contains("article__button-icon_type_save-active")) {
       this.removeArticleFromSaved(event);
     } else this._saved(event);
   }
 
-  _saved(event) {
+  //формирует запрос на сохранение карточки
+  _saved = (event) => {
     const article = event.target.closest('.article');
     const sourceLink = article.querySelector('.article__link');
     const articleData = {
@@ -97,13 +100,15 @@ export default class Card {
     this._saveArticle(articleData, article);
   }
 
-  removeArticleFromSaved(event) {
+  //формирует запрос на удаление статьи из базы данных
+  removeArticleFromSaved = (event) => {
     const article = event.target.closest('.article');
     const articleId = article.getAttribute('id');
     this._revomeArticleData(articleId, article);
   }
 
-  updateDataCard(article, articleId) {
+  //вносит изменения в карточку после ее сохранения или удаления в базе данных
+  updateDataCard = (article, articleId) => {
     if (article.getAttribute('id') === articleId) {
       article.removeAttribute('id')
     }
@@ -111,12 +116,14 @@ export default class Card {
     this._changeIcon(article);
   }
 
-  _changeIcon(card) {
+  //перерисовывает иконку
+  _changeIcon = (card) => {
     const icon = card.querySelector('.article__button-icon');
     this._toggleClassIcon(icon);
   }
 
-  _toggleClassIcon(icon) {
+  //меняет классы у иконки
+  _toggleClassIcon = (icon) => {
     icon.classList.toggle("article__button-icon_type_save-active");
     icon.classList.toggle("article__button-icon_type_save");
   }

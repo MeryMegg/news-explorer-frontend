@@ -229,7 +229,6 @@ import ResultSearch from './js/components/ResultSearch';
         choicePopup(instancePopupContent.createContent(popupRes));
       })
       .catch((err) => {
-        console.log(err)
         instanceForm.setErrorMessage(err.message);
       })
       .finally(() => instanceForm.enableInputs());
@@ -242,7 +241,6 @@ import ResultSearch from './js/components/ResultSearch';
         renderAuthPage(res);
       })
       .catch((err) => {
-        console.log(err)
         instanceForm.setErrorMessage(err.message)
       })
       .finally(() => instanceForm.enableInputs())
@@ -256,7 +254,6 @@ import ResultSearch from './js/components/ResultSearch';
       })
       .catch((err) => {
         instanceHeader.render();
-        console.log(err)
       })
       .finally(() => setEventListeners());
   }
@@ -267,15 +264,15 @@ import ResultSearch from './js/components/ResultSearch';
       .then((res) => {
         instanceNewsCard.updateDataCard(article, res._id);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => alert(err.message))
   }
 
   function revomeArticleData(articleId, article) {
     instanceMainApi.removeArticle(articleId)
-      .then((res) => {
+      .then(() => {
         instanceNewsCard.updateDataCard(article);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => alert(err.message))
   }
 
   // выход из системы
@@ -284,7 +281,7 @@ import ResultSearch from './js/components/ResultSearch';
       .then(() => {
         renderUnauthPage();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.message));
   }
 
   //поиск статей
@@ -300,7 +297,6 @@ import ResultSearch from './js/components/ResultSearch';
         renderArticles(res.articles, keyWord);
       })
       .catch((err) => {
-        console.log(err)
         instanceResultSearch.show(blockError)
       })
       .finally(() => {

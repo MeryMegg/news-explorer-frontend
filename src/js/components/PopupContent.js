@@ -10,10 +10,12 @@ export default class PopupContent extends BaseComponent {
     this._formSubmitHandler = params.formSubmitHandler;
     this._removeCard = params.removeCard;
     this._closeOverlay = params.closeOverlay;
-    this._choiceContent = this._choiceContent.bind(this);
-    this._removeArticle = this._removeArticle.bind(this);
+    // this._choiceContent = this._choiceContent.bind(this);
+    //this._removeArticle = this._removeArticle.bind(this);
   }
 
+
+  //формирует контент всплывающего окна
   createContent = (markup) => {
     this._view = markup.content.querySelector(".popup__content").cloneNode(true);
     this.content = this._view;
@@ -21,12 +23,14 @@ export default class PopupContent extends BaseComponent {
     return this.content = this._view;
   }
 
-  _removeArticle = (event) => {
-    const article = event.target.closest('article');
-    this._removeCard(event);
-    this._closeOverlay();
-  }
 
+  // _removeArticle = (event) => {
+  //   const article = event.target.closest('article');
+  //   this._removeCard(event);
+  //   this._closeOverlay();
+  // }
+
+  //формирует контен при замене во всплывающем окне
   _choiceContent = (event) => {
     switch (true) {
       case event.target.id === "buttonChoiceReg":
@@ -38,6 +42,7 @@ export default class PopupContent extends BaseComponent {
     }
   }
 
+  //вешает слушатели
   _setEventListeners = () => {
     if (this.content.classList.contains('popup__content_form')) {
       this._form = this.content.querySelector('.form');
@@ -57,6 +62,7 @@ export default class PopupContent extends BaseComponent {
     ]);
   }
 
+  //удаляет слушатели
   removeEventListeners = () => {
     if (this._view.classList.contains('.popup__content_form')) {
       this._removeHandler(this._form, 'submit', this._formSubmitHandler);

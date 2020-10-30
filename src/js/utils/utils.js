@@ -1,13 +1,13 @@
 import { newsServerConfig, } from "../constants/config";
 import { months, compOfTime } from '../constants/constants';
 
-
+//преобразование даты для карточки
 export function conversionDateForCard(data) {
   const date = new Date(data);
   const dateCard = `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
   return { dateCard };
 }
-
+//расчет даты для запроса на новостной сайт
 export function getDate() {
   const lengthPeriod = newsServerConfig.days * compOfTime.min * compOfTime.sec * compOfTime.ms;
   const currentDate = new Date();
@@ -15,7 +15,7 @@ export function getDate() {
   const fromDate = new Date(currentDate.getTime() - lengthPeriod).toISOString();
   return { fromDate, toDate }
 }
-
+//формирование query для запроса новостей
 export function getQuery(keyWord) {
   const query = new URLSearchParams({
     q: keyWord,
@@ -27,14 +27,14 @@ export function getQuery(keyWord) {
   })
   return query.toString();
 }
-
+//склонение слов и окончаний для титульного блока
 export function enumerate(num, arr) {
   if (num > 100) num = num % 100;
   if (num <= 20 && num >= 10) return arr[2];
   if (num > 20) num = num % 10;
   return num === 1 ? arr[0] : num > 1 && num < 5 ? arr[1] : arr[2];
 }
-
+//сортировка ключевых слов
 export const sortKeyWords = (articles) => {
   const repeatCount = articles.map((article) => article.keyword).reduce((acc, tag) => {
     acc[tag] = (acc[tag] || 0) + 1;

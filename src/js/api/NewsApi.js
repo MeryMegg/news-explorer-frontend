@@ -1,5 +1,6 @@
 import { getQuery } from "../utils/utils";
 
+//получить статьи с новостного сайта
 export default class NewsApi {
   constructor(config) {
     this._url = config.baseUrl;
