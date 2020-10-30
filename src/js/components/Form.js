@@ -3,8 +3,6 @@ import PopupContent from './PopupContent';
 export default class Form extends PopupContent {
   constructor(params) {
     super(params);
-
-    this.enableInputs = this.enableInputs.bind(this)
   }
 
   //собирает данные с формы для запроса на сервер

@@ -10,8 +10,6 @@ export default class PopupContent extends BaseComponent {
     this._formSubmitHandler = params.formSubmitHandler;
     this._removeCard = params.removeCard;
     this._closeOverlay = params.closeOverlay;
-    // this._choiceContent = this._choiceContent.bind(this);
-    //this._removeArticle = this._removeArticle.bind(this);
   }
 
 
@@ -22,13 +20,6 @@ export default class PopupContent extends BaseComponent {
     this._setEventListeners();
     return this.content = this._view;
   }
-
-
-  // _removeArticle = (event) => {
-  //   const article = event.target.closest('article');
-  //   this._removeCard(event);
-  //   this._closeOverlay();
-  // }
 
   //формирует контен при замене во всплывающем окне
   _choiceContent = (event) => {

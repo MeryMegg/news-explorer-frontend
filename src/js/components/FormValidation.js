@@ -6,7 +6,6 @@ export default class FormValidation extends BaseComponent {
     super();
     this.errorMessages = errorMessages;
     this._enableSearchInputs = enableSearchInputs;
-
   }
 
   //обработчик событий

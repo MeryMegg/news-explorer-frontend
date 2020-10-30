@@ -16,8 +16,6 @@ export default class ResultSearch extends BaseComponent {
     this._renderNextArticles = params.renderNextArticles;
     this._removeCard = params.removeCard;
 
-    //this._clickHandler = this._clickHandler.bind(this)
-    //this.removeEventListenerOnBlock = this.removeEventListenerOnBlock.bind(this);
     this._articles = [];
     this._blockArticles = [];
   }

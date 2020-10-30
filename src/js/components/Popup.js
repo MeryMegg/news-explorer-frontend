@@ -7,19 +7,12 @@ export default class Popup extends BaseComponent {
     this._overlay = params.overlay;
     this._body = params.body;
     this._buttonOpenMenu = params.buttonOpenMenu;
-    //функции
-    // this._showButtonOpenMenu = params.showButtonOpenMenu.bind(this);
-    // this._hideButtonOpenMenu = params.hideButtonOpenMenu.bind(this);
+    /* функции */
     this._showButtonOpenMenu = params.showButtonOpenMenu;
     this._hideButtonOpenMenu = params.hideButtonOpenMenu;
     this._closeMenuMobile = params.closeMenuMobile;
     this._isOpenMenuMobile = params.isOpenMenuMobile;
     this._removeContentPopupListeners = params.removeContentPopupListeners;
-
-    // this._handleCloseByEsc = this._handleCloseByEsc.bind(this);
-    // this._handleCloseByOverlay = this._handleCloseByOverlay.bind(this);
-
-
   }
 
   //открывает оверлей и добавляет контент при наличии
