@@ -1,5 +1,6 @@
 import { getQuery } from "../utils/utils";
 
+//получить статьи с новостного сайта
 export default class NewsApi {
   constructor(config) {
     this._url = config.baseUrl;
@@ -7,7 +8,7 @@ export default class NewsApi {
 
   getArticles(keyWord) {
     const query = getQuery(keyWord);
-    return fetch(`https://nomoreparties.co/news/v2/everything?${query}`)
+    return fetch(`${this._url}${query}`)
       .then((res) => this._requestHandler(res));
   }
 

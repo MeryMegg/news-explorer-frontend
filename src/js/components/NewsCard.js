@@ -1,48 +1,68 @@
 import { conversionDateForCard } from '../utils/utils';
-
 export default class Card {
   constructor(params) {
     this._cardMarkup = params.newsCardMarkup;
     this._placeholderUrl = params.placeholderUrl;
-    this._tooltipText = params.tooltipMessages;
-
     //функции
     this._getUserId = params.getUserId;
     this._saveArticle = params.saveArticle;
     this._revomeArticleData = params.revomeArticleData;
-
-    //this._removeArticleFromSaved = this._removeArticleFromSaved.bind(this);
   }
 
-  createCard(cardData) {
+  //создание карточки для главной страницы
+  createCardForMainPage(cardData) {
     const userId = this._getUserId();
     this._view = this._cardMarkup.content.querySelector(".article").cloneNode(true);
-
+    //фото
     const urlImage = this._getUrl(cardData.urlToImage);
     this._view.querySelector(".article__image").setAttribute('src', urlImage);
-
-    this._view.querySelector('.article__tooltip').textContent = this._tooltipText.needAuth;
-    this._view.querySelector('.article__button-icon').classList.add('article__button-icon_type_save');
-
+    //дата
     const articleDate = this._view.querySelector('.article__date')
-    const dateTime = conversionDateForCard(cardData.publishedAt).dateAtribute;
     const dateArticle = conversionDateForCard(cardData.publishedAt).dateCard;
-    articleDate.setAttribute('datetime', dateTime);
+    articleDate.setAttribute('datetime', cardData.publishedAt);
     articleDate.textContent = dateArticle;
-
+    //Заголовок и текст
     this._view.querySelector(".article__title").textContent = cardData.title;
     this._view.querySelector('.article__text').textContent = cardData.description;
-
+    //Источник и ссылка
     const source = this._view.querySelector('.article__link');
     source.textContent = cardData.source.name;
     source.setAttribute('href', cardData.url);
-
-    this._view.querySelector('.article__keyword').textContent = cardData.keyWord;
+    //Ключевое слово
+    const keyWord = this._view.querySelector('.article__keyword');
+    keyWord.textContent = cardData.keyWord;
     this.cardElement = this._view;
 
     if (userId) {
-      this.activateButton(this.cardElement);
+      this.hideTooltip(this.cardElement);
     }
+    return this.cardElement;
+  }
+
+  //создает карточку для страницы с сохраненными статьями
+  createCardForFavouritesPage(cardData) {
+    this._view = this._cardMarkup.content.querySelector(".article").cloneNode(true);
+    //id
+    this._view.setAttribute('id', cardData._id);
+    //фото
+    const urlImage = this._getUrl(cardData.image);
+    this._view.querySelector(".article__image").setAttribute('src', urlImage);
+    //дата
+    const articleDate = this._view.querySelector('.article__date')
+    const dateArticle = conversionDateForCard(cardData.date).dateCard;
+    articleDate.setAttribute('datetime', cardData.date);
+    articleDate.textContent = dateArticle;
+    //Заголовок и текст
+    this._view.querySelector(".article__title").textContent = cardData.title;
+    this._view.querySelector('.article__text').textContent = cardData.text;
+    //Источник и ссылка
+    const source = this._view.querySelector('.article__link');
+    source.textContent = cardData.source;
+    source.setAttribute('href', cardData.link);
+    //Ключевое слово
+    const keyWord = this._view.querySelector('.article__keyword');
+    keyWord.textContent = cardData.keyword;
+    this.cardElement = this._view;
     return this.cardElement;
   }
 
@@ -52,24 +72,27 @@ export default class Card {
     return urlArticle;
   }
 
-  activateButton(card) {
+  //скрывает подсказку для кнопки на главной странице, если пользователь авторизировался
+  hideTooltip(card) {
     card.querySelector('.article__tooltip').classList.add('article__tooltip_is-invisible');
   }
 
+  //при клике на иконку сохранения карточки проверяет сохранена она или нет
   isSaved(event) {
     if (event.target.classList.contains("article__button-icon_type_save-active")) {
-      this._removeArticleFromSaved(event);
+      this.removeArticleFromSaved(event);
     } else this._saved(event);
   }
 
-  _saved(event) {
+  //формирует запрос на сохранение карточки
+  _saved = (event) => {
     const article = event.target.closest('.article');
     const sourceLink = article.querySelector('.article__link');
     const articleData = {
       keyword: article.querySelector('.article__keyword').textContent,
       title: article.querySelector('.article__title').textContent,
       text: article.querySelector('.article__text').textContent,
-      date: article.querySelector('.article__date').textContent,
+      date: article.querySelector('.article__date').getAttribute('datetime'),
       source: sourceLink.textContent,
       link: sourceLink.getAttribute('href'),
       image: article.querySelector('.article__image').getAttribute('src')
@@ -77,30 +100,30 @@ export default class Card {
     this._saveArticle(articleData, article);
   }
 
-  _removeArticleFromSaved(event) {
+  //формирует запрос на удаление статьи из базы данных
+  removeArticleFromSaved = (event) => {
     const article = event.target.closest('.article');
     const articleId = article.getAttribute('id');
     this._revomeArticleData(articleId, article);
   }
 
-  updateDataCard(article, articleId) {
-    console.log(article)
-    //const attribute = article.getAttribute('id') === articleId;
-    //console.log(attribute)
+  //вносит изменения в карточку после ее сохранения или удаления в базе данных
+  updateDataCard = (article, articleId) => {
     if (article.getAttribute('id') === articleId) {
       article.removeAttribute('id')
     }
     article.setAttribute('id', articleId);
-    //attribute ? article.removeAttribute('id') : article.setAttribute('id', articleId);
     this._changeIcon(article);
   }
 
-  _changeIcon(card) {
+  //перерисовывает иконку
+  _changeIcon = (card) => {
     const icon = card.querySelector('.article__button-icon');
     this._toggleClassIcon(icon);
   }
 
-  _toggleClassIcon(icon) {
+  //меняет классы у иконки
+  _toggleClassIcon = (icon) => {
     icon.classList.toggle("article__button-icon_type_save-active");
     icon.classList.toggle("article__button-icon_type_save");
   }

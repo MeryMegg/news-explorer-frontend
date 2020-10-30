@@ -2,23 +2,27 @@ export default class BaseComponent {
   constructor() {
   }
 
-  _setHandlers(arrayParams) {
+  //обработка запроса на установку слушателей
+  _setHandlers = (arrayParams) => {
     arrayParams.forEach((params) => {
       this._addHandler(...params);
     });
   }
 
-  _addHandler(element, event, handler) {
+  //установка слушателей
+  _addHandler = (element, event, handler) => {
     element.addEventListener(event, handler);
   };
 
-  _removeHandlers(arrayParams) {
+  //обработка запроса на удаление слушателей
+  _removeHandlers = (arrayParams) => {
     arrayParams.forEach((params) => {
       this._removeHandler(...params);
     });
   };
 
-  _removeHandler(element, event, handler) {
+  //удаление слушателей
+  _removeHandler = (element, event, handler) => {
     element.removeEventListener(event, handler);
   };
 }
