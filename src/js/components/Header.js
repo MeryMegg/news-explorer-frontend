@@ -15,8 +15,6 @@ export default class Header extends BaseComponent {
     /* functions */
     this._openOverlay = params.openOverlay;
     this._logout = params.logout;
-    //this._logout = params.logout.bind(this);
-    //this._openPopup = this._openPopup.bind(this);
   }
 
   //отрисовать header при первом заходе на сайт

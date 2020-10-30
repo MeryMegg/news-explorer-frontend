@@ -11,8 +11,6 @@ export default class Menu extends BaseComponent {
     /* functions */
     this._openOverlay = params.openOverlay;
     this._closeOverlay = params.closeOverlay;
-    // this._open = this._open.bind(this);
-    // this.close = this.close.bind(this);
   }
 
   //вешает слушатели
