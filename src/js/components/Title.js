@@ -34,4 +34,12 @@ export default class Title {
       return
     }
   }
+
+  updateUserInfo = (articleId) => {
+    const arr = JSON.parse(sessionStorage.articles);
+    const index = arr.findIndex(item => item.id === articleId);
+    arr.splice(index, 1);
+    this.setUserInfo(arr);
+    sessionStorage.articles = JSON.stringify(arr);
+  }
 }
