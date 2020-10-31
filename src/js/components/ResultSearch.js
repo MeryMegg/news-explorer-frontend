@@ -116,6 +116,9 @@ export default class ResultSearch extends BaseComponent {
         if (this._getUserId()) {
           this.removeEventListenerOnBlock();
         }
+        if (!this._button.classList.contains('result-search__button_is-invisible')) {
+          this.hideButtonMore();
+        }
         block.classList.add('result-search__block_is-invisible');
       }
       if (!block.classList.contains('result-search__block_is-invisible')) {

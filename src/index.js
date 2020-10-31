@@ -229,6 +229,7 @@ import ResultSearch from './js/components/ResultSearch';
         choicePopup(instancePopupContent.createContent(popupRes));
       })
       .catch((err) => {
+        console.log(err)
         instanceForm.setErrorMessage(err.message);
       })
       .finally(() => instanceForm.enableInputs());
