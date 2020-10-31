@@ -154,9 +154,8 @@ import Title from '../js/components/Title';
     if (confirm("Удалить cтатью?")) {
       instanceMainApi.removeArticle(articleId)
         .then((res) => {
-          console.log(res)
           instanceNewsCardList.removeCard(article);
-          instanceTitle.updateUserInfo(articleId);
+          instanceTitle.updateUserInfo(res.id);
         })
         .catch((err) => alert(err.message))
     }

@@ -13,6 +13,7 @@ export default class Title {
     this._nunberOrItem = params.nunberOrItem;
     /* функции */
     this._getUserName = params.getUserName;
+    this._changeBlocksResultSearch = params.changeBlocksResultSearch;
   }
 
   //формирует титульный блок
@@ -35,6 +36,7 @@ export default class Title {
     }
   }
 
+  //обновляет информацию в титульном блоке при удалении статьи
   updateUserInfo = (articleId) => {
     const arr = JSON.parse(sessionStorage.articles);
     const index = arr.findIndex(item => item.id === articleId);
