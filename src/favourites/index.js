@@ -134,8 +134,10 @@ import Title from '../js/components/Title';
   //получение статьи
   function getArticles() {
     renderLoading(true);
+    sessionStorage.articles = "";
     instanceMainApi.getArticles()
       .then((res) => {
+        sessionStorage.articles = JSON.stringify(res);
         instanceTitle.setUserInfo(res);
         renderArticles(res);
       })
@@ -151,8 +153,9 @@ import Title from '../js/components/Title';
   function revomeArticleData(articleId, article) {
     if (confirm("Удалить cтатью?")) {
       instanceMainApi.removeArticle(articleId)
-        .then(() => {
+        .then((res) => {
           instanceNewsCardList.removeCard(article);
+          instanceTitle.updateUserInfo(res.id);
         })
         .catch((err) => alert(err.message))
     }
