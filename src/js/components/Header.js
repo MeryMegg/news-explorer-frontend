@@ -69,7 +69,5 @@ export default class Header extends BaseComponent {
       return;
     }
     location.reload();
-    // this._addHandler(this._buttonLogin, 'click', this._openLoginPopup);
-    // this._removeHandler(this._buttonLogout, 'click', this._logout);
   }
 }

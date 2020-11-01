@@ -122,28 +122,16 @@ import Title from '../js/components/Title';
   /* *************************************************** ЗАПРОСЫ *************************************************************************** */
   //данные пользователя / проверка авторизации
   function isAuth() {
-    instanceMainApi.getUserData()
-      .then((res) => {
-        renderPage(res);
-      })
-      .catch(() => {
-        return location = './';
-      })
-  }
-
-  //получение статьи
-  function getArticles() {
     renderLoading(true);
     sessionStorage.articles = "";
-    instanceMainApi.getArticles()
-      .then((res) => {
-        sessionStorage.articles = JSON.stringify(res);
-        instanceTitle.setUserInfo(res);
-        renderArticles(res);
+    Promise.all([instanceMainApi.getUserData(), instanceMainApi.getArticles()])
+      .then(([data, articles]) => {
+        renderPage(data);
+        sessionStorage.articles = JSON.stringify(articles);
+        instanceTitle.setUserInfo(articles);
+        renderArticles(articles);
       })
-      .catch(() => {
-        instanceResultSearch.show(blockError);
-      })
+      .catch(() => { return location = './' })
       .finally(() => {
         renderLoading(false);
       })
@@ -173,5 +161,4 @@ import Title from '../js/components/Title';
   }
 
   isAuth();
-  getArticles();
 })();

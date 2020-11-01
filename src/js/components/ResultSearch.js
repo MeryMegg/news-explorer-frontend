@@ -25,10 +25,11 @@ export default class ResultSearch extends BaseComponent {
     const arrLength = articles.length;
     if (arrLength === 0) {
       this.show(this._blockNotFound)
-      return
+      return;
+    } else {
+      this.show(this._blockContent, arrLength);
+      this._setResArticlesData(articles, keyWord)
     }
-    this.show(this._blockContent, arrLength);
-    this._setResArticlesData(articles, keyWord)
   }
 
   //отображает блок

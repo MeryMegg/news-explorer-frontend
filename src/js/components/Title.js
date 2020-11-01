@@ -18,12 +18,13 @@ export default class Title {
 
   //формирует титульный блок
   setUserInfo = (articles) => {
+    const name = this._getUserName();
     if (articles.length === 0) {
       this._title.textContent = `${this._getUserName()}, у вас нет сохраненных статей`;
       this._titelBlockKeyWords.textContent = "";
       return
     }
-    this._title.textContent = `${this._getUserName()}, у вас ${articles.length} ${enumerate(articles.length, this._declinableWords)}`;
+    this._title.textContent = `${name}, у вас ${articles.length} ${enumerate(articles.length, this._declinableWords)}`;
     const keysSorted = sortKeyWords(articles);
     if (keysSorted.length <= this._numberOfKeyWords) {
       this._listKeyWords.textContent = `${keysSorted.join(', ')}`;

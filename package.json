@@ -7,7 +7,7 @@
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --watch",
     "deploy": "cross-env NODE_ENV=production gh-pages -d dist",
-    "serverDeploy": "scp -r ./dist/* magdalin@130.193.34.202:/home/magdalin/news-frontend"
+    "serverDeploy": "scp -r ./dist/* magdalin@84.201.152.18:/home/magdalin/news-frontend"
   },
   "repository": {
     "type": "git",
