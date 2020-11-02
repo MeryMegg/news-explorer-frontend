@@ -15,6 +15,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: './[name]/index.[chunkhash].js'
   },
+  devtool: 'eval-source-map',
   module: {
     rules: [{ // тут описываются правила
       test: /\.js$/, // регулярное выражение, которое ищет все js файлы

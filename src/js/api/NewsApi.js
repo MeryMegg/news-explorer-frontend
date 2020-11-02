@@ -1,5 +1,6 @@
 import { getQuery } from "../utils/utils";
 
+//получить статьи с новостного сайта
 export default class NewsApi {
   constructor(config) {
     this._url = config.baseUrl;
@@ -15,6 +16,6 @@ export default class NewsApi {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(res);
+    return res.json().then(Promise.reject.bind(Promise))
   }
 }

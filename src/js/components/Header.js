@@ -1,3 +1,4 @@
+import { buttonOpenMenu } from '../constants/dom-elements';
 import BaseComponent from './BaseComponent';
 
 export default class Header extends BaseComponent {
@@ -13,19 +14,16 @@ export default class Header extends BaseComponent {
 
     /* functions */
     this._openOverlay = params.openOverlay;
-    //this._openMenuMobile = params.openMenuMobile;
     this._logout = params.logout;
-
-    this._openPopup = this._openPopup.bind(this);
   }
 
-  render(name) {
-    // this._addHandler(this._buttonOpenMenu, 'click', this._openMenuMobile);
+  //отрисовать header при первом заходе на сайт
+  render = (name) => {
     if (!name) {
-      this._addHandler(this._buttonLogin, 'click', this._openPopup);
+      this.setEventListener(this._buttonLogin);
       return;
     }
-    this._buttonLogout.textContent = name;
+    this.setNameButton(name);
     this._itemsAuth.forEach((item) => {
       item.classList.remove(`list__item_is-invisible`);
     });
@@ -33,7 +31,13 @@ export default class Header extends BaseComponent {
     this._changeListeners(true);
   }
 
-  logoutRendered() {
+  //установить имя на кнопку выхода
+  setNameButton = (name) => {
+    this._buttonLogout.textContent = name;
+  }
+
+  //перерисовать header при изменении статуса посетителя
+  logoutRendered = () => {
     this._itemsAuth.forEach((item) => {
       item.classList.add(`list__item_is-invisible`);
     });
@@ -41,17 +45,29 @@ export default class Header extends BaseComponent {
     this._changeListeners(false);
   }
 
-  _openPopup() {
+  //слушатели на кнопки
+  setEventListener = (button) => {
+    this._addHandler(button, 'click', this._chooseCallBack(button));
+  }
+
+  //переадресует запрос в класс Popup
+  _openPopup = () => {
     this._openOverlay(this._popupLogin);
   }
 
-  _changeListeners(flag) {
+  //выбор колбека для слушателя
+  _chooseCallBack = (button) => {
+    const callback = (button === this._buttonLogout) ? this._logout : this._openPopup;
+    return callback;
+  }
+
+  //смена слушателей на кнопках при переписовке headera
+  _changeListeners = (flag) => {
     if (flag) {
       this._addHandler(this._buttonLogout, 'click', this._logout);
       this._removeHandler(this._buttonLogin, 'click', this._openLoginPopup);
       return;
     }
-    this._removeHandler(this._buttonLogout, 'click', this._logout);
-    this._addHandler(this._buttonLogin, 'click', this._openLoginPopup);
+    location.reload();
   }
 }

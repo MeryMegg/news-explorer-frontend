@@ -2,13 +2,14 @@ import { errorMessages } from "../constants/messages";
 import BaseComponent from './BaseComponent';
 
 export default class FormValidation extends BaseComponent {
-  constructor(enableSearchInputs) {
+  constructor(errorMessages, enableSearchInputs) {
     super();
+    this.errorMessages = errorMessages;
     this._enableSearchInputs = enableSearchInputs;
   }
 
   //обработчик событий
-  inputHandler(event) {
+  inputHandler = (event) => {
     this._submit = event.target
       .closest(".form")
       .querySelector(".button");
@@ -25,10 +26,11 @@ export default class FormValidation extends BaseComponent {
   }
 
   //Проверяет наличие данных в форме поиска новостей перед отправкой
-  getValidateData(form, data) {
+  getValidateData = (form, data) => {
     const values = Object.values(data);
     const errorElem = form.querySelector(`.error-message`);
-    const keyWord = values[0];
+    const i = 0;
+    const keyWord = values[i];
     if (keyWord === "") {
       errorElem.textContent = errorMessages.empty;
       this._enableSearchInputs();
@@ -37,7 +39,7 @@ export default class FormValidation extends BaseComponent {
   }
 
   //Добавляет или удаляет ошибку
-  isFieldValid(input) {
+  isFieldValid = (input) => {
     const errorElem = input
       .closest(".form")
       .querySelector(`#${input.name}-error`);
@@ -47,7 +49,7 @@ export default class FormValidation extends BaseComponent {
   }
 
   //Проверяет поля и выбирает ошибку
-  _isValidate(input) {
+  _isValidate = (input) => {
     input.setCustomValidity("");
 
     if (input.validity.valueMissing) {
@@ -76,7 +78,7 @@ export default class FormValidation extends BaseComponent {
   }
 
   // Активирует и деактивирует кнопку submit
-  setSubmitButtonState(submit, state) {
+  setSubmitButtonState = (submit, state) => {
     if (submit.id === "searchNews") {
       return;
     }

@@ -3,23 +3,20 @@ import BaseComponent from './BaseComponent';
 export default class Popup extends BaseComponent {
   constructor(params) {
     super();
+    /* dom elements */
     this._overlay = params.overlay;
     this._body = params.body;
     this._buttonOpenMenu = params.buttonOpenMenu;
     //функции
-    this._showButtonOpenMenu = params.showButtonOpenMenu.bind(this);
-    this._hideButtonOpenMenu = params.hideButtonOpenMenu.bind(this);
+    this._showButtonOpenMenu = params.showButtonOpenMenu;
+    this._hideButtonOpenMenu = params.hideButtonOpenMenu;
     this._closeMenuMobile = params.closeMenuMobile;
     this._isOpenMenuMobile = params.isOpenMenuMobile;
     this._removeContentPopupListeners = params.removeContentPopupListeners;
-
-    this._handleCloseByEsc = this._handleCloseByEsc.bind(this);
-    this._handleCloseByOverlay = this._handleCloseByOverlay.bind(this);
-
-
   }
 
-  open(content) {
+  //открывает оверлей и добавляет контент при наличии
+  open = (content) => {
     if (content) {
       this._overlay.append(content);
     }
@@ -29,32 +26,35 @@ export default class Popup extends BaseComponent {
     this._togglePopup();
   }
 
-  _togglePopup() {
+  _togglePopup = () => {
     this._overlay.classList.toggle("popup_is-opened");
-
   };
 
-  choicePopup(content) {
+  //смена контента во всплывающем окне
+  choicePopup = (content) => {
     this._clearContent();
     this._overlay.append(content);
     this._setEventListeners();
   }
 
-  _setEventListeners() {
+  //устанавливает слушатели
+  _setEventListeners = () => {
     this._setHandlers([
       [this._overlay, 'mousedown', this._handleCloseByOverlay],
       [document, 'keyup', this._handleCloseByEsc],
     ]);
   }
 
-  _clearContent() {
+  //удаляет контент из всплывающего окна
+  _clearContent = () => {
     this._removeEventListeners();
     if (this._overlay.querySelector('.popup__content')) {
       this._overlay.querySelector('.popup__content').remove();
     }
   }
 
-  _removeEventListeners() {
+  //снимает слушатели
+  _removeEventListeners = () => {
     this._removeHandlers([
       [this._overlay, 'click', this._handleCloseByOverlay],
       [document, 'keyup', this._handleCloseByEsc],
@@ -66,20 +66,23 @@ export default class Popup extends BaseComponent {
     }
   }
 
-  close() {
+  //закрывает оверлей
+  close = () => {
     this._showButtonOpenMenu(this._buttonOpenMenu);
     this._body.classList.toggle('body_overflow_hidden');
     this._clearContent();
     this._togglePopup();
   };
 
-  _handleCloseByOverlay(event) {
+  //закрытие окна по клику на оверлей
+  _handleCloseByOverlay = (event) => {
     if (event.target === this._overlay && event.target !== this._overlay.querySelector('.popup__content')) {
       this._isOpenMenuMobile() ? this._closeMenuMobile() : this.close();
     }
   }
 
-  _handleCloseByEsc(event) {
+  //закрытие окна по клику на ESC
+  _handleCloseByEsc = (event) => {
     if (event.key === 'Escape') {
       this._isOpenMenuMobile() ? this._closeMenuMobile() : this.close();
     }

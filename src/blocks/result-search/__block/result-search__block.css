@@ -1,6 +1,6 @@
-@import url('./_is-invisible/result-search__not-found_is-invisible.css');
+@import url('./_is-invisible/result-search__block_is-invisible.css');
 
-.result-search__not-found {
+.result-search__block {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,21 +9,20 @@
 }
 
 @media screen and (min-width: 768px) {
-  .result-search__not-found {
+  .result-search__block {
     padding-bottom: 40px;
     padding-top: 40px;
   }
 }
-
 @media screen and (min-width: 900px) {
-  .result-search__not-found {
+  .result-search__block {
     padding-bottom: 60px;
     padding-top: 60px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .result-search__not-found {
+  .result-search__block {
     padding-bottom: 80px;
     padding-top: 80px;
   }
